@@ -3,7 +3,7 @@
 ## Tech Stack
 
 - **Language:** TypeScript
-- **Build:** [tsup](https://tsup.egoist.dev/) (ESM + dts)
+- **Build:** [tsdown](https://tsdown.dev/) (ESM + dts)
 - **Template Engine:** [LiquidJS](https://liquidjs.com/)
 - **Test Runner:** [Vitest](https://vitest.dev/) (Browser Mode)
 - **Browser Automation:** [Playwright](https://playwright.dev/)
@@ -40,15 +40,16 @@ src/
 - **Object/interface properties:** Order by importance, not alphabetically.
   Group related properties. Identifying fields first, core fields next,
   optional/metadata fields last.
+- **Use `undefined`, not `null`.** Prefer `undefined` throughout the codebase
+  for absent values.
 
 ## Commands
 
 | Command             | Description                    |
 | ------------------- | ------------------------------ |
-| `npm run build`     | Build package (tsup)           |
+| `npm run build`     | Build package (tsdown)         |
 | `npm run typecheck` | Type-check without emitting    |
 | `npm run lint`      | Check with Biome + Prettier    |
-| `npm run format`    | Auto-fix with Biome            |
 | `npm run lint:fix`  | Auto-fix with Biome + Prettier |
 | `npm run verify`    | Lint, format, and type-check   |
 
