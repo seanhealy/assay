@@ -1,8 +1,13 @@
 {
 	"name": "@augeo/assay",
 	"version": "0.1.0",
-	"description": "A minimal, TypeScript-first testing stack for Shopify Liquid snippets",
-	"author": "",
+	"description": "A minimal, TypeScript-first testing stack for Shopify Liquid Themes.",
+	"author": "Sean Healy",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/seanhealy/assay.git"
+	},
 	"type": "module",
 	"exports": {
 		".": {
