@@ -10,9 +10,8 @@ export function createFetchFS(urlPrefix: string): FS {
 			return `${urlPrefix}${dir ? `${dir}/` : ""}${path}`;
 		},
 
-		async exists(filepath: string): Promise<boolean> {
-			const res = await fetch(filepath, { method: "HEAD" });
-			return res.ok;
+		async exists(): Promise<boolean> {
+			return true;
 		},
 
 		async readFile(filepath: string): Promise<string> {

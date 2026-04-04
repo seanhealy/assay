@@ -1,5 +1,7 @@
 node_modules/
 dist/
+__screenshots__/
+.vitest-attachments/
 
 # claude code
 .claude/worktrees/

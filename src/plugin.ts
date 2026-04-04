@@ -3,28 +3,19 @@ import { join, resolve } from "node:path";
 import type { Plugin } from "vite";
 import { LIQUID_URL_PREFIX } from "./constants";
 
-const VIRTUAL_CONFIG_ID = "virtual:assay-config";
-const RESOLVED_VIRTUAL_CONFIG_ID = `\0${VIRTUAL_CONFIG_ID}`;
-
-export function assayPlugin(liquidPaths: string[]): Plugin {
+export function assayPlugin(liquidPaths: string[], assetsPath: string): Plugin {
 	const resolvedPaths = liquidPaths.map((p) => resolve(p));
 
 	return {
 		name: "assay-liquid",
 
-		resolveId(id) {
-			if (id === VIRTUAL_CONFIG_ID) {
-				return RESOLVED_VIRTUAL_CONFIG_ID;
-			}
-		},
-
-		load(id) {
-			if (id === RESOLVED_VIRTUAL_CONFIG_ID) {
-				return [
-					`export const liquidPaths = ${JSON.stringify(resolvedPaths)};`,
-					`export const urlPrefix = ${JSON.stringify(LIQUID_URL_PREFIX)};`,
-				].join("\n");
-			}
+		config() {
+			return {
+				define: {
+					// Compile-time replacement — consumed in filters.ts
+					__ASSAY_ASSET_PATH__: JSON.stringify(assetsPath),
+				},
+			};
 		},
 
 		configureServer(server) {

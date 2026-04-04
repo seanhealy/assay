@@ -19,10 +19,12 @@
 	],
 	"scripts": {
 		"build": "tsdown",
+		"build:watch": "tsdown --watch",
 		"lint": "biome check && prettier --check .",
 		"lint:fix": "biome check --write && prettier --write .",
 		"typecheck": "tsc --noEmit",
 		"verify": "npm run lint:fix && npm run typecheck",
+		"test": "npm test --prefix example",
 		"prepublishOnly": "npm run build"
 	},
 	"volta": {
