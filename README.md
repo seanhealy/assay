@@ -15,7 +15,7 @@ patterns. Including web component interaction, `userEvent`, and accessibility.
 
 ## Example
 
-See the [`example/`](./example) directory for a full working theme with tests.
+See the [`example/`](./example) directory for an example theme with tests.
 
 ---
 
