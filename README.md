@@ -1,6 +1,6 @@
 # Assay
 
-[![Test](https://github.com/seanhealy/assay/actions/workflows/test.yml/badge.svg)](https://github.com/seanhealy/assay/actions/workflows/test.yml)
+[![Tests](https://github.com/seanhealy/assay/actions/workflows/test.yml/badge.svg)](https://github.com/seanhealy/assay/actions/workflows/test.yml)
 
 A Fast TypeScript-first testing stack for unit testing Shopify Liquid Themes.
 Renders snippets, sections, and blocks with familiar Vitest + Testing Library
