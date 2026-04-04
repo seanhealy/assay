@@ -17,7 +17,7 @@
 src/
 ├── index.ts              # Barrel export
 ├── preset.ts             # Vitest config preset
-├── plugin.ts             # Vite plugin — serves .liquid files
+├── plugin.ts             # Vite plugin, serves .liquid files
 ├── fs-adapter.ts         # Custom LiquidJS fs using fetch
 ├── render.ts             # renderSnippet helper
 ├── filters.ts            # Shopify filter mocks
@@ -36,7 +36,7 @@ src/
 - **Variable naming:** Use full words, not abbreviations (e.g., `action` not
   `fn`, `context` not `ctx`).
 - **Directory modules:** When a module grows into a directory, use `index.ts` as
-  a barrel export only — implementation lives in a named file.
+  a barrel export only. Implementation lives in a named file.
 - **Object/interface properties:** Order by importance, not alphabetically.
   Group related properties. Identifying fields first, core fields next,
   optional/metadata fields last.

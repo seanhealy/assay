@@ -12,7 +12,7 @@ export function assayPlugin(liquidPaths: string[], assetsPath: string): Plugin {
 		config() {
 			return {
 				define: {
-					// Compile-time replacement — consumed in filters.ts
+					// Compile-time replacement. (Consumed in filters.ts)
 					__ASSAY_ASSET_PATH__: JSON.stringify(assetsPath),
 				},
 			};

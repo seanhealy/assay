@@ -1,6 +1,6 @@
 import type { Liquid } from "liquidjs";
 
-// Injected at compile time by Vite's `define` — see plugin.ts
+// Injected at compile time by Vite's `define`. (see plugin.ts)
 declare const __ASSAY_ASSET_PATH__: string;
 
 export function registerDefaultFilters(engine: Liquid): void {
