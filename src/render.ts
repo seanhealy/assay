@@ -70,6 +70,7 @@ export async function renderSnippet(
 	const container = document.createElement("div");
 	container.setAttribute("data-testroot", "");
 	container.innerHTML = html;
+	activateScripts(container);
 	document.body.appendChild(container);
 
 	// Wait for specified custom elements to upgrade
@@ -84,6 +85,22 @@ export async function renderSnippet(
 	}
 
 	return container;
+}
+
+/**
+ * innerHTML doesn't execute script tags. This replaces each script
+ * element with a fresh clone so the browser treats it as new and
+ * executes it.
+ */
+function activateScripts(container: HTMLElement): void {
+	for (const original of container.querySelectorAll("script")) {
+		const script = document.createElement("script");
+		for (const attr of original.attributes) {
+			script.setAttribute(attr.name, attr.value);
+		}
+		script.textContent = original.textContent;
+		original.replaceWith(script);
+	}
 }
 
 /**
