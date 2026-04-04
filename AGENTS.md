@@ -45,13 +45,10 @@ src/
 
 ## Commands
 
-| Command             | Description                    |
-| ------------------- | ------------------------------ |
-| `npm run build`     | Build package (tsdown)         |
-| `npm run typecheck` | Type-check without emitting    |
-| `npm run lint`      | Check with Biome + Prettier    |
-| `npm run lint:fix`  | Auto-fix with Biome + Prettier |
-| `npm run verify`    | Lint, format, and type-check   |
+| Command          | Description                  |
+| ---------------- | ---------------------------- |
+| `npm run build`  | Build package (tsdown)       |
+| `npm run verify` | Lint, format, and type-check |
 
 ## Before Submitting Changes
 
