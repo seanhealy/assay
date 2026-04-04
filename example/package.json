@@ -1,0 +1,15 @@
+{
+	"name": "assay-example",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"@augeo/assay": "file:../"
+	},
+	"devDependencies": {
+		"vitest": "^4.1.2",
+		"@vitest/browser-playwright": "^4.1.2"
+	}
+}

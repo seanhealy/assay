@@ -1,0 +1,8 @@
+<toggle-switch>
+	<label>
+		<input type="checkbox" name="{{ name }}"{% if checked %} checked{% endif %}>
+		<span>{{ label }}</span>
+	</label>
+</toggle-switch>
+
+<script src="{{ 'toggle-switch.js' | asset_url }}" type="module"></script>
