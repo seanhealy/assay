@@ -15,7 +15,7 @@ patterns. Including web component interaction, `userEvent`, and accessibility.
 
 ## Example
 
-See the [`example/`](./example) directory for an example theme with tests.
+See the [📄 `example/`](./example) directory for an example theme with tests.
 
 ---
 
@@ -24,9 +24,9 @@ See the [`example/`](./example) directory for an example theme with tests.
 - [Writing Tests](#writing-tests)
 - [Install](#install)
 - [Setup](#setup)
-- [Filters](#filters)
-- [Tags](#tags)
-- [Web Components](#web-components)
+  - [Filters](#filters)
+  - [Tags](#tags)
+  - [Web Components](#web-components)
 - [Learn More](#learn-more)
 - [Future Plans](#future-plans)
 
@@ -105,6 +105,8 @@ npx playwright install chromium
 
 ### `vitest.config.ts`
 
+📄 [See example](./example/vitest.config.ts)
+
 ```typescript
 import { liquidPreset } from "@augeo/assay/preset";
 
@@ -143,6 +145,8 @@ Built-in Shopify filter mocks:
 
 Register additional filters in a setup file:
 
+📄 [See example](./example/tests/setup.ts)
+
 ```typescript
 // tests/setup.ts
 import { registerFilter } from "@augeo/assay";
@@ -160,6 +164,8 @@ Then reference it via Vitest's standard
 
 Built in Shopify-specific tags:
 
+📄 [See example](./example/theme/sections/hero.liquid)
+
 | Tag                              | Behaviour                                      |
 | -------------------------------- | ---------------------------------------------- |
 | `{% schema %}...{% endschema %}` | Silently ignored (section/block settings JSON) |
@@ -168,6 +174,11 @@ Built in Shopify-specific tags:
 
 Templates with `<script>` tags work. Scripts are executed after rendering. Use
 `waitForElements` to wait for custom elements to upgrade:
+
+📄 See example:
+
+- [snippet](./example/theme/snippets/toggle-switch.liquid)
+- [test](./example/tests/snippets/toggle-switch.test.ts)
 
 ```typescript
 await renderSnippet(
