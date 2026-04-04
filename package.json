@@ -1,0 +1,22 @@
+{
+	"name": "@augeo/assay",
+	"version": "0.1.0",
+	"description": "A minimal, TypeScript-first testing stack for Shopify Liquid snippets",
+	"author": "",
+	"type": "module",
+	"scripts": {
+		"lint": "biome check && prettier --check .",
+		"format": "biome check --write",
+		"lint:fix": "biome check --write && prettier --write .",
+		"typecheck": "tsc --noEmit",
+		"verify": "npm run lint:fix && npm run typecheck"
+	},
+	"volta": {
+		"node": "24.10.0",
+		"npm": "11.6.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.10",
+		"prettier": "^3.8.1"
+	}
+}

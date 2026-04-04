@@ -1,0 +1,13 @@
+# Ignore everything by default
+*
+
+# But don't ignore markdown files
+!*.md
+!**/*.md
+
+# But don't ignore HTML files
+!*.html
+!**/*.html
+
+# Don't ignore directories (needed for pattern matching to work)
+!*/
