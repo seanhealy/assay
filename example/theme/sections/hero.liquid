@@ -1,6 +1,20 @@
 <section class="hero">
-	<h1>{{ heading }}</h1>
-	{% if subheading %}
-		<p class="hero__subheading">{{ subheading }}</p>
+	<h1>{{ section.settings.heading }}</h1>
+	{% if section.settings.subheading %}
+		<p class="hero__subheading">{{ section.settings.subheading }}</p>
+	{% endif %}
+	{% if section.settings.cta %}
+		{% render 'button', text: section.settings.cta, variant: 'primary' %}
 	{% endif %}
 </section>
+
+{% schema %}
+{
+	"name": "Hero",
+	"settings": [
+		{ "type": "text", "id": "heading", "label": "Heading" },
+		{ "type": "text", "id": "subheading", "label": "Subheading" },
+		{ "type": "text", "id": "cta", "label": "Call to action" }
+	]
+}
+{% endschema %}

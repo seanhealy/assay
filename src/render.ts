@@ -26,6 +26,7 @@ function createEngine(): Liquid {
 	});
 
 	registerDefaultFilters(engine);
+	registerTagNoOp("schema");
 
 	return engine;
 }
@@ -101,6 +102,19 @@ function activateScripts(container: HTMLElement): void {
 		script.textContent = original.textContent;
 		original.replaceWith(script);
 	}
+}
+
+/** Registers a block tag that silently consumes its content. */
+function registerTagNoOp(name: string): void {
+	registerTag(name, {
+		parse(_token, remainingTokens) {
+			while (remainingTokens.length) {
+				const next = remainingTokens.shift();
+				if (next && "name" in next && next.name === `end${name}`) break;
+			}
+		},
+		render() {},
+	});
 }
 
 /**

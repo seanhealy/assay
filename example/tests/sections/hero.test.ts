@@ -4,7 +4,11 @@ import { page } from "vitest/browser";
 
 describe("hero.liquid", () => {
 	describe("with just a heading", () => {
-		beforeEach(() => renderSnippet("hero", { heading: "Welcome" }));
+		beforeEach(() =>
+			renderSnippet("hero", {
+				section: { settings: { heading: "Welcome" } },
+			}),
+		);
 
 		it("renders the heading", async () => {
 			await expect
@@ -22,8 +26,12 @@ describe("hero.liquid", () => {
 	describe("with a subheading", () => {
 		beforeEach(() =>
 			renderSnippet("hero", {
-				heading: "Welcome",
-				subheading: "Shop our latest collection",
+				section: {
+					settings: {
+						heading: "Welcome",
+						subheading: "Shop our latest collection",
+					},
+				},
 			}),
 		);
 
@@ -36,6 +44,25 @@ describe("hero.liquid", () => {
 		it("renders the subheading", async () => {
 			await expect
 				.element(page.getByText("Shop our latest collection"))
+				.toBeVisible();
+		});
+	});
+
+	describe("with a call to action", () => {
+		beforeEach(() =>
+			renderSnippet("hero", {
+				section: {
+					settings: {
+						heading: "Welcome",
+						cta: "Shop now",
+					},
+				},
+			}),
+		);
+
+		it("renders the button from the nested snippet", async () => {
+			await expect
+				.element(page.getByRole("button", { name: "Shop now" }))
 				.toBeVisible();
 		});
 	});
