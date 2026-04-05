@@ -1,0 +1,322 @@
+/**
+ * Count Liquid tags, filters, and objects across .liquid files in a theme.
+ *
+ * Uses canonical names from the local theme-liquid-docs submodule, then
+ * parses files with awareness of {% liquid %} blocks and multi-line tags
+ * to produce accurate counts.
+ *
+ * Shows compatibility status (✅ parity, ☑️ mock, unsupported) for each
+ * tag and filter based on LiquidJS core support and Assay shims.
+ *
+ * Usage:
+ *   npx tsx scripts/audit-theme-usage.ts ./path/to/theme
+ *   npx tsx scripts/audit-theme-usage.ts ./path/to/theme --json
+ *   npx tsx scripts/audit-theme-usage.ts ./path/to/theme --output docs/usage.md
+ */
+
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { Liquid } from "liquidjs";
+import {
+	filters as assayFilterShims,
+	tags as assayTagShims,
+} from "../src/shims";
+import { formatTable } from "./utilities/markdown-table";
+import { getStatusIcon } from "./utilities/status";
+
+const projectRoot = resolve(import.meta.dirname, "..");
+const docsDataPath = resolve(projectRoot, "vendor/theme-liquid-docs/data");
+
+// Shared regex patterns for Liquid block detection
+const LIQUID_OPEN = /\{%-?\s*liquid\b/;
+const LIQUID_CLOSE = /-?%\}/;
+const TAG_PATTERN = /\{%-?\s*(\w+)/g;
+const FILTER_PATTERN = /\|\s*([a-z_]+)/g;
+
+// --- Main ---
+
+const args = process.argv.slice(2);
+const jsonOutput = args.includes("--json");
+const outputIndex = args.indexOf("--output");
+const outputPath = outputIndex !== -1 ? args[outputIndex + 1] : undefined;
+const themeRoot = resolve(args.find((arg) => !arg.startsWith("--")) ?? ".");
+
+// Tags that are sub-tag syntax, not standalone tags
+const EXCLUDED_TAGS = new Set(["else"]);
+
+const canonicalTags = new Set(
+	readNames("tags.json").filter((name) => !EXCLUDED_TAGS.has(name)),
+);
+const canonicalFilters = new Set(readNames("filters.json"));
+const canonicalObjects = readNames("objects.json");
+canonicalTags.add("schema");
+canonicalFilters.add("t");
+
+const engine = new Liquid();
+const coreFilterNames = new Set(Object.keys(engine.filters));
+const coreTagNames = new Set(Object.keys(engine.tags));
+const assayFilterMap = new Map(
+	assayFilterShims.map((filter) => [filter.name, filter]),
+);
+const assayTagMap = new Map(assayTagShims.map((tag) => [tag.name, tag]));
+
+const files = findLiquidFiles(themeRoot);
+console.error(`Scanning ${files.length} .liquid files in ${themeRoot}...`);
+
+const tagCounts = countTags(files, canonicalTags);
+const filterCounts = countFilters(files, canonicalFilters);
+const liquidContext = extractLiquidContext(files);
+const objectCounts = countObjects(
+	liquidContext,
+	canonicalObjects,
+	canonicalTags,
+);
+
+if (jsonOutput) {
+	console.log(
+		JSON.stringify(
+			{
+				tags: Object.fromEntries(tagCounts),
+				filters: Object.fromEntries(filterCounts),
+				objects: Object.fromEntries(objectCounts),
+			},
+			undefined,
+			2,
+		),
+	);
+} else {
+	const markdown = buildMarkdown(tagCounts, filterCounts, objectCounts);
+	if (outputPath) {
+		writeFileSync(outputPath, markdown);
+		console.error(`Written to ${outputPath}`);
+	} else {
+		console.log(markdown);
+	}
+}
+
+// --- Output ---
+
+function buildMarkdown(
+	tags: Map<string, number>,
+	filters: Map<string, number>,
+	objects: Map<string, number>,
+): string {
+	const date = new Date().toISOString().split("T")[0];
+
+	return [
+		"# Liquid Usage",
+		"",
+		`Usage counts for Liquid tags, filters, and objects. Generated ${date}.`,
+		"",
+		"---",
+		"",
+		"## Tags",
+		"",
+		...buildUsageTable("Tag", tags, coreTagNames, assayTagMap),
+		"",
+		"## Filters",
+		"",
+		...buildUsageTable("Filter", filters, coreFilterNames, assayFilterMap),
+		"",
+		"## Objects",
+		"",
+		...buildSimpleTable("Object", objects),
+		"",
+	].join("\n");
+}
+
+function buildUsageTable(
+	columnName: string,
+	counts: Map<string, number>,
+	coreNames: Set<string>,
+	shimMap: Map<string, { status: string }>,
+): string[] {
+	const headers = ["Count", columnName, ""];
+	const rows = [...counts.entries()].map(([name, count]) => [
+		String(count),
+		`\`${name}\``,
+		getStatusIcon(name, coreNames, shimMap),
+	]);
+	return formatTable(headers, rows);
+}
+
+function buildSimpleTable(
+	columnName: string,
+	counts: Map<string, number>,
+): string[] {
+	const headers = ["Count", columnName];
+	const rows = [...counts.entries()].map(([name, count]) => [
+		String(count),
+		`\`${name}\``,
+	]);
+	return formatTable(headers, rows);
+}
+
+// --- Counting ---
+
+function countTags(
+	liquidFiles: string[],
+	tagNames: Set<string>,
+): Map<string, number> {
+	const counts = new Map<string, number>();
+
+	for (const filepath of liquidFiles) {
+		const text = readFileSync(filepath, "utf-8");
+		const lines = text.split("\n");
+		let inLiquidBlock = false;
+
+		for (const line of lines) {
+			if (!inLiquidBlock) {
+				if (LIQUID_OPEN.test(line)) {
+					increment(counts, "liquid");
+					inLiquidBlock = true;
+					if (LIQUID_CLOSE.test(line)) {
+						inLiquidBlock = false;
+					}
+					continue;
+				}
+
+				for (const match of line.matchAll(TAG_PATTERN)) {
+					const name = match[1];
+					if (tagNames.has(name)) {
+						increment(counts, name);
+					}
+				}
+			} else {
+				const stripped = line.trim();
+				if (stripped) {
+					const firstWord = stripped.split(/\s/)[0];
+					if (tagNames.has(firstWord)) {
+						increment(counts, firstWord);
+					}
+				}
+				if (LIQUID_CLOSE.test(line)) {
+					inLiquidBlock = false;
+				}
+			}
+		}
+	}
+
+	return sortByCountDesc(counts);
+}
+
+function countFilters(
+	liquidFiles: string[],
+	filterNames: Set<string>,
+): Map<string, number> {
+	const counts = new Map<string, number>();
+
+	for (const filepath of liquidFiles) {
+		const text = readFileSync(filepath, "utf-8");
+		for (const match of text.matchAll(FILTER_PATTERN)) {
+			const name = match[1];
+			if (filterNames.has(name)) {
+				increment(counts, name);
+			}
+		}
+	}
+
+	return sortByCountDesc(counts);
+}
+
+function extractLiquidContext(liquidFiles: string[]): string {
+	const outputPattern = /\{\{.*?\}\}/gs;
+	const logicPattern = /\{%-?.*?-?%\}/gs;
+	const parts: string[] = [];
+
+	for (const filepath of liquidFiles) {
+		const text = readFileSync(filepath, "utf-8");
+
+		for (const match of text.matchAll(outputPattern)) {
+			parts.push(match[0]);
+		}
+		for (const match of text.matchAll(logicPattern)) {
+			parts.push(match[0]);
+		}
+
+		const lines = text.split("\n");
+		let inLiquidBlock = false;
+
+		for (const line of lines) {
+			if (!inLiquidBlock) {
+				if (LIQUID_OPEN.test(line)) {
+					inLiquidBlock = true;
+					if (LIQUID_CLOSE.test(line)) {
+						inLiquidBlock = false;
+					}
+				}
+			} else if (LIQUID_CLOSE.test(line)) {
+				inLiquidBlock = false;
+			} else {
+				parts.push(line);
+			}
+		}
+	}
+
+	return parts.join("\n");
+}
+
+function countObjects(
+	context: string,
+	objectNames: string[],
+	tagNames: Set<string>,
+): Map<string, number> {
+	const counts = new Map<string, number>();
+
+	for (const name of objectNames) {
+		const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		const pattern = tagNames.has(name)
+			? new RegExp(`\\b${escaped}\\.`, "g")
+			: new RegExp(`\\b${escaped}\\b`, "g");
+
+		const matches = context.match(pattern);
+		if (matches && matches.length > 0) {
+			counts.set(name, matches.length);
+		}
+	}
+
+	return sortByCountDesc(counts);
+}
+
+// --- Data loading ---
+
+function readNames(filename: string): string[] {
+	interface Entry {
+		name: string;
+	}
+	const data: Entry[] = JSON.parse(
+		readFileSync(resolve(docsDataPath, filename), "utf-8"),
+	);
+	return data.map((entry) => entry.name);
+}
+
+function findLiquidFiles(root: string): string[] {
+	const results: string[] = [];
+
+	function walk(directory: string) {
+		for (const entry of readdirSync(directory)) {
+			const fullPath = join(directory, entry);
+			const stat = statSync(fullPath);
+			if (stat.isDirectory() && entry !== "node_modules") {
+				walk(fullPath);
+			} else if (entry.endsWith(".liquid")) {
+				results.push(fullPath);
+			}
+		}
+	}
+
+	walk(root);
+	return results.sort();
+}
+
+// --- Utilities ---
+
+function increment(counts: Map<string, number>, key: string): void {
+	counts.set(key, (counts.get(key) ?? 0) + 1);
+}
+
+function sortByCountDesc(counts: Map<string, number>): Map<string, number> {
+	return new Map(
+		[...counts.entries()].sort(([, first], [, second]) => second - first),
+	);
+}

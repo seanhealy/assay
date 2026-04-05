@@ -17,9 +17,14 @@ export const filters: ShimFilter[] = [
 	{
 		type: "filter",
 		name: "asset_url",
+		status: "parity",
+		implementation: assetUrl,
+	},
+	{
+		type: "filter",
+		name: "asset_img_url",
 		status: "mock",
-		implementation: (value: unknown): string =>
-			`/${__ASSAY_ASSET_PATH__}/${String(value)}`,
+		implementation: assetUrl,
 	},
 ];
 
@@ -27,4 +32,8 @@ export function registerDefaultFilters(engine: Liquid): void {
 	for (const filter of filters) {
 		engine.registerFilter(filter.name, filter.implementation);
 	}
+}
+
+function assetUrl(value: unknown): string {
+	return `/${__ASSAY_ASSET_PATH__}/${String(value)}`;
 }
