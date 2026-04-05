@@ -19,10 +19,14 @@
 			"import": "./dist/preset.js"
 		}
 	},
+	"bin": {
+		"assay": "./dist/cli.js"
+	},
 	"files": [
 		"dist"
 	],
 	"scripts": {
+		"prebuild": "tsx scripts/generate-shopify-names.ts",
 		"build": "tsdown",
 		"build:watch": "tsdown --watch ./src",
 		"lint": "biome check && prettier --check .",

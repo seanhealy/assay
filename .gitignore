@@ -1,5 +1,6 @@
 node_modules/
 dist/
+src/cli/shopify-names.ts
 __screenshots__/
 .vitest-attachments/
 

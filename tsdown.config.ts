@@ -4,6 +4,7 @@ export default defineConfig({
 	entry: {
 		index: "src/index.ts",
 		preset: "src/preset.ts",
+		cli: "src/cli/cli.ts",
 	},
 	format: "esm",
 	fixedExtension: false,

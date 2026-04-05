@@ -1,96 +1,91 @@
 /**
- * Count Liquid tags, filters, and objects across .liquid files in a theme.
- *
- * Uses canonical names from the local theme-liquid-docs submodule, then
- * parses files with awareness of {% liquid %} blocks and multi-line tags
- * to produce accurate counts.
- *
- * Shows compatibility status (✅ parity, ☑️ mock, unsupported) for each
- * tag and filter based on LiquidJS core support and Assay shims.
- *
- * Usage:
- *   npx tsx scripts/audit-theme-usage.ts ./path/to/theme
- *   npx tsx scripts/audit-theme-usage.ts ./path/to/theme --json
- *   npx tsx scripts/audit-theme-usage.ts ./path/to/theme --output docs/usage.md
+ * Audit Liquid usage in a theme and report Assay compatibility.
  */
 
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { Liquid } from "liquidjs";
+import { filters as assayFilterShims } from "../shims/filters";
+import { tags as assayTagShims } from "../shims/tags";
 import {
-	filters as assayFilterShims,
-	tags as assayTagShims,
-} from "../src/shims";
+	filterNames as shopifyFilterNames,
+	objectNames as shopifyObjectNames,
+	tagNames as shopifyTagNames,
+} from "./shopify-names";
 import { formatTable } from "./utilities/markdown-table";
 import { getStatusIcon } from "./utilities/status";
 
-const projectRoot = resolve(import.meta.dirname, "..");
-const docsDataPath = resolve(projectRoot, "vendor/theme-liquid-docs/data");
-
-// Shared regex patterns for Liquid block detection
+// Shared regex patterns
 const LIQUID_OPEN = /\{%-?\s*liquid\b/;
 const LIQUID_CLOSE = /-?%\}/;
 const TAG_PATTERN = /\{%-?\s*(\w+)/g;
 const FILTER_PATTERN = /\|\s*([a-z_]+)/g;
 
-// --- Main ---
-
-const args = process.argv.slice(2);
-const jsonOutput = args.includes("--json");
-const outputIndex = args.indexOf("--output");
-const outputPath = outputIndex !== -1 ? args[outputIndex + 1] : undefined;
-const themeRoot = resolve(args.find((arg) => !arg.startsWith("--")) ?? ".");
-
-// Tags that are sub-tag syntax, not standalone tags
+// Tags that are sub-tag syntax, not standalone
 const EXCLUDED_TAGS = new Set(["else"]);
 
-const canonicalTags = new Set(
-	readNames("tags.json").filter((name) => !EXCLUDED_TAGS.has(name)),
-);
-const canonicalFilters = new Set(readNames("filters.json"));
-const canonicalObjects = readNames("objects.json");
-canonicalTags.add("schema");
-canonicalFilters.add("t");
+export function audit(args: string[]): void {
+	const jsonOutput = args.includes("--json");
+	const outputIndex = args.indexOf("--output");
+	const outputPath = outputIndex !== -1 ? args[outputIndex + 1] : undefined;
+	const themeRoot = resolve(args.find((arg) => !arg.startsWith("--")) ?? ".");
 
-const engine = new Liquid();
-const coreFilterNames = new Set(Object.keys(engine.filters));
-const coreTagNames = new Set(Object.keys(engine.tags));
-const assayFilterMap = new Map(
-	assayFilterShims.map((filter) => [filter.name, filter]),
-);
-const assayTagMap = new Map(assayTagShims.map((tag) => [tag.name, tag]));
-
-const files = findLiquidFiles(themeRoot);
-console.error(`Scanning ${files.length} .liquid files in ${themeRoot}...`);
-
-const tagCounts = countTags(files, canonicalTags);
-const filterCounts = countFilters(files, canonicalFilters);
-const liquidContext = extractLiquidContext(files);
-const objectCounts = countObjects(
-	liquidContext,
-	canonicalObjects,
-	canonicalTags,
-);
-
-if (jsonOutput) {
-	console.log(
-		JSON.stringify(
-			{
-				tags: Object.fromEntries(tagCounts),
-				filters: Object.fromEntries(filterCounts),
-				objects: Object.fromEntries(objectCounts),
-			},
-			undefined,
-			2,
-		),
+	const canonicalTags = new Set(
+		shopifyTagNames.filter((name) => !EXCLUDED_TAGS.has(name)),
 	);
-} else {
-	const markdown = buildMarkdown(tagCounts, filterCounts, objectCounts);
-	if (outputPath) {
-		writeFileSync(outputPath, markdown);
-		console.error(`Written to ${outputPath}`);
+	const canonicalFilters = new Set(shopifyFilterNames);
+	const canonicalObjects = [...shopifyObjectNames];
+	canonicalTags.add("schema");
+	canonicalFilters.add("t");
+
+	const engine = new Liquid();
+	const coreFilterNames = new Set(Object.keys(engine.filters));
+	const coreTagNames = new Set(Object.keys(engine.tags));
+	const assayFilterMap = new Map(
+		assayFilterShims.map((filter) => [filter.name, filter]),
+	);
+	const assayTagMap = new Map(assayTagShims.map((tag) => [tag.name, tag]));
+
+	const files = findLiquidFiles(themeRoot);
+	console.error(`Scanning ${files.length} .liquid files in ${themeRoot}...`);
+
+	const tagCounts = countTags(files, canonicalTags);
+	const filterCounts = countFilters(files, canonicalFilters);
+	const liquidContext = extractLiquidContext(files);
+	const objectCounts = countObjects(
+		liquidContext,
+		canonicalObjects,
+		canonicalTags,
+	);
+
+	if (jsonOutput) {
+		console.log(
+			JSON.stringify(
+				{
+					tags: Object.fromEntries(tagCounts),
+					filters: Object.fromEntries(filterCounts),
+					objects: Object.fromEntries(objectCounts),
+				},
+				undefined,
+				2,
+			),
+		);
 	} else {
-		console.log(markdown);
+		const markdown = buildMarkdown(
+			tagCounts,
+			filterCounts,
+			objectCounts,
+			coreTagNames,
+			coreFilterNames,
+			assayTagMap,
+			assayFilterMap,
+		);
+		if (outputPath) {
+			writeFileSync(outputPath, markdown);
+			console.error(`Written to ${outputPath}`);
+		} else {
+			console.log(markdown);
+		}
 	}
 }
 
@@ -100,6 +95,10 @@ function buildMarkdown(
 	tags: Map<string, number>,
 	filters: Map<string, number>,
 	objects: Map<string, number>,
+	coreTagNames: Set<string>,
+	coreFilterNames: Set<string>,
+	assayTagMap: Map<string, { status: string }>,
+	assayFilterMap: Map<string, { status: string }>,
 ): string {
 	const date = new Date().toISOString().split("T")[0];
 
@@ -278,17 +277,7 @@ function countObjects(
 	return sortByCountDesc(counts);
 }
 
-// --- Data loading ---
-
-function readNames(filename: string): string[] {
-	interface Entry {
-		name: string;
-	}
-	const data: Entry[] = JSON.parse(
-		readFileSync(resolve(docsDataPath, filename), "utf-8"),
-	);
-	return data.map((entry) => entry.name);
-}
+// --- File discovery ---
 
 function findLiquidFiles(root: string): string[] {
 	const results: string[] = [];

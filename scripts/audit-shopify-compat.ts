@@ -12,13 +12,13 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { Liquid } from "liquidjs";
+import { formatTable } from "../src/cli/utilities/markdown-table";
+import { getStatusWithLabel } from "../src/cli/utilities/status";
 import type { ShimFilter, ShimStatus, ShimTag } from "../src/shims";
 import {
 	filters as assayFilterShims,
 	tags as assayTagShims,
 } from "../src/shims";
-import { formatTable } from "./utilities/markdown-table";
-import { getStatusWithLabel } from "./utilities/status";
 
 type Status = "core" | "assay" | "missing";
 
