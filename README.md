@@ -26,9 +26,7 @@ See the [📄 `example/`](./example) directory for an example theme with tests.
 - [Writing Tests](#writing-tests)
 - [Install](#install)
 - [Setup](#setup)
-  - [Filters](#filters)
-  - [Tags](#tags)
-  - [Web Components](#web-components)
+- [Filters & Tags](#filters--tags)
 - [Learn More](#learn-more)
 - [Future Plans](#future-plans)
 
@@ -41,55 +39,30 @@ import { renderSnippet } from "@augeo/assay";
 import { beforeEach, describe, expect, it } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
-describe("hero.liquid", () => {
-	describe("with a heading", () => {
+describe("product-card.liquid", () => {
+	describe("with an available product", () => {
 		beforeEach(() =>
-			renderSnippet("hero", {
-				section: { settings: { heading: "Welcome" } },
+			renderSnippet("product-card", {
+				product: { title: "Classic Tee", price: 2999, available: true },
 			}),
 		);
 
-		it("renders the heading", async () => {
-			await expect
-				.element(page.getByRole("heading", { name: "Welcome" }))
-				.toBeVisible();
+		it("renders the product title", async () => {
+			await expect.element(page.getByText("Classic Tee")).toBeVisible();
 		});
-	});
-});
 
-describe("toggle-switch.liquid", () => {
-	describe("when unchecked", () => {
-		beforeEach(() =>
-			renderSnippet("toggle-switch", {
-				name: "notifications",
-				label: "Enable notifications",
-			}),
-		);
+		it("renders the formatted price", async () => {
+			await expect.element(page.getByText("$29.99")).toBeVisible();
+		});
 
-		it("checks the checkbox when clicked", async () => {
-			await userEvent.click(page.getByText("Enable notifications"));
+		it("adds to cart when clicked", async () => {
+			await userEvent.click(page.getByRole("button", { name: "Add to cart" }));
 
-			await expect
-				.element(page.getByRole("checkbox", { name: "Enable notifications" }))
-				.toBeChecked();
+			await expect.element(page.getByText("Added!")).toBeVisible();
 		});
 	});
 });
 ```
-
-### `renderSnippet(file, data?, options?)`
-
-Renders a `.liquid` template into the live browser DOM and returns the container
-element.
-
-| Parameter                 | Type                      | Description                                      |
-| ------------------------- | ------------------------- | ------------------------------------------------ |
-| `file`                    | `string`                  | Template filename (without `.liquid` extension)  |
-| `data`                    | `Record<string, unknown>` | Template variables                               |
-| `options.waitForElements` | `string[]`                | Custom element tags to wait for before returning |
-
-Previous renders are cleaned up automatically. `<script>` tags in the rendered
-HTML are executed.
 
 ## Install
 
@@ -118,89 +91,41 @@ export default liquidPreset({
 });
 ```
 
-`liquidPreset` accepts an optional second argument for
-[Vitest Config](https://vitest.dev/config/) and
-[Browser Mode](https://vitest.dev/guide/browser/#configuration) overrides:
-
-```typescript
-export default liquidPreset(
-	{ liquidPaths: ["./theme/snippets"] },
-	{ test: { browser: { headless: false } } },
-);
-```
-
-### Options
-
 | Option        | Default          | Description                                                 |
 | ------------- | ---------------- | ----------------------------------------------------------- |
 | `liquidPaths` | `['./snippets']` | Directories containing `.liquid` template files             |
 | `assetsPath`  | `'assets'`       | Directory for theme assets (used by the `asset_url` filter) |
 
-### Filters
+## Web Components
 
-Built-in Shopify filter mocks:
+Web components are supported and fully upgrade as expected. See
+[Advanced Usage](./docs/advanced-usage.md#web-components) for `waitForElements`
+and more details.
 
-| Filter      | Behaviour                                  |
-| ----------- | ------------------------------------------ |
-| `money`     | Cents to dollars (e.g., `2999` → `$29.99`) |
-| `asset_url` | Prepends the configured assets path        |
+## Filters & Tags
 
-Register additional filters in a setup file:
+Assay mocks Shopify-specific Liquid filters and tags that aren't in LiquidJS
+core. See the full compatibility tables:
 
-📄 [See example](./example/tests/setup.ts)
+- 📄 [Filters](./docs/filters.md) — 59 core, 2 mocked, 85 unsupported
+- 📄 [Tags](./docs/tags.md) — 18 core, 1 mocked, 11 unsupported
 
-```typescript
-// tests/setup.ts
-import { registerFilter } from "@augeo/assay";
-
-registerFilter("upcase_first", (value) => {
-	const str = String(value ?? "");
-	return str.charAt(0).toUpperCase() + str.slice(1);
-});
-```
-
-Then reference it via Vitest's standard
-[`setupFiles`](https://vitest.dev/config/#setupfiles).
-
-### Tags
-
-Built in Shopify-specific tags:
-
-📄 [See example](./example/theme/sections/hero.liquid)
-
-| Tag                              | Behaviour                                      |
-| -------------------------------- | ---------------------------------------------- |
-| `{% schema %}...{% endschema %}` | Silently ignored (section/block settings JSON) |
-
-### Web Components
-
-Templates with `<script>` tags work. Scripts are executed after rendering. Use
-`waitForElements` to wait for custom elements to upgrade:
-
-📄 See example:
-
-- [snippet](./example/theme/snippets/toggle-switch.liquid)
-- [test](./example/tests/snippets/toggle-switch.test.ts)
-
-```typescript
-await renderSnippet(
-	"toggle-switch",
-	{ label: "Enable notifications" },
-	{ waitForElements: ["toggle-switch"] },
-);
-```
+Need a filter or tag that's not yet supported? See
+[Advanced Usage](./docs/advanced-usage.md) for how to register your own.
 
 ## Learn More
 
-New to testing? These resources are a good starting point:
-
-- [Vitest](https://vitest.dev/guide/): the test runner Assay is built on
+- [Advanced Usage](./docs/advanced-usage.md): custom filters, tags, preset
+  overrides, web components
 - [Vitest Browser Mode](https://vitest.dev/guide/browser/): how tests run in a
   real browser
 - [Testing Library Guiding Principles](https://testing-library.com/docs/guiding-principles):
   the philosophy behind `getByRole`, `getByText`, and user-centric testing
-- [Testing Library Queries](https://testing-library.com/docs/queries/about): how
-  to find elements in the DOM
+- [Vitest Locators](https://vitest.dev/api/browser/locators): how to find
+  elements with `page.getByRole`, `page.getByText`, etc.
+- [Vitest Assertions](https://vitest.dev/api/browser/assertions): `toBeVisible`,
+  `toBeChecked`, `toHaveTextContent`, and more
+- [Vitest](https://vitest.dev/guide/): the test runner Assay is built on
 
 ## Future Plans
 
@@ -211,7 +136,7 @@ New to testing? These resources are a good starting point:
   pattern
 - Translation support (`| t` filter + locale JSON loading)
 - Additional filter and tag mocks (e.g., `{% javascript %}`, `{% stylesheet %}`)
-- Automatic custom element detection. Scan rendered HTML non-standard tags and
-  wait for `customElements.whenDefined()` without explicit `waitForElements`
+- Automatic custom element detection — scan rendered HTML for non-standard tags
+  and wait for `customElements.whenDefined()` without explicit `waitForElements`
 - Visual regression helpers
 - Shadow DOM query support
