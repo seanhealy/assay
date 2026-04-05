@@ -6,6 +6,7 @@ export const tags: ShimTag[] = [
 		type: "tag",
 		name: "schema",
 		status: "mock",
+		description: "Section and block settings JSON. Silently ignored.",
 		implementation: tagNoOp("schema"),
 	},
 ];

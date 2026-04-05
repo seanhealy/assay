@@ -24,7 +24,7 @@
 	],
 	"scripts": {
 		"build": "tsdown",
-		"build:watch": "tsdown --watch",
+		"build:watch": "tsdown --watch ./src",
 		"lint": "biome check && prettier --check .",
 		"lint:fix": "biome check --write && prettier --write .",
 		"typecheck": "tsc --noEmit",

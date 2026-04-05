@@ -6,6 +6,7 @@ type ImplementationTag = Parameters<Liquid["registerTag"]>[1];
 interface ShimBase {
 	name: string;
 	status: ShimStatus;
+	description?: string;
 }
 
 export interface ShimFilter extends ShimBase {
