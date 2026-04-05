@@ -1,0 +1,3 @@
+[submodule "vendor/theme-liquid-docs"]
+	path = vendor/theme-liquid-docs
+	url = https://github.com/Shopify/theme-liquid-docs.git

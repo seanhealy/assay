@@ -30,6 +30,8 @@
 		"typecheck": "tsc --noEmit",
 		"verify": "npm run lint:fix && npm run typecheck",
 		"test": "npm test --prefix example",
+		"docs:update": "git submodule update --remote vendor/theme-liquid-docs",
+		"docs:audit": "tsx scripts/audit-shopify-compat.ts",
 		"prepublishOnly": "npm run build"
 	},
 	"volta": {
@@ -49,6 +51,7 @@
 		"@vitest/browser-playwright": "^4.1.2",
 		"prettier": "^3.8.1",
 		"tsdown": "^0.21.7",
+		"tsx": "^4.21.0",
 		"typescript": "^6.0.2",
 		"vitest": "^4.1.2"
 	}

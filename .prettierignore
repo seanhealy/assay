@@ -11,3 +11,6 @@
 
 # Don't ignore directories (needed for pattern matching to work)
 !*/
+
+# But ignore vendor
+vendor/
