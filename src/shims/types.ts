@@ -1,6 +1,6 @@
 import type { Liquid } from "liquidjs";
 
-type ShimStatus = "parity" | "mock";
+export type ShimStatus = "parity" | "mock";
 type ImplementationTag = Parameters<Liquid["registerTag"]>[1];
 
 interface ShimBase {
