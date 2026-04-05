@@ -1,5 +1,9 @@
 {
 	"permissions": {
-		"allow": ["Bash(npm run verify)", "Bash(npm run build)"]
+		"allow": [
+			"Bash(npm run verify)",
+			"Bash(npm run build)",
+			"Bash(npm run docs:audit)"
+		]
 	}
 }
