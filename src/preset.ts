@@ -12,20 +12,20 @@ import type { LiquidPresetOptions } from "./types";
  *
  * @example
  * ```ts
- * import { liquidPreset } from '@augeo/assay/preset';
+ * import { assayPreset } from '@augeo/assay/preset';
  *
- * export default liquidPreset({ liquidPaths: ['./snippets'] });
+ * export default assayPreset({ liquidPaths: ['./snippets'] });
  * ```
  *
  * @example With overrides
  * ```ts
- * export default liquidPreset(
+ * export default assayPreset(
  *   { liquidPaths: ['./snippets'] },
  *   { test: { browser: { headless: false } } },
  * );
  * ```
  */
-export function liquidPreset(
+export function assayPreset(
 	options: LiquidPresetOptions = {},
 	overrides: ViteUserConfig = {},
 ): ViteUserConfig {

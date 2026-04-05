@@ -68,14 +68,14 @@ for implementation details.
 
 ## Preset Overrides
 
-`liquidPreset` accepts an optional second argument for
+`assayPreset` accepts an optional second argument for
 [Vitest config](https://vitest.dev/config/) and
 [browser mode](https://vitest.dev/guide/browser/#configuration) overrides:
 
 ```typescript
-import { liquidPreset } from "@augeo/assay/preset";
+import { assayPreset } from "@augeo/assay/preset";
 
-export default liquidPreset(
+export default assayPreset(
 	{ liquidPaths: ["./theme/snippets"] },
 	{
 		test: {
