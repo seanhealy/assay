@@ -1,8 +1,7 @@
 import { Liquid } from "liquidjs";
 import { LIQUID_URL_PREFIX } from "./constants";
-import { registerDefaultFilters } from "./filters";
 import { createFetchFS } from "./fs-adapter";
-import { registerDefaultTags } from "./tags";
+import { registerDefaultFilters, registerDefaultTags } from "./shims";
 
 export interface RenderSnippetOptions {
 	/** Wait for specific custom elements to be defined before returning */

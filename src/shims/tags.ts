@@ -1,5 +1,5 @@
 import type { Liquid } from "liquidjs";
-import type { ShimTag } from "./shims";
+import type { ShimTag } from "./types";
 
 export const tags: ShimTag[] = [
 	{

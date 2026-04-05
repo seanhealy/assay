@@ -1,5 +1,5 @@
 import type { Liquid } from "liquidjs";
-import type { ShimFilter } from "./shims";
+import type { ShimFilter } from "./types";
 
 // Injected at compile time by Vite's `define`. (see plugin.ts)
 declare const __ASSAY_ASSET_PATH__: string;
