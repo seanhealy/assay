@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/seanhealy/assay.git"
+		"url": "git+https://github.com/seanhealy/assay.git"
 	},
 	"type": "module",
 	"exports": {
@@ -20,7 +20,7 @@
 		}
 	},
 	"bin": {
-		"assay": "./dist/cli.js"
+		"assay": "dist/cli.js"
 	},
 	"files": [
 		"dist"
