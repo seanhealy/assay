@@ -12,8 +12,8 @@ patterns. Including web component interaction, `userEvent`, and accessibility.
   choice) via [Vitest Browser Mode](https://vitest.dev/guide/browser/).
 - **Shopify-native mocks.** Filters like `| money` and `| asset_url` work out of
   the box. Working on filter parity. Register additional filters as needed.
-- **Simple API.** Call `renderSnippet` with a filename and data. The Liquid
-  engine, file resolution, and everything else is handled for you.
+- **Simple API.** Call `render` with a filename and data. The Liquid engine,
+  file resolution, and everything else is handled for you.
 
 ## Example
 
@@ -35,14 +35,14 @@ See the [📄 `example/`](./example) directory for an example theme with tests.
 ## Writing Tests
 
 ```typescript
-import { renderSnippet } from "@augeo/assay";
+import { render } from "@augeo/assay";
 import { beforeEach, describe, expect, it } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 describe("product-card.liquid", () => {
 	describe("with an available product", () => {
 		beforeEach(() =>
-			renderSnippet("product-card", {
+			render("product-card", {
 				product: { title: "Classic Tee", price: 2999, available: true },
 			}),
 		);

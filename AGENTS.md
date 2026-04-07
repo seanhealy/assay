@@ -19,7 +19,7 @@ src/
 ├── preset.ts             # Vitest config preset
 ├── plugin.ts             # Vite plugin, serves .liquid files
 ├── fs-adapter.ts         # Custom LiquidJS fs using fetch
-├── render.ts             # renderSnippet helper
+├── render.ts             # render helper
 ├── filters.ts            # Shopify filter mocks
 └── types.ts              # Config type definitions
 ```

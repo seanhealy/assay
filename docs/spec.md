@@ -10,13 +10,13 @@ Internal design notes. For usage, see [README.md](../README.md).
 ┌─────────────────────────────────────────────────────┐
 │                  Consumer Test File                 │
 │                                                     │
-│  renderSnippet('button', { text: 'Click me' })      │
+│  render('button', { text: 'Click me' })             │
 │  page.getByRole('button') / userEvent.click(...)    │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│                   renderSnippet                     │
+│                   render                            │
 │                                                     │
 │  1. Get or create LiquidJS engine                   │
 │  2. Render .liquid file → HTML string               │

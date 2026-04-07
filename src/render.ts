@@ -3,7 +3,7 @@ import { LIQUID_URL_PREFIX } from "./constants";
 import { createFetchFS } from "./fs-adapter";
 import { registerDefaultFilters, registerDefaultTags } from "./shims";
 
-export interface RenderSnippetOptions {
+export interface RenderOptions {
 	/** Wait for specific custom elements to be defined before returning */
 	waitForElements?: string[];
 }
@@ -18,16 +18,16 @@ export interface RenderSnippetOptions {
  *
  * @example
  * ```ts
- * const container = await renderSnippet('button', {
+ * const container = await render('button', {
  *   text: 'Click me',
  *   variant: 'primary',
  * });
  * ```
  */
-export async function renderSnippet(
+export async function render(
 	file: string,
 	data: Record<string, unknown> = {},
-	options: RenderSnippetOptions = {},
+	options: RenderOptions = {},
 ): Promise<HTMLElement> {
 	const { waitForElements = [] } = options;
 	const engine = getEngine();

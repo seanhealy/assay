@@ -1,2 +1,2 @@
-export type { RenderSnippetOptions } from "./render";
-export { registerFilter, registerTag, renderSnippet } from "./render";
+export type { RenderOptions } from "./render";
+export { registerFilter, registerTag, render } from "./render";

@@ -11,14 +11,14 @@ Templates with `<script>` tags work. Scripts are executed after rendering. Use
 - [test](../example/tests/snippets/toggle-switch.test.ts)
 
 ```typescript
-await renderSnippet(
+await render(
 	"toggle-switch",
 	{ label: "Enable notifications" },
 	{ waitForElements: ["toggle-switch"] },
 );
 ```
 
-### `renderSnippet` Options
+### `render` Options
 
 | Parameter                 | Type                      | Description                                      |
 | ------------------------- | ------------------------- | ------------------------------------------------ |

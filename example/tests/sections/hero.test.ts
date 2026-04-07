@@ -1,11 +1,11 @@
-import { renderSnippet } from "@augeo/assay";
+import { render } from "@augeo/assay";
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 
 describe("hero.liquid", () => {
 	describe("with just a heading", () => {
 		beforeEach(() =>
-			renderSnippet("hero", {
+			render("hero", {
 				section: { settings: { heading: "Welcome" } },
 			}),
 		);
@@ -25,7 +25,7 @@ describe("hero.liquid", () => {
 
 	describe("with a subheading", () => {
 		beforeEach(() =>
-			renderSnippet("hero", {
+			render("hero", {
 				section: {
 					settings: {
 						heading: "Welcome",
@@ -50,7 +50,7 @@ describe("hero.liquid", () => {
 
 	describe("with a call to action", () => {
 		beforeEach(() =>
-			renderSnippet("hero", {
+			render("hero", {
 				section: {
 					settings: {
 						heading: "Welcome",

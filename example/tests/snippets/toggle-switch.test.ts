@@ -1,11 +1,11 @@
-import { renderSnippet } from "@augeo/assay";
+import { render } from "@augeo/assay";
 import { beforeEach, describe, expect, it } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 describe("toggle-switch.liquid", () => {
 	describe("when unchecked", () => {
 		beforeEach(() =>
-			renderSnippet(
+			render(
 				"toggle-switch",
 				{ name: "notifications", label: "Enable notifications" },
 				{ waitForElements: ["toggle-switch"] },
@@ -29,7 +29,7 @@ describe("toggle-switch.liquid", () => {
 
 	describe("when checked", () => {
 		beforeEach(() =>
-			renderSnippet(
+			render(
 				"toggle-switch",
 				{
 					name: "notifications",
