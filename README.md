@@ -2,18 +2,19 @@
 
 [![Tests](https://github.com/seanhealy/assay/actions/workflows/test.yml/badge.svg)](https://github.com/seanhealy/assay/actions/workflows/test.yml)
 
-A Fast TypeScript-first testing stack for unit testing Shopify Liquid Themes.
-Renders snippets, sections, and blocks with familiar Vitest + Testing Library
-patterns. Including web component interaction, `userEvent`, and accessibility.
+Test Shopify Liquid templates with Vitest. Render snippets, sections, and
+blocks, then query and interact with familiar Testing Library patterns.
 
 ## Why
 
-- **Real browser, real confidence.** Tests run in Chromium (or your browser of
-  choice) via [Vitest Browser Mode](https://vitest.dev/guide/browser/).
-- **Shopify-native mocks.** Filters like `| money` and `| asset_url` work out of
-  the box. Working on filter parity. Register additional filters as needed.
-- **Simple API.** Call `render` with a filename and data. The Liquid engine,
-  file resolution, and everything else is handled for you.
+- **Shopify-ready.** Filters like `| money` and `| asset_url` work out of the
+  box. `{% schema %}` tags are handled. More filters shipping regularly.
+- **Simple API.** `render("button", { text: "Click me" })` — one function,
+  template name, data. Everything else is handled for you.
+- **Web components.** `<script>` tags execute, custom elements upgrade. Test
+  interactive components the same way they work in production.
+- **Cross-browser.** Tests run in real Chromium, Firefox, or WebKit via Vitest
+  Browser Mode — catch browser-specific issues before your users do.
 
 ---
 
@@ -109,6 +110,12 @@ core. See the full compatibility tables:
 
 - 📄 [Filters](./docs/filters.md) — 59 core, 2 mocked, 85 unsupported
 - 📄 [Tags](./docs/tags.md) — 18 core, 1 mocked, 11 unsupported
+
+Audit your theme to see which filters and tags you use are currently supported:
+
+```bash
+npx @augeo/assay audit ./path/to/theme
+```
 
 Need a filter or tag that's not yet supported? See
 [Advanced Usage](./docs/advanced-usage.md) for how to register your own.

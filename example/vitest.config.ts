@@ -5,5 +5,12 @@ export default assayPreset(
 		liquidPaths: ["./theme/snippets", "./theme/sections"],
 		assetsPath: "theme/assets",
 	},
-	{ test: { setupFiles: ["./tests/setup.ts"] } },
+	{
+		test: {
+			setupFiles: ["./tests/setup.ts"],
+			browser: {
+				instances: [{ browser: "chromium" }, { browser: "firefox" }],
+			},
+		},
+	},
 );

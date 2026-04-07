@@ -2,6 +2,7 @@
 
 - [Web Components](#web-components)
 - [Preset Overrides](#preset-overrides)
+  - [Cross-browser testing](#cross-browser-testing)
 - [Mocking](#mocking)
 - [Custom Filters](#custom-filters)
 - [Custom Tags](#custom-tags)
@@ -59,6 +60,47 @@ Overrides are merged with Assay's defaults. Use
 tags before tests run. The `test.browser` object is spread on top of the
 defaults (chromium, headless), so you can override individual settings without
 losing the rest.
+
+### Cross-browser testing
+
+Run your tests across multiple browsers by adding instances:
+
+```typescript
+export default assayPreset(
+	{ liquidPaths: ["./theme/snippets"] },
+	{
+		test: {
+			browser: {
+				instances: [
+					{ browser: "chromium" },
+					{ browser: "firefox" },
+					{ browser: "webkit" },
+				],
+			},
+		},
+	},
+);
+```
+
+Each browser runs the full test suite. Setup the browsers you need:
+
+Chrome
+
+```bash
+npx playwright install chromium
+```
+
+Firefox
+
+```bash
+npx playwright install firefox
+```
+
+Safari
+
+```bash
+npx playwright install webkit
+```
 
 ### Options
 
