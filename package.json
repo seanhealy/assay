@@ -1,13 +1,23 @@
 {
 	"name": "@augeo/assay",
 	"version": "1.0.1",
-	"description": "A minimal, TypeScript-first testing stack for Shopify Liquid Themes.",
+	"description": "Test Shopify Liquid Themes with Vitest.",
 	"author": "Sean Healy",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/seanhealy/assay.git"
 	},
+	"keywords": [
+		"shopify",
+		"liquid",
+		"testing",
+		"vitest",
+		"theme",
+		"browser-testing",
+		"web-components",
+		"playwright"
+	],
 	"type": "module",
 	"exports": {
 		".": {
