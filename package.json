@@ -1,6 +1,6 @@
 {
 	"name": "@augeo/assay",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A minimal, TypeScript-first testing stack for Shopify Liquid Themes.",
 	"author": "Sean Healy",
 	"license": "MIT",
