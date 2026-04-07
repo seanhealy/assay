@@ -1,6 +1,8 @@
-import { render } from "@augeo/assay";
+import { mock, render } from "@augeo/assay";
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
+
+mock("button", "<span data-testid='mock-button'>{{ text }}</span>");
 
 describe("hero.liquid", () => {
 	describe("with just a heading", () => {
@@ -60,10 +62,12 @@ describe("hero.liquid", () => {
 			}),
 		);
 
-		it("renders the button from the nested snippet", async () => {
-			await expect
-				.element(page.getByRole("button", { name: "Shop now" }))
-				.toBeVisible();
+		it("renders the mocked button", async () => {
+			await expect.element(page.getByTestId("mock-button")).toBeVisible();
+		});
+
+		it("passes variables to the mock", async () => {
+			await expect.element(page.getByText("Shop now")).toBeVisible();
 		});
 	});
 });

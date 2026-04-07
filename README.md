@@ -15,24 +15,22 @@ patterns. Including web component interaction, `userEvent`, and accessibility.
 - **Simple API.** Call `render` with a filename and data. The Liquid engine,
   file resolution, and everything else is handled for you.
 
-## Example
-
-See the [📄 `example/`](./example) directory for an example theme with tests.
-
 ---
 
 ## Contents
 
-- [Writing Tests](#writing-tests)
+- [Example](#example)
 - [Install](#install)
 - [Setup](#setup)
+- [Web Components](#web-components)
 - [Filters & Tags](#filters--tags)
+- [Mocking](#mocking)
 - [Learn More](#learn-more)
 - [Future Plans](#future-plans)
 
 ---
 
-## Writing Tests
+## Example
 
 ```typescript
 import { render } from "@augeo/assay";
@@ -63,6 +61,8 @@ describe("product-card.liquid", () => {
 	});
 });
 ```
+
+See the [📄 `example/`](./example) directory for an example theme with tests.
 
 ## Install
 
@@ -113,6 +113,18 @@ core. See the full compatibility tables:
 Need a filter or tag that's not yet supported? See
 [Advanced Usage](./docs/advanced-usage.md) for how to register your own.
 
+## Mocking
+
+Mock nested `{% render %}` calls to test a section in isolation:
+
+```typescript
+import { mock, render } from "@augeo/assay";
+
+mock("product-card", "<div data-testid='mock-card'>{{ product.title }}</div>");
+```
+
+See [Advanced Usage](./docs/advanced-usage.md#mocking) for more on mocking.
+
 ## Learn More
 
 - [Advanced Usage](./docs/advanced-usage.md): custom filters, tags, preset
@@ -136,6 +148,9 @@ Need a filter or tag that's not yet supported? See
   pattern
 - Translation support (`| t` filter + locale JSON loading)
 - Additional filter and tag mocks (e.g., `{% javascript %}`, `{% stylesheet %}`)
+- Render spies — wrap the `render` tag to record which templates were rendered
+  and with what data, enabling assertions like
+  `expect(spy).toHaveBeenCalledWith({ product })`
 - Automatic custom element detection — scan rendered HTML for non-standard tags
   and wait for `customElements.whenDefined()` without explicit `waitForElements`
 - Visual regression helpers

@@ -1,0 +1,14 @@
+<section>
+	<h1>{{ section.settings.title }}</h1>
+	{% render 'greeting', name: section.settings.name %}
+</section>
+
+{% schema %}
+{
+	"name": "Page",
+	"settings": [
+		{ "type": "text", "id": "title", "label": "Title" },
+		{ "type": "text", "id": "name", "label": "Name" }
+	]
+}
+{% endschema %}

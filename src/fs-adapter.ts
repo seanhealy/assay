@@ -1,5 +1,15 @@
 import type { FS } from "liquidjs";
 
+const templateMocks = new Map<string, string>();
+
+export function mockTemplate(name: string, template: string): void {
+	templateMocks.set(name, template);
+}
+
+export function unmockTemplate(name: string): void {
+	templateMocks.delete(name);
+}
+
 export function createFetchFS(urlPrefix: string): FS {
 	return {
 		sep: "/",
@@ -15,6 +25,9 @@ export function createFetchFS(urlPrefix: string): FS {
 		},
 
 		async readFile(filepath: string): Promise<string> {
+			const name = extractTemplateName(filepath);
+			if (templateMocks.has(name)) return templateMocks.get(name) as string;
+
 			const res = await fetch(filepath);
 			if (!res.ok) throw new Error(`Template not found: ${filepath}`);
 			return res.text();
@@ -38,4 +51,10 @@ export function createFetchFS(urlPrefix: string): FS {
 			return parts.join("/");
 		},
 	};
+}
+
+/** Extracts the template name from a full URL path (e.g., "/__assay__/button.liquid" → "button") */
+function extractTemplateName(filepath: string): string {
+	const filename = filepath.split("/").pop() ?? filepath;
+	return filename.replace(/\.liquid$/, "");
 }

@@ -1,5 +1,11 @@
 # Advanced Usage
 
+- [Web Components](#web-components)
+- [Preset Overrides](#preset-overrides)
+- [Mocking](#mocking)
+- [Custom Filters](#custom-filters)
+- [Custom Tags](#custom-tags)
+
 ## Web Components
 
 Templates with `<script>` tags work. Scripts are executed after rendering. Use
@@ -27,6 +33,97 @@ await render(
 | `options.waitForElements` | `string[]`                | Custom element tags to wait for before returning |
 
 Previous renders are cleaned up automatically.
+
+## Preset Overrides
+
+`assayPreset` accepts an optional second argument for
+[Vitest config](https://vitest.dev/config/) and
+[browser mode](https://vitest.dev/guide/browser/#configuration) overrides:
+
+```typescript
+import { assayPreset } from "@augeo/assay/preset";
+
+export default assayPreset(
+	{ liquidPaths: ["./theme/snippets"] },
+	{
+		test: {
+			setupFiles: ["./tests/setup.ts"],
+			browser: { headless: false },
+		},
+	},
+);
+```
+
+Overrides are merged with Assay's defaults. Use
+[`setupFiles`](https://vitest.dev/config/#setupfiles) to load custom filters and
+tags before tests run. The `test.browser` object is spread on top of the
+defaults (chromium, headless), so you can override individual settings without
+losing the rest.
+
+### Options
+
+| Option        | Default          | Description                                                 |
+| ------------- | ---------------- | ----------------------------------------------------------- |
+| `liquidPaths` | `['./snippets']` | Directories containing `.liquid` template files             |
+| `assetsPath`  | `'assets'`       | Directory for theme assets (used by the `asset_url` filter) |
+
+## Mocking
+
+Mock nested `{% render %}` calls to test a template in isolation. When a
+template is mocked, LiquidJS returns the mock content instead of loading the
+real file.
+
+### Module-level mock
+
+Set once at the top of a test file. Persists for all tests in that file — same
+pattern as `vi.mock`.
+
+📄 [See example](../example/tests/sections/hero.test.ts)
+
+```typescript
+import { mock, render } from "@augeo/assay";
+
+mock("button", "<span data-testid='mock-button'>{{ text }}</span>");
+
+describe("hero.liquid", () => {
+	it("renders the mock", async () => {
+		await render("hero", { ... });
+		await expect.element(page.getByTestId("mock-button")).toBeVisible();
+	});
+});
+```
+
+### Scoped mock
+
+Use `beforeEach` and `afterEach` to scope a mock to a single describe block.
+
+```typescript
+import { mock, render, unmock } from "@augeo/assay";
+
+describe("hero.liquid", () => {
+	describe("with a mocked button", () => {
+		beforeEach(() => mock("button", "<span>{{ text }}</span>"));
+		afterEach(() => unmock("button"));
+
+		it("renders the mock", async () => {
+			await render("hero", { ... });
+			// ...
+		});
+	});
+
+	describe("without the mock", () => {
+		it("renders the real button", async () => {
+			await render("hero", { ... });
+			// ...
+		});
+	});
+});
+```
+
+Mocks are Liquid templates — they receive the same variables that
+`{% render 'name', key: value %}` passes.
+
+Mocks do not bleed between test files. Each file starts with a clean state.
 
 ## Custom Filters
 
@@ -65,36 +162,3 @@ registerTag("my_tag", {
 See the
 [LiquidJS tag documentation](https://liquidjs.com/tutorials/register-filters-tags.html)
 for implementation details.
-
-## Preset Overrides
-
-`assayPreset` accepts an optional second argument for
-[Vitest config](https://vitest.dev/config/) and
-[browser mode](https://vitest.dev/guide/browser/#configuration) overrides:
-
-```typescript
-import { assayPreset } from "@augeo/assay/preset";
-
-export default assayPreset(
-	{ liquidPaths: ["./theme/snippets"] },
-	{
-		test: {
-			setupFiles: ["./tests/setup.ts"],
-			browser: { headless: false },
-		},
-	},
-);
-```
-
-Overrides are merged with Assay's defaults. Use
-[`setupFiles`](https://vitest.dev/config/#setupfiles) to load custom filters and
-tags before tests run. The `test.browser` object is spread on top of the
-defaults (chromium, headless), so you can override individual settings without
-losing the rest.
-
-### Options
-
-| Option        | Default          | Description                                                 |
-| ------------- | ---------------- | ----------------------------------------------------------- |
-| `liquidPaths` | `['./snippets']` | Directories containing `.liquid` template files             |
-| `assetsPath`  | `'assets'`       | Directory for theme assets (used by the `asset_url` filter) |

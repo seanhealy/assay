@@ -33,7 +33,7 @@
 		"lint:fix": "biome check --write && prettier --write .",
 		"typecheck": "tsc --noEmit",
 		"verify": "npm run lint:fix && npm run typecheck",
-		"test": "npm test --prefix example",
+		"test": "vitest run && npm test --prefix example",
 		"docs:update": "git submodule update --remote vendor/theme-liquid-docs",
 		"docs:audit": "tsx scripts/audit-shopify-compat.ts",
 		"prepublishOnly": "npm run build"
