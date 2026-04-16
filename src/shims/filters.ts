@@ -26,6 +26,12 @@ export const filters: ShimFilter[] = [
 		status: "mock",
 		implementation: assetUrl,
 	},
+	{
+		type: "filter",
+		name: "image_url",
+		status: "mock",
+		implementation: imageUrl,
+	},
 ];
 
 export function registerDefaultFilters(engine: Liquid): void {
@@ -36,4 +42,18 @@ export function registerDefaultFilters(engine: Liquid): void {
 
 function assetUrl(value: unknown): string {
 	return `/${__ASSAY_ASSET_PATH__}/${String(value)}`;
+}
+
+const PIXEL =
+	"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
+function imageUrl(_value: unknown, ...args: unknown[]): string {
+	const params = new URLSearchParams();
+	for (const arg of args) {
+		if (Array.isArray(arg)) {
+			params.set(String(arg[0]), String(arg[1]));
+		}
+	}
+	const fragment = params.toString();
+	return fragment ? `${PIXEL}#${fragment}` : PIXEL;
 }
