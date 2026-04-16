@@ -13,7 +13,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { Liquid } from "liquidjs";
 import { formatTable } from "../src/cli/utilities/markdown-table";
-import { getStatusWithLabel } from "../src/cli/utilities/status";
+import { statusIcon } from "../src/cli/utilities/status";
 import type { ShimFilter, ShimStatus, ShimTag } from "../src/shims";
 import {
 	filters as assayFilterShims,
@@ -223,11 +223,9 @@ function resolveDescription(
 }
 
 function entryToRow(entry: AuditedEntry): string[] {
-	const { icon, label } = getStatusWithLabel(
-		entry.name,
-		entry.kind === "filter" ? coreFilterNames : coreTagNames,
-		entry.kind === "filter" ? filterShimMap : tagShimMap,
-	);
+	const resolvedStatus = entry.status === "core" ? "parity" : entry.shimStatus;
+	const label = entry.status === "core" ? "LiquidJS" : "Assay";
+	const icon = statusIcon(resolvedStatus);
 
 	const description = entry.description
 		.replace(/\|/g, "\\|")
@@ -236,5 +234,10 @@ function entryToRow(entry: AuditedEntry): string[] {
 	const docsUrl = `https://shopify.dev/docs/api/liquid/${entry.kind}s/${entry.name}`;
 	const link = entry.hasShopifyDocs ? `[🔗](${docsUrl})` : "";
 
-	return [`\`${entry.name}\``, `${icon} ${label}`, link, description];
+	return [
+		`\`${entry.name}\``,
+		icon ? `${icon} ${label}` : "",
+		link,
+		description,
+	];
 }

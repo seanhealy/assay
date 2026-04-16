@@ -13,7 +13,20 @@ import {
 	tagNames as shopifyTagNames,
 } from "./shopify-names";
 import { formatTable } from "./utilities/markdown-table";
-import { getStatusIcon } from "./utilities/status";
+import { statusIcon } from "./utilities/status";
+
+interface AuditEntry {
+	count: number;
+	status: string | undefined;
+}
+
+type AuditSection = Record<string, AuditEntry>;
+
+interface AuditResult {
+	tags: AuditSection;
+	filters: AuditSection;
+	objects: AuditSection;
+}
 
 // Shared regex patterns
 const LIQUID_OPEN = /\{%-?\s*liquid\b/;
@@ -30,6 +43,22 @@ export function audit(args: string[]): void {
 	const outputPath = outputIndex !== -1 ? args[outputIndex + 1] : undefined;
 	const themeRoot = resolve(args.find((arg) => !arg.startsWith("--")) ?? ".");
 
+	const result = buildAudit(themeRoot);
+
+	if (jsonOutput) {
+		console.log(JSON.stringify(result, undefined, 2));
+	} else {
+		const markdown = buildMarkdown(result);
+		if (outputPath) {
+			writeFileSync(outputPath, markdown);
+			console.error(`Written to ${outputPath}`);
+		} else {
+			console.log(markdown);
+		}
+	}
+}
+
+function buildAudit(themeRoot: string): AuditResult {
 	const canonicalTags = new Set(
 		shopifyTagNames.filter((name) => !EXCLUDED_TAGS.has(name)),
 	);
@@ -58,48 +87,16 @@ export function audit(args: string[]): void {
 		canonicalTags,
 	);
 
-	if (jsonOutput) {
-		console.log(
-			JSON.stringify(
-				{
-					tags: Object.fromEntries(tagCounts),
-					filters: Object.fromEntries(filterCounts),
-					objects: Object.fromEntries(objectCounts),
-				},
-				undefined,
-				2,
-			),
-		);
-	} else {
-		const markdown = buildMarkdown(
-			tagCounts,
-			filterCounts,
-			objectCounts,
-			coreTagNames,
-			coreFilterNames,
-			assayTagMap,
-			assayFilterMap,
-		);
-		if (outputPath) {
-			writeFileSync(outputPath, markdown);
-			console.error(`Written to ${outputPath}`);
-		} else {
-			console.log(markdown);
-		}
-	}
+	return {
+		tags: enrichCounts(tagCounts, coreTagNames, assayTagMap),
+		filters: enrichCounts(filterCounts, coreFilterNames, assayFilterMap),
+		objects: enrichCounts(objectCounts, new Set(), new Map()),
+	};
 }
 
 // --- Output ---
 
-function buildMarkdown(
-	tags: Map<string, number>,
-	filters: Map<string, number>,
-	objects: Map<string, number>,
-	coreTagNames: Set<string>,
-	coreFilterNames: Set<string>,
-	assayTagMap: Map<string, { status: string }>,
-	assayFilterMap: Map<string, { status: string }>,
-): string {
+function buildMarkdown(result: AuditResult): string {
 	const date = new Date().toISOString().split("T")[0];
 
 	return [
@@ -111,40 +108,32 @@ function buildMarkdown(
 		"",
 		"## Tags",
 		"",
-		...buildUsageTable("Tag", tags, coreTagNames, assayTagMap),
+		...buildUsageTable("Tag", result.tags),
 		"",
 		"## Filters",
 		"",
-		...buildUsageTable("Filter", filters, coreFilterNames, assayFilterMap),
+		...buildUsageTable("Filter", result.filters),
 		"",
 		"## Objects",
 		"",
-		...buildSimpleTable("Object", objects),
+		...buildSimpleTable("Object", result.objects),
 		"",
 	].join("\n");
 }
 
-function buildUsageTable(
-	columnName: string,
-	counts: Map<string, number>,
-	coreNames: Set<string>,
-	shimMap: Map<string, { status: string }>,
-): string[] {
+function buildUsageTable(columnName: string, section: AuditSection): string[] {
 	const headers = ["Count", columnName, ""];
-	const rows = [...counts.entries()].map(([name, count]) => [
+	const rows = Object.entries(section).map(([name, { count, status }]) => [
 		String(count),
 		`\`${name}\``,
-		getStatusIcon(name, coreNames, shimMap),
+		statusIcon(status),
 	]);
 	return formatTable(headers, rows);
 }
 
-function buildSimpleTable(
-	columnName: string,
-	counts: Map<string, number>,
-): string[] {
+function buildSimpleTable(columnName: string, section: AuditSection): string[] {
 	const headers = ["Count", columnName];
-	const rows = [...counts.entries()].map(([name, count]) => [
+	const rows = Object.entries(section).map(([name, { count }]) => [
 		String(count),
 		`\`${name}\``,
 	]);
@@ -308,4 +297,24 @@ function sortByCountDesc(counts: Map<string, number>): Map<string, number> {
 	return new Map(
 		[...counts.entries()].sort(([, first], [, second]) => second - first),
 	);
+}
+
+function enrichCounts(
+	counts: Map<string, number>,
+	coreNames: Set<string>,
+	shimMap: Map<string, { status: string }>,
+): Record<string, { count: number; status: string | undefined }> {
+	const result: Record<string, { count: number; status: string | undefined }> =
+		{};
+	for (const [name, count] of counts) {
+		let status: string | undefined;
+		if (coreNames.has(name)) {
+			status = "parity";
+		} else {
+			const shim = shimMap.get(name);
+			if (shim) status = shim.status;
+		}
+		result[name] = { count, status };
+	}
+	return result;
 }

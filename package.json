@@ -45,7 +45,7 @@
 		"verify": "npm run lint:fix && npm run typecheck",
 		"test": "vitest run && npm test --prefix example",
 		"docs:update": "git submodule update --remote vendor/theme-liquid-docs",
-		"docs:audit": "tsx scripts/audit-shopify-compat.ts",
+		"docs:audit": "tsx scripts/audit-shopify-compat.ts && prettier --write docs/filters.md docs/tags.md",
 		"prepublishOnly": "npm run build"
 	},
 	"volta": {
