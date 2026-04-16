@@ -8,3 +8,4 @@ __screenshots__/
 .claude/worktrees/
 .claude/plans/
 .claude/settings.local.json
+.DS_Store
