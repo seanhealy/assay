@@ -32,6 +32,24 @@ export const filters: ShimFilter[] = [
 		status: "mock",
 		implementation: imageUrl,
 	},
+	{
+		type: "filter",
+		name: "inline_asset_content",
+		status: "parity",
+		implementation: inlineAssetContent,
+	},
+	{
+		type: "filter",
+		name: "t",
+		status: "mock",
+		implementation: translate,
+	},
+	{
+		type: "filter",
+		name: "translate",
+		status: "mock",
+		implementation: translate,
+	},
 ];
 
 export function registerDefaultFilters(engine: Liquid): void {
@@ -46,6 +64,17 @@ function assetUrl(value: unknown): string {
 
 const PIXEL =
 	"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
+async function inlineAssetContent(value: unknown): Promise<string> {
+	const url = `/${__ASSAY_ASSET_PATH__}/${String(value)}`;
+	const response = await fetch(url);
+	if (!response.ok) return "";
+	return response.text();
+}
+
+function translate(value: unknown): string {
+	return String(value ?? "");
+}
 
 function imageUrl(_value: unknown, ...args: unknown[]): string {
 	const params = new URLSearchParams();
