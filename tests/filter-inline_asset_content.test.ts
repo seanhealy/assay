@@ -7,8 +7,6 @@ describe("inline_asset_content filter", () => {
 
 	it("inlines the SVG asset content", async () => {
 		await expect.element(page.getByTestId("icon")).toBeVisible();
-		await expect
-			.element(page.getByTestId("icon"))
-			.toContainHTML("<svg");
+		await expect.element(page.getByTestId("icon")).toContainHTML("<svg");
 	});
 });

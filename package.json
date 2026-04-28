@@ -36,7 +36,7 @@
 		"dist"
 	],
 	"scripts": {
-		"prebuild": "tsx scripts/generate-shopify-names.ts",
+		"prebuild": "tsx scripts/generate-shopify-names.ts && tsx scripts/generate-shim-barrels.ts",
 		"build": "tsdown",
 		"build:watch": "tsdown --watch ./src",
 		"lint": "biome check && prettier --check .",

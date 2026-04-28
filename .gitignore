@@ -1,6 +1,8 @@
 node_modules/
 dist/
 src/cli/shopify-names.ts
+src/shims/filters/index.ts
+src/shims/tags/index.ts
 __screenshots__/
 .vitest-attachments/
 
