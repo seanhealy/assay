@@ -50,9 +50,6 @@ await render(liquid`<div data-testid="price">{{ amount | money }}</div>`, {
 });
 ```
 
-The tag returns a branded `LiquidTemplate` object so `render` can statically
-distinguish a filename from an inline template — no runtime sniffing.
-
 ### Interpolation
 
 `${...}` values are concatenated into the source string before the template is
