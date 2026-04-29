@@ -1,0 +1,34 @@
+// Shopify reference: https://shopify.dev/docs/api/liquid/tags/doc
+// `{% doc %}` blocks contain LiquidDoc comments — author-facing documentation
+// that Shopify strips before rendering. The Assay shim is a no-op block tag:
+// it consumes the contents and emits nothing.
+
+import { beforeEach, describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
+import { liquid, render } from "@";
+
+describe("doc tag", () => {
+	let container: HTMLElement;
+	beforeEach(async () => {
+		container = await render(liquid`
+<div data-testid="before">before</div>
+{% doc %}
+	@description Renders a button with the given text.
+	@param {string} text - The button label.
+{% enddoc %}
+<div data-testid="after">after</div>
+		`);
+	});
+
+	it("renders content before and after the doc block", async () => {
+		await expect
+			.element(page.getByTestId("before"))
+			.toHaveTextContent("before");
+		await expect.element(page.getByTestId("after")).toHaveTextContent("after");
+	});
+
+	it("emits nothing for the doc block contents", () => {
+		expect(container.textContent).not.toContain("@description");
+		expect(container.textContent).not.toContain("@param");
+	});
+});

@@ -117,6 +117,19 @@ Object metadata (properties, types) lives in
 `vendor/theme-liquid-docs/data/objects.json` and can drive a future TS-type
 generator.
 
+## Setup
+
+This repo uses a git submodule for `vendor/theme-liquid-docs` (Shopify's docs
+data, consumed by `npm run docs:lookup` and `scripts/audit-shopify-compat.ts`).
+After a fresh clone — including in any sandboxed/CI agent — initialise it:
+
+```
+git submodule update --init --recursive
+```
+
+Without this, `vendor/theme-liquid-docs/data/*.json` is missing and the docs
+lookup script fails with `ENOENT`.
+
 ## Before Submitting Changes
 
 1. Run `npm run verify` to lint, format, and type-check
