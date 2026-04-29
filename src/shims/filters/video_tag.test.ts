@@ -1,20 +1,24 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/filters/video_tag
-// Real Shopify generates a fully-formed `<video>` from a media object with
-// CDN-hosted sources and a poster image. The Assay shim emits a `<video>`
-// with default playback attributes plus a single `<source>` derived from
-// `media.src`, and forwards keyword arguments (autoplay, loop, muted,
-// controls, etc.) as attributes on the outer element.
+// `video_tag` is a mock — real Shopify resolves `media.sources[].url` and
+// `media.preview_image.src` to CDN paths, the shim just passes them through
+// unchanged. Tests here use the same `video` object shape that themes get
+// from `product.media`: an array of sources, a preview_image object, and an
+// alt string.
 
 import { beforeEach, describe, expect, it } from "vitest";
 import { liquid, render } from "@";
 
+const media = {
+	media_type: "video",
+	alt: "Potion beats",
+	sources: [
+		{ url: "/tests/fixtures/videos/promo.mp4", mime_type: "video/mp4" },
+		{ url: "/tests/fixtures/videos/promo.webm", mime_type: "video/webm" },
+	],
+	preview_image: { src: "/tests/fixtures/videos/promo.jpg" },
+};
+
 describe("video_tag()", () => {
 	let container: HTMLElement;
-	const media = {
-		media_type: "video",
-		src: "/tests/fixtures/videos/promo.mp4",
-		preview_image: "/tests/fixtures/videos/promo.jpg",
-	};
 
 	describe("with default arguments", () => {
 		beforeEach(async () => {
@@ -33,22 +37,38 @@ describe("video_tag()", () => {
 			);
 		});
 
-		it("derives `poster` from `media.preview_image`", () => {
+		it("derives `aria-label` from `media.alt`", () => {
+			expect(container.querySelector("video")?.getAttribute("aria-label")).toBe(
+				media.alt,
+			);
+		});
+
+		it("derives `poster` from `media.preview_image.src`", () => {
 			expect(container.querySelector("video")?.getAttribute("poster")).toBe(
-				media.preview_image,
+				media.preview_image.src,
 			);
 		});
 
-		it("emits a `<source>` whose `src` is `media.src`", () => {
-			expect(container.querySelector("video source")?.getAttribute("src")).toBe(
-				media.src,
-			);
+		it("emits one `<source>` per entry in `media.sources`", () => {
+			expect(container.querySelectorAll("video source").length).toBe(2);
 		});
 
-		it("emits a `<source>` whose `type` is `video/mp4`", () => {
-			expect(
-				container.querySelector("video source")?.getAttribute("type"),
-			).toBe("video/mp4");
+		it("uses `source.url` for the `src` attribute", () => {
+			const sources = container.querySelectorAll("video source");
+			expect(sources[0].getAttribute("src")).toBe(media.sources[0].url);
+			expect(sources[1].getAttribute("src")).toBe(media.sources[1].url);
+		});
+
+		it("uses `source.mime_type` for the `type` attribute", () => {
+			const sources = container.querySelectorAll("video source");
+			expect(sources[0].getAttribute("type")).toBe(media.sources[0].mime_type);
+			expect(sources[1].getAttribute("type")).toBe(media.sources[1].mime_type);
+		});
+
+		it("emits a fallback `<img>` with the preview image src", () => {
+			expect(container.querySelector("video img")?.getAttribute("src")).toBe(
+				media.preview_image.src,
+			);
 		});
 	});
 
