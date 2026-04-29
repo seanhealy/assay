@@ -1,7 +1,7 @@
 // Shopify reference: https://shopify.dev/docs/api/liquid/tags/doc
-// `{% doc %}` blocks contain LiquidDoc comments — author-facing documentation
-// that Shopify strips before rendering. The Assay shim is a no-op block tag:
-// it consumes the contents and emits nothing.
+// `{% doc %}` blocks contain LiquidDoc comments — author-facing
+// documentation that Shopify strips before rendering. The Assay shim is a
+// no-op block tag: it consumes the contents and emits nothing.
 
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
@@ -9,6 +9,7 @@ import { liquid, render } from "@";
 
 describe("doc tag", () => {
 	let container: HTMLElement;
+
 	beforeEach(async () => {
 		container = await render(liquid`
 <div data-testid="before">before</div>
@@ -20,15 +21,27 @@ describe("doc tag", () => {
 		`);
 	});
 
-	it("renders content before and after the doc block", async () => {
-		await expect
-			.element(page.getByTestId("before"))
-			.toHaveTextContent("before");
-		await expect.element(page.getByTestId("after")).toHaveTextContent("after");
+	describe("surrounding content", () => {
+		it("renders content before the doc block", async () => {
+			await expect
+				.element(page.getByTestId("before"))
+				.toHaveTextContent("before");
+		});
+
+		it("renders content after the doc block", async () => {
+			await expect
+				.element(page.getByTestId("after"))
+				.toHaveTextContent("after");
+		});
 	});
 
-	it("emits nothing for the doc block contents", () => {
-		expect(container.textContent).not.toContain("@description");
-		expect(container.textContent).not.toContain("@param");
+	describe("the doc block contents", () => {
+		it("emits nothing for the @description annotation", () => {
+			expect(container.textContent).not.toContain("@description");
+		});
+
+		it("emits nothing for the @param annotation", () => {
+			expect(container.textContent).not.toContain("@param");
+		});
 	});
 });

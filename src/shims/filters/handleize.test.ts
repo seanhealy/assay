@@ -1,52 +1,58 @@
 // Shopify reference: https://shopify.dev/docs/api/liquid/filters/handleize
-// `handleize` slugifies a string into a URL-safe handle: lowercase, with any
-// run of non-alphanumeric characters collapsed to a single hyphen, and leading
-// or trailing hyphens trimmed. Aliased as `handle` — both names register to
-// the same implementation.
+// `handleize` slugifies a string into a URL-safe handle: lowercase, with
+// runs of non-alphanumeric characters collapsed to a single hyphen, and
+// leading/trailing hyphens trimmed.
 
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { liquid, render } from "@";
 
-describe("handleize / handle filters", () => {
-	beforeEach(() =>
-		render(
-			liquid`
-<div data-testid="handleize">{{ product.title | handleize }}</div>
-<div data-testid="handle">{{ product.title | handle }}</div>
+describe("handleize()", () => {
+	describe("with the Shopify docs example", () => {
+		beforeEach(() =>
+			render(
+				liquid`<div data-testid="output">{{ product.title | handleize }}</div>`,
+				{ product: { title: "Health potion" } },
+			),
+		);
+
+		it("slugifies the title to lowercase and hyphens", async () => {
+			await expect
+				.element(page.getByTestId("output"))
+				.toHaveTextContent("health-potion");
+		});
+	});
+
+	describe("with punctuation and surrounding whitespace", () => {
+		beforeEach(() =>
+			render(liquid`
 <div data-testid="punctuation">{{ "Health & Wellness!" | handleize }}</div>
-<div data-testid="trim">{{ "  spaced out  " | handleize }}</div>
-<div data-testid="empty">[{{ nothing | handleize }}]</div>
-		`,
-			{ product: { title: "Health potion" } },
-		),
-	);
+<div data-testid="whitespace">{{ "  spaced out  " | handleize }}</div>
+			`),
+		);
 
-	it("slugifies via `handleize` (Shopify docs example)", async () => {
-		await expect
-			.element(page.getByTestId("handleize"))
-			.toHaveTextContent("health-potion");
+		it("collapses non-alphanumeric runs to a single hyphen", async () => {
+			await expect
+				.element(page.getByTestId("punctuation"))
+				.toHaveTextContent("health-wellness");
+		});
+
+		it("trims leading and trailing whitespace", async () => {
+			await expect
+				.element(page.getByTestId("whitespace"))
+				.toHaveTextContent("spaced-out");
+		});
 	});
 
-	it("slugifies identically via the `handle` alias", async () => {
-		await expect
-			.element(page.getByTestId("handle"))
-			.toHaveTextContent("health-potion");
-	});
+	describe("with nil input", () => {
+		beforeEach(() =>
+			render(
+				liquid`<div data-testid="empty">[{{ nothing | handleize }}]</div>`,
+			),
+		);
 
-	it("collapses runs of punctuation and whitespace into a single hyphen", async () => {
-		await expect
-			.element(page.getByTestId("punctuation"))
-			.toHaveTextContent("health-wellness");
-	});
-
-	it("trims leading and trailing hyphens", async () => {
-		await expect
-			.element(page.getByTestId("trim"))
-			.toHaveTextContent("spaced-out");
-	});
-
-	it("returns an empty string for nil input", async () => {
-		await expect.element(page.getByTestId("empty")).toHaveTextContent("[]");
+		it("returns an empty string", async () => {
+			await expect.element(page.getByTestId("empty")).toHaveTextContent("[]");
+		});
 	});
 });

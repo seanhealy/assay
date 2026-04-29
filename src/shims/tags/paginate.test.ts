@@ -38,29 +38,39 @@ describe("paginate tag", () => {
 		),
 	);
 
-	it("renders the body content", async () => {
-		await expect
-			.element(page.getByTestId("products"))
-			.toHaveTextContent("Blue Mountain Flower");
-		await expect
-			.element(page.getByTestId("products"))
-			.toHaveTextContent("Charcoal");
+	describe("the body content", () => {
+		it("renders the first product title", async () => {
+			await expect
+				.element(page.getByTestId("products"))
+				.toHaveTextContent("Blue Mountain Flower");
+		});
+
+		it("renders the last product title", async () => {
+			await expect
+				.element(page.getByTestId("products"))
+				.toHaveTextContent("Crocodile tears");
+		});
 	});
 
-	it("exposes `paginate.current_page` (always 1) and `pages`", async () => {
-		await expect
-			.element(page.getByTestId("current-page"))
-			.toHaveTextContent("1");
-		await expect.element(page.getByTestId("pages")).toHaveTextContent("1");
-	});
+	describe("the paginate drop", () => {
+		it("exposes `current_page` as 1", async () => {
+			await expect
+				.element(page.getByTestId("current-page"))
+				.toHaveTextContent("1");
+		});
 
-	it("exposes `paginate.items` from the collection length", async () => {
-		await expect.element(page.getByTestId("items")).toHaveTextContent("3");
-	});
+		it("exposes `pages` based on `items / page_size`", async () => {
+			await expect.element(page.getByTestId("pages")).toHaveTextContent("1");
+		});
 
-	it("treats `paginate.next.is_link` as false when there's only one page", async () => {
-		await expect
-			.element(page.getByTestId("next-link"))
-			.toHaveTextContent("false");
+		it("exposes `items` from the collection length", async () => {
+			await expect.element(page.getByTestId("items")).toHaveTextContent("3");
+		});
+
+		it("treats `next.is_link` as false when there's only one page", async () => {
+			await expect
+				.element(page.getByTestId("next-link"))
+				.toHaveTextContent("false");
+		});
 	});
 });

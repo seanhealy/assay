@@ -1,5 +1,7 @@
+import { escape as escapeHtml } from "es-toolkit/string";
 import type { Template, Tokenizer, ValueToken } from "liquidjs";
 import { evalToken } from "liquidjs";
+import { attributes } from "../filters/shared/html";
 import type { ShimTag } from "../types";
 import { parseBlockBody } from "./shared/passthrough-block";
 
@@ -119,7 +121,7 @@ export default {
 				if (name !== "id" && name !== "class") formAttrs[name] = value;
 			}
 
-			emitter.write(`<form${formatAttrs(formAttrs)}>`);
+			emitter.write(`<form${attributes(formAttrs)}>`);
 			emitter.write(hiddenInput("form_type", formType));
 			emitter.write(hiddenInput("utf8", "✓"));
 			if (config.hidden) {
@@ -181,23 +183,5 @@ function readAttributeName(tokenizer: Tokenizer): string {
 }
 
 function hiddenInput(name: string, value: string): string {
-	return `<input type="hidden" name="${name}" value="${escapeAttr(value)}">`;
-}
-
-function escapeAttr(value: string): string {
-	return value
-		.replace(/&/g, "&amp;")
-		.replace(/"/g, "&quot;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;");
-}
-
-function formatAttrs(values: Record<string, unknown>): string {
-	const parts: string[] = [];
-	for (const [name, value] of Object.entries(values)) {
-		if (value === undefined || value === null || value === false) continue;
-		if (value === true) parts.push(name);
-		else parts.push(`${name}="${escapeAttr(String(value))}"`);
-	}
-	return parts.length === 0 ? "" : ` ${parts.join(" ")}`;
+	return `<input type="hidden" name="${name}" value="${escapeHtml(value)}">`;
 }

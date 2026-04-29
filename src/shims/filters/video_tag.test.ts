@@ -8,48 +8,78 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { liquid, render } from "@";
 
-describe("video_tag filter", () => {
+describe("video_tag()", () => {
 	let container: HTMLElement;
-	beforeEach(async () => {
-		container = await render(
-			liquid`
-{{ media | video_tag }}
-{{ media | video_tag: autoplay: true, loop: true, muted: true, controls: true }}
-		`,
-			{
-				media: {
-					media_type: "video",
-					src: "/tests/fixtures/videos/promo.mp4",
-					preview_image: "/tests/fixtures/videos/promo.jpg",
-				},
-			},
-		);
+	const media = {
+		media_type: "video",
+		src: "/tests/fixtures/videos/promo.mp4",
+		preview_image: "/tests/fixtures/videos/promo.jpg",
+	};
+
+	describe("with default arguments", () => {
+		beforeEach(async () => {
+			container = await render(liquid`{{ media | video_tag }}`, { media });
+		});
+
+		it("sets `playsinline`", () => {
+			expect(
+				container.querySelector("video")?.getAttribute("playsinline"),
+			).toBe("playsinline");
+		});
+
+		it("sets `preload` to `metadata`", () => {
+			expect(container.querySelector("video")?.getAttribute("preload")).toBe(
+				"metadata",
+			);
+		});
+
+		it("derives `poster` from `media.preview_image`", () => {
+			expect(container.querySelector("video")?.getAttribute("poster")).toBe(
+				media.preview_image,
+			);
+		});
+
+		it("emits a `<source>` whose `src` is `media.src`", () => {
+			expect(container.querySelector("video source")?.getAttribute("src")).toBe(
+				media.src,
+			);
+		});
+
+		it("emits a `<source>` whose `type` is `video/mp4`", () => {
+			expect(
+				container.querySelector("video source")?.getAttribute("type"),
+			).toBe("video/mp4");
+		});
 	});
 
-	it("emits a `<video>` with default playback attributes", () => {
-		const video = container.querySelectorAll("video")[0];
-		expect(video.getAttribute("playsinline")).toBe("playsinline");
-		expect(video.getAttribute("preload")).toBe("metadata");
-		expect(video.getAttribute("poster")).toBe(
-			"/tests/fixtures/videos/promo.jpg",
-		);
-	});
+	describe("with HTML5 boolean attributes", () => {
+		beforeEach(async () => {
+			container = await render(
+				liquid`{{ media | video_tag: autoplay: true, loop: true, muted: true, controls: true }}`,
+				{ media },
+			);
+		});
 
-	it("includes a `<source>` derived from `media.src`", () => {
-		const source = container
-			.querySelectorAll("video")[0]
-			.querySelector("source");
-		expect(source?.getAttribute("src")).toBe(
-			"/tests/fixtures/videos/promo.mp4",
-		);
-		expect(source?.getAttribute("type")).toBe("video/mp4");
-	});
+		it("forwards `autoplay`", () => {
+			expect(container.querySelector("video")?.hasAttribute("autoplay")).toBe(
+				true,
+			);
+		});
 
-	it("forwards boolean HTML5 attributes when supplied", () => {
-		const video = container.querySelectorAll("video")[1];
-		expect(video.hasAttribute("autoplay")).toBe(true);
-		expect(video.hasAttribute("loop")).toBe(true);
-		expect(video.hasAttribute("muted")).toBe(true);
-		expect(video.hasAttribute("controls")).toBe(true);
+		it("forwards `loop`", () => {
+			expect(container.querySelector("video")?.hasAttribute("loop")).toBe(true);
+		});
+
+		it("forwards `muted`", () => {
+			expect(container.querySelector("video")?.hasAttribute("muted")).toBe(
+				true,
+			);
+		});
+
+		it("forwards `controls`", () => {
+			expect(container.querySelector("video")?.hasAttribute("controls")).toBe(
+				true,
+			);
+		});
 	});
 });

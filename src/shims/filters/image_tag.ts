@@ -7,11 +7,12 @@ export default {
 	status: "mock",
 	implementation: (value, ...args) => {
 		const src = String(value ?? "");
-		const { srcset, alt, ...rest } = keywordArgs(args);
+		const kwargs = keywordArgs(args);
+		const { alt, srcset, ...rest } = kwargs;
 		return `<img${attributes({
 			src,
 			alt: alt ?? "",
-			srcset: srcset === undefined ? src : srcset,
+			srcset: "srcset" in kwargs ? srcset : src,
 			...rest,
 		})}>`;
 	},
