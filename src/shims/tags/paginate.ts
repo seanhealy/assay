@@ -3,6 +3,8 @@ import { evalToken } from "liquidjs";
 import type { ShimTag } from "../types";
 import { parseBlockBody } from "./shared/passthrough-block";
 
+const NO_LINK = { is_link: false, url: "", title: "" } as const;
+
 export default {
 	type: "tag",
 	name: "paginate",
@@ -55,11 +57,11 @@ export default {
 					items,
 					pages,
 					parts: buildParts(pages),
-					previous: { is_link: false, url: "", title: "" },
+					previous: NO_LINK,
 					next:
 						pages > 1
 							? { is_link: true, url: "?page=2", title: "Next »" }
-							: { is_link: false, url: "", title: "" },
+							: NO_LINK,
 				},
 			});
 			yield this.liquid.renderer.renderTemplates(

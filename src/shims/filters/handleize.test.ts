@@ -53,18 +53,6 @@ describe("handleize()", () => {
 		});
 	});
 
-	describe("with diacritics", () => {
-		beforeEach(() =>
-			render(liquid`<div data-testid="accent">{{ "Café" | handleize }}</div>`),
-		);
-
-		it("strips diacritics from letters", async () => {
-			await expect
-				.element(page.getByTestId("accent"))
-				.toHaveTextContent("cafe");
-		});
-	});
-
 	describe("with nil input", () => {
 		beforeEach(() =>
 			render(

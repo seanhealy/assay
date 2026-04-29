@@ -35,6 +35,10 @@ const FORMS: Record<string, FormConfig> = {
 		id: "create_customer",
 		dataLogin: "sign-up",
 	},
+	// `currency` and `localization` would auto-emit a `return_to` hidden input
+	// pointing at the current request URL in real Shopify. The mock has no
+	// request context, so themes relying on that auto-population should pass
+	// `return_to:` explicitly.
 	currency: {
 		action: "/cart/update",
 		id: "currency_form",
@@ -116,8 +120,9 @@ export default {
 			const { return_to, ...htmlAttrs } = evaluated;
 
 			const config = FORMS[formType] ?? { action: "" };
-			const id = deriveId(formType, config, parameter, htmlAttrs);
-			const productId = readProductId(formType, parameter);
+			const paramId = parameterId(parameter);
+			const id = deriveId(formType, htmlAttrs.id, paramId) ?? config.id;
+			const productId = formType === "product" ? paramId : undefined;
 
 			emitter.write(
 				`<form${attributes({
@@ -127,21 +132,16 @@ export default {
 					"accept-charset": "UTF-8",
 					class: config.class,
 					enctype: config.enctype,
-					...(config.dataLogin === "sign-in" && {
-						"data-login-with-shop-sign-in": "true",
-					}),
-					...(config.dataLogin === "sign-up" && {
-						"data-login-with-shop-sign-up": "true",
+					...(config.dataLogin && {
+						[`data-login-with-shop-${config.dataLogin}`]: "true",
 					}),
 					...htmlAttrs,
 				})}>`,
 			);
 			emitter.write(hiddenInput("form_type", formType));
 			emitter.write(hiddenInput("utf8", "✓"));
-			if (config.hiddenBefore) {
-				for (const [name, value] of Object.entries(config.hiddenBefore)) {
-					emitter.write(hiddenInput(name, value));
-				}
+			for (const [name, value] of Object.entries(config.hiddenBefore ?? {})) {
+				emitter.write(hiddenInput(name, value));
 			}
 			if (typeof return_to === "string") {
 				emitter.write(hiddenInput("return_to", return_to));
@@ -154,46 +154,30 @@ export default {
 			if (productId !== undefined) {
 				emitter.write(hiddenInput("product-id", productId));
 			}
-			if (config.hiddenAfter) {
-				for (const [name, value] of Object.entries(config.hiddenAfter)) {
-					emitter.write(hiddenInput(name, value));
-				}
+			for (const [name, value] of Object.entries(config.hiddenAfter ?? {})) {
+				emitter.write(hiddenInput(name, value));
 			}
 			emitter.write(`</form>`);
 		},
 	},
 } satisfies ShimTag;
 
-function deriveId(
-	formType: string,
-	config: FormConfig,
-	parameter: unknown,
-	attrs: Record<string, unknown>,
-): string | undefined {
-	if (typeof attrs.id === "string") return attrs.id;
-	if (formType === "product" && parameter && typeof parameter === "object") {
-		const id = (parameter as { id?: unknown }).id;
-		if (id !== undefined) return `product_form_${id}`;
-	}
-	if (
-		formType === "customer_address" &&
-		parameter &&
-		typeof parameter === "object"
-	) {
-		const id = (parameter as { id?: unknown }).id;
-		if (id !== undefined) return `address_form_${id}`;
-	}
-	return config.id;
-}
-
-function readProductId(
-	formType: string,
-	parameter: unknown,
-): string | undefined {
-	if (formType !== "product") return undefined;
+function parameterId(parameter: unknown): string | undefined {
 	if (!parameter || typeof parameter !== "object") return undefined;
 	const id = (parameter as { id?: unknown }).id;
 	return id === undefined ? undefined : String(id);
+}
+
+function deriveId(
+	formType: string,
+	explicitId: unknown,
+	paramId: string | undefined,
+): string | undefined {
+	if (typeof explicitId === "string") return explicitId;
+	if (paramId === undefined) return undefined;
+	if (formType === "product") return `product_form_${paramId}`;
+	if (formType === "customer_address") return `address_form_${paramId}`;
+	return undefined;
 }
 
 /**
@@ -246,5 +230,5 @@ function readAttributeName(tokenizer: Tokenizer): string {
 }
 
 function hiddenInput(name: string, value: string): string {
-	return `<input type="hidden" name="${name}" value="${escapeHtml(value)}">`;
+	return `<input type="hidden" name="${name}" value="${escapeHtml(value)}" />`;
 }

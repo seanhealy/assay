@@ -15,6 +15,6 @@ export default {
 			type: "text/css",
 			media: positional ?? "all",
 			preload,
-		})}>`;
+		})} />`;
 	},
 } satisfies ShimFilter;
