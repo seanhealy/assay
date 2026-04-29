@@ -7,15 +7,15 @@ export default {
 	status: "mock",
 	implementation: (value, ...args) => {
 		const src = String(value ?? "");
-		const kwargs = keywordArgs(args);
-		const { alt, srcset, ...rest } = kwargs;
+		const keywords = keywordArgs(args);
+		const { alt, srcset, ...rest } = keywords;
 		// `srcset` defaults to `src` when omitted, but `srcset: nil` should
 		// remove the attribute. Distinguish "omitted" from "explicit nil" by
 		// checking for the key — `attributes()` skips nil values.
 		return `<img${attributes({
 			src,
 			alt: alt ?? "",
-			srcset: "srcset" in kwargs ? srcset : src,
+			srcset: "srcset" in keywords ? srcset : src,
 			...rest,
 		})}>`;
 	},
