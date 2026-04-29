@@ -71,6 +71,7 @@ function listShimFiles(dir: string): string[] {
 			(entry) =>
 				entry.isFile() &&
 				entry.name.endsWith(".ts") &&
+				!entry.name.endsWith(".test.ts") &&
 				entry.name !== "index.ts",
 		)
 		.map((entry) => entry.name.replace(/\.ts$/, ""))

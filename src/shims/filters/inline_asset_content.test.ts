@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { render } from "../src/index";
+import { render } from "@";
 
 describe("inline_asset_content filter", () => {
 	beforeEach(() => render("filter-inline_asset_content"));

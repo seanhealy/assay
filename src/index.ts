@@ -1,3 +1,3 @@
 export { mockTemplate as mock, unmockTemplate as unmock } from "./fs-adapter";
-export type { RenderOptions } from "./render";
-export { registerFilter, registerTag, render } from "./render";
+export type { LiquidTemplate, RenderOptions } from "./render";
+export { liquid, registerFilter, registerTag, render } from "./render";

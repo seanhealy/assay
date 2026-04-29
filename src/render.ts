@@ -8,24 +8,71 @@ export interface RenderOptions {
 	waitForElements?: string[];
 }
 
+const TEMPLATE_BRAND: unique symbol = Symbol("liquidTemplate");
+
+/**
+ * A Liquid template authored inline via the {@link liquid} tagged template.
+ * Distinguished from a filename string so {@link render} can statically tell
+ * the two apart.
+ */
+export interface LiquidTemplate {
+	readonly [TEMPLATE_BRAND]: true;
+	readonly source: string;
+}
+
+/**
+ * Tagged template for inline Liquid source. Use with {@link render} when a
+ * test only needs a small snippet and a separate `.liquid` fixture would be
+ * overkill.
+ *
+ * Interpolated `${}` values are concatenated as JS strings before parsing —
+ * convenient for dynamic property names or test labels. Don't interpolate
+ * user/runtime input that might contain Liquid syntax: it would be re-parsed
+ * by the engine. Test fixtures are author-controlled, so this is a footgun
+ * concern only, not a security one.
+ *
+ * @example
+ * ```ts
+ * await render(liquid`<div>{{ 'cart.js' | asset_url }}</div>`);
+ * ```
+ */
+export function liquid(
+	strings: TemplateStringsArray,
+	...values: unknown[]
+): LiquidTemplate {
+	let source = strings[0];
+	for (let index = 0; index < values.length; index++) {
+		source += String(values[index]) + strings[index + 1];
+	}
+	return { [TEMPLATE_BRAND]: true, source };
+}
+
+function isLiquidTemplate(value: unknown): value is LiquidTemplate {
+	return typeof value === "object" && value !== null && TEMPLATE_BRAND in value;
+}
+
 /**
  * Renders a Liquid template into the live browser DOM.
  *
- * @param file - Template filename (without extension)
+ * @param input - Either a template filename (without extension) or an inline
+ *   {@link LiquidTemplate} produced by the {@link liquid} tag.
  * @param data - Template variables passed to the Liquid template
  * @param options - Additional rendering options
  * @returns The container HTMLElement wrapping the rendered output
  *
  * @example
  * ```ts
- * const container = await render('button', {
- *   text: 'Click me',
- *   variant: 'primary',
- * });
+ * // From a fixture file (tests/fixtures/snippets/button.liquid):
+ * const container = await render('button', { text: 'Click me' });
+ *
+ * // Inline:
+ * const container = await render(
+ *   liquid`<div>{{ 'cart.js' | asset_url }}</div>`,
+ * );
  * ```
  */
 export async function render(
-	file: string,
+	input: string | LiquidTemplate,
 	data: Record<string, unknown> = {},
 	options: RenderOptions = {},
 ): Promise<HTMLElement> {
@@ -37,7 +84,9 @@ export async function render(
 	if (existing) existing.remove();
 
 	// Render Liquid → HTML string
-	const html = await engine.renderFile(file, data);
+	const html = isLiquidTemplate(input)
+		? await engine.parseAndRender(input.source, data)
+		: await engine.renderFile(input, data);
 
 	// Inject into live browser DOM
 	const container = document.createElement("div");

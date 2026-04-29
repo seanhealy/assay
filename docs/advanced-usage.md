@@ -1,6 +1,7 @@
 # Advanced Usage
 
 - [Web Components](#web-components)
+- [Inline Templates](#inline-templates)
 - [Preset Overrides](#preset-overrides)
   - [Cross-browser testing](#cross-browser-testing)
 - [Mocking](#mocking)
@@ -27,13 +28,55 @@ await render(
 
 ### `render` Options
 
-| Parameter                 | Type                      | Description                                      |
-| ------------------------- | ------------------------- | ------------------------------------------------ |
-| `file`                    | `string`                  | Template filename (without `.liquid` extension)  |
-| `data`                    | `Record<string, unknown>` | Template variables                               |
-| `options.waitForElements` | `string[]`                | Custom element tags to wait for before returning |
+| Parameter                 | Type                       | Description                                                                |
+| ------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| `input`                   | `string \| LiquidTemplate` | Template filename (without `.liquid` extension) or an inline `liquid\`…\`` |
+| `data`                    | `Record<string, unknown>`  | Template variables                                                         |
+| `options.waitForElements` | `string[]`                 | Custom element tags to wait for before returning                           |
 
 Previous renders are cleaned up automatically.
+
+## Inline Templates
+
+For small tests, an inline `liquid` tagged template is often clearer than a
+separate `.liquid` fixture file. Pass the result to `render` exactly like a
+filename:
+
+```typescript
+import { liquid, render } from "@augeo/assay";
+
+await render(liquid`<div data-testid="price">{{ amount | money }}</div>`, {
+	amount: 1000,
+});
+```
+
+The tag returns a branded `LiquidTemplate` object so `render` can statically
+distinguish a filename from an inline template — no runtime sniffing.
+
+### Interpolation
+
+`${...}` values are concatenated into the source string before the template is
+parsed, so you can splice in dynamic property names or test labels:
+
+```typescript
+const property = "color";
+
+await render(liquid`{{ product.metafields.${property} }}`, {
+	product: { metafields: { color: "red" } },
+});
+```
+
+⚠️ Don't interpolate user/runtime input that might contain Liquid syntax — it
+will be re-parsed by the engine. In test fixtures this is a footgun, not a
+security boundary, but worth knowing.
+
+### When to use which
+
+- **Inline (`liquid\`…\``)** — single-purpose tests, one or two tags or filters
+  per snippet, no shared template surface.
+- **Fixture file** — anything substantial, anything reused across tests, or
+  anything that loads other assets (e.g. `inline_asset_content` reads a real SVG
+  from `tests/fixtures/assets/`).
 
 ## Preset Overrides
 
