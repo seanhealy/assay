@@ -1,5 +1,5 @@
+import { attributes } from "../shared/html";
 import type { ShimFilter } from "../types";
-import { attributes } from "./shared/html";
 
 export default {
 	type: "filter",
@@ -7,9 +7,7 @@ export default {
 	status: "mock",
 	implementation: (value, ...args) => {
 		const name = String(value ?? "");
-		const className = args.find((arg) => typeof arg === "string") as
-			| string
-			| undefined;
+		const className = typeof args[0] === "string" ? args[0] : undefined;
 		return `<svg${attributes({
 			xmlns: "http://www.w3.org/2000/svg",
 			viewBox: "0 0 100 100",

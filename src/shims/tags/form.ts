@@ -1,7 +1,7 @@
 import { escape as escapeHtml } from "es-toolkit/string";
 import type { Template, Tokenizer, ValueToken } from "liquidjs";
 import { evalToken } from "liquidjs";
-import { attributes } from "../filters/shared/html";
+import { attributes } from "../shared/html";
 import type { ShimTag } from "../types";
 import { parseBlockBody } from "./shared/passthrough-block";
 
@@ -105,23 +105,23 @@ export default {
 			}
 
 			const config = FORMS[formType] ?? { action: "" };
-			const formAttrs: Record<string, unknown> = {
-				method: "post",
-				action: config.action,
-				id: (attrs.id as string | undefined) ?? config.id,
-				"accept-charset": "UTF-8",
-				class: (attrs.class as string | undefined) ?? config.class,
-				enctype: config.enctype,
-			};
-			if (config.dataLogin === "sign-in")
-				formAttrs["data-login-with-shop-sign-in"] = "true";
-			if (config.dataLogin === "sign-up")
-				formAttrs["data-login-with-shop-sign-up"] = "true";
-			for (const [name, value] of Object.entries(attrs)) {
-				if (name !== "id" && name !== "class") formAttrs[name] = value;
-			}
-
-			emitter.write(`<form${attributes(formAttrs)}>`);
+			emitter.write(
+				`<form${attributes({
+					method: "post",
+					action: config.action,
+					id: config.id,
+					"accept-charset": "UTF-8",
+					class: config.class,
+					enctype: config.enctype,
+					...(config.dataLogin === "sign-in" && {
+						"data-login-with-shop-sign-in": "true",
+					}),
+					...(config.dataLogin === "sign-up" && {
+						"data-login-with-shop-sign-up": "true",
+					}),
+					...attrs,
+				})}>`,
+			);
 			emitter.write(hiddenInput("form_type", formType));
 			emitter.write(hiddenInput("utf8", "✓"));
 			if (config.hidden) {
@@ -143,7 +143,9 @@ export default {
  * Reads the remaining args after `form_type`. Treats `name: value` pairs as
  * HTML attributes and silently consumes any extra positional arguments (the
  * parameter object — Shopify uses it to pull `id` for product/customer_address
- * forms; the shim doesn't model that detail). Stops at end-of-input.
+ * forms; the shim doesn't model that detail). Hand-rolled rather than using
+ * LiquidJS's `Hash` because Shopify allows hyphenated `data-*` attributes,
+ * which the framework's identifier reader rejects. Stops at end-of-input.
  */
 function readArgs(tokenizer: Tokenizer): Array<[string, ValueToken]> {
 	const result: Array<[string, ValueToken]> = [];

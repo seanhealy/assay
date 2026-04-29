@@ -24,6 +24,7 @@ src/
 ├── types.ts              # Public config type definitions
 ├── shims/                # Shopify filter & tag mocks
 │   ├── types.ts          # ShimFilter / ShimTag types
+│   ├── shared/           # Helpers reused across both filters and tags
 │   ├── filters/          # One file per filter (default export)
 │   │   ├── shared/       # Helpers reused by 2+ filter shims
 │   │   └── index.ts      # GENERATED — do not edit
@@ -105,7 +106,9 @@ docs examples should be the spine of every shim's test file.
 
 Reuse rule: extract shared logic — implementations, helpers, types, constants —
 into `src/shims/{filters,tags}/shared/` only when a second consumer appears.
-One-off code lives inline in the shim file.
+One-off code lives inline in the shim file. When a helper is reused by both a
+filter and a tag (e.g. HTML attribute building used by `image_tag` and the
+`form` tag), it lives in `src/shims/shared/` instead.
 
 ## Objects
 

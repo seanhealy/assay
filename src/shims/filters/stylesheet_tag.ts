@@ -1,5 +1,5 @@
+import { attributes, keywordArgs } from "../shared/html";
 import type { ShimFilter } from "../types";
-import { attributes, keywordArgs } from "./shared/html";
 
 export default {
 	type: "filter",

@@ -104,6 +104,20 @@ describe("form tag", () => {
 			expect(getForm(container)?.getAttribute("class")).toBe("mine");
 		});
 	});
+
+	describe("with hyphenated `data-*` keyword arguments", () => {
+		beforeEach(async () => {
+			container = await render(liquid`
+{% form 'cart', data-example: '100' %}
+	<input data-testid="data" name="data">
+{% endform %}
+			`);
+		});
+
+		it("forwards data-* keys as HTML attributes", () => {
+			expect(getForm(container)?.getAttribute("data-example")).toBe("100");
+		});
+	});
 });
 
 function getForm(container: HTMLElement): HTMLFormElement | null {

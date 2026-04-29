@@ -8,7 +8,7 @@ export default {
 	name: "paginate",
 	status: "mock",
 	description:
-		"Renders the body and exposes a `paginate` drop with `current_page`, `pages`, `items`, `previous`, and `next`. Always renders page 1 — the shim doesn't read query parameters or slice the collection.",
+		"Renders the body and exposes a `paginate` drop with `current_page`, `pages`, `items`, `parts`, `previous`, and `next`. Always renders page 1 — the shim doesn't read query parameters or slice the collection. The `window_size` option is parsed for compatibility but doesn't affect the rendered `parts` array.",
 	implementation: {
 		parse(token, remainingTokens) {
 			const tokenizer = token.tokenizer as Tokenizer;
@@ -37,27 +37,30 @@ export default {
 			const pageSize = Number(
 				yield evalToken(this.pageSizeToken as ValueToken, ctx),
 			);
-			const items = countItems(collection);
+			// Drain `window_size` and any other options so undefined values
+			// don't crash the engine, then discard the result.
+			for (const [, valueToken] of this.optionTokens as Array<
+				[string, ValueToken]
+			>) {
+				yield evalToken(valueToken, ctx);
+			}
+			const items = Array.isArray(collection) ? collection.length : 0;
 			const pages = Math.max(1, Math.ceil(items / Math.max(1, pageSize)));
-			const paginate = {
-				current_page: 1,
-				current_offset: 0,
-				items,
-				pages,
-				page_size: pageSize,
-				previous: { is_link: false, url: "", title: "" },
-				next:
-					pages > 1
-						? {
-								is_link: true,
-								url: "?page=2",
-								title: "Next »",
-							}
-						: { is_link: false, url: "", title: "" },
-				parts: buildParts(pages),
-			};
 
-			ctx.push({ paginate });
+			ctx.push({
+				paginate: {
+					current_page: 1,
+					page_size: pageSize,
+					items,
+					pages,
+					parts: buildParts(pages),
+					previous: { is_link: false, url: "", title: "" },
+					next:
+						pages > 1
+							? { is_link: true, url: "?page=2", title: "Next »" }
+							: { is_link: false, url: "", title: "" },
+				},
+			});
 			yield this.liquid.renderer.renderTemplates(
 				this.templates as Template[],
 				ctx,
@@ -67,19 +70,6 @@ export default {
 		},
 	},
 } satisfies ShimTag;
-
-function countItems(collection: unknown): number {
-	if (Array.isArray(collection)) return collection.length;
-	if (collection && typeof collection === "object") {
-		const candidate = collection as {
-			size?: unknown;
-			length?: unknown;
-		};
-		if (typeof candidate.size === "number") return candidate.size;
-		if (typeof candidate.length === "number") return candidate.length;
-	}
-	return 0;
-}
 
 function buildParts(pages: number): Array<{
 	title: string;
