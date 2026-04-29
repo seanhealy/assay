@@ -1,8 +1,3 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/filters/handleize
-// `handle` is an alias for `handleize` and is registered against the same
-// implementation. This file covers the alias is wired up; behavior coverage
-// lives in handleize.test.ts.
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { liquid, render } from "@";

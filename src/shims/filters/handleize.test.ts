@@ -1,8 +1,3 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/filters/handleize
-// `handleize` slugifies a string into a URL-safe handle: lowercase, with
-// runs of non-alphanumeric characters collapsed to a single hyphen, and
-// leading/trailing hyphens trimmed.
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { liquid, render } from "@";

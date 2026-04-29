@@ -1,8 +1,3 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/tags/doc
-// `{% doc %}` blocks contain LiquidDoc comments — author-facing
-// documentation that Shopify strips before rendering. The Assay shim is a
-// no-op block tag: it consumes the contents and emits nothing.
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { liquid, render } from "@";

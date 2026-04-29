@@ -1,9 +1,3 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/filters/stylesheet_tag
-// `stylesheet_tag` wraps a URL in a `<link rel="stylesheet">` tag with
-// `type="text/css"` and `media="all"` by default. The Assay shim uses the
-// upstream URL as-is (it's typically the output of `asset_url`) and passes
-// keyword arguments through as additional attributes.
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { liquid, render } from "@";
 

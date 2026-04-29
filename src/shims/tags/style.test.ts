@@ -1,7 +1,3 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/tags/style
-// `{% style %}` wraps its body in a `<style data-shopify>` tag. The body is
-// regular Liquid: variables interpolate before being emitted as CSS.
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { liquid, render } from "@";
 
