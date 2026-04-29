@@ -66,15 +66,11 @@ src/
 
 ## Commands
 
-| Command                                   | Description                                               |
-| ----------------------------------------- | --------------------------------------------------------- |
-| `npm run build`                           | Build package (tsdown)                                    |
-| `npm run verify`                          | Lint, format, and type-check                              |
-| `npm run docs:lookup <kind> <name>`       | Print Shopify docs JSON for a filter/tag/object           |
-| `npm run docs:fetchExample <kind> <name>` | Fetch rendered Code/Data/Output examples from shopify.dev |
-| `npm run docs:fetchExample all`           | Re-fetch examples for every filter/tag/object             |
-| `npm run docs:fetchExample missing`       | Fetch only items we don't already have on disk            |
-| `npm run docs:fetchExample --parse`       | Re-derive `.json` from local `.md` (no network)           |
+| Command                             | Description                                     |
+| ----------------------------------- | ----------------------------------------------- |
+| `npm run build`                     | Build package (tsdown)                          |
+| `npm run verify`                    | Lint, format, and type-check                    |
+| `npm run docs:lookup <kind> <name>` | Print Shopify docs JSON for a filter/tag/object |
 
 ## Authoring Shims
 
@@ -100,16 +96,16 @@ it to confirm:
 - Whether the entry is `deprecated`.
 
 If a `vendor/shopify-examples/{filters,tags}/<name>.json` file exists, the
-lookup also includes a `renderedExamples` array of `{ code, data, output }`
-triples scraped from shopify.dev. Use these to drive shim tests — render `code`
-against `data` and assert the result matches `output`. Run
-`npm run docs:fetchExample <kind> <name>` (or `missing` for everything we
-haven't fetched yet) to populate the directory before authoring. The directory
-is gitignored — we don't redistribute Shopify's docs content — so each dev
-fetches their own local copy after clone.
+lookup also includes a `renderedExamples` array of `{ code, data, output }`.
+Lean on these when writing tests — they come straight from Shopify's docs, so we
+treat them as the closest thing to a spec we have. Render `code` against `data`
+and assert the result matches `output`. Hand-written test cases are still useful
+for edge cases the docs don't cover (empty input, type coercion, etc.), but the
+docs examples should be the spine of every shim's test file.
 
-Reuse rule: extract impl into `src/shims/{filters,tags}/shared/` only when a
-second consumer appears. One-off impls live inline in the shim file.
+Reuse rule: extract shared logic — implementations, helpers, types, constants —
+into `src/shims/{filters,tags}/shared/` only when a second consumer appears.
+One-off code lives inline in the shim file.
 
 ## Objects
 
