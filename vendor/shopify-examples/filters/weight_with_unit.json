@@ -1,0 +1,56 @@
+{
+  "kind": "filter",
+  "name": "weight_with_unit",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/weight_with_unit",
+  "renderedExamples": [
+    {
+      "code": "{%- assign variant = product.variants.first -%}\n\n{{ variant.weight | weight_with_unit }}",
+      "data": {
+        "product": {
+          "variants": [
+            {
+              "weight": 200
+            },
+            {
+              "weight": 200
+            },
+            {
+              "weight": 400
+            },
+            {
+              "weight": 200
+            }
+          ]
+        }
+      },
+      "output": "0.2 kg"
+    },
+    {
+      "code": "{%- assign variant = product.variants.first -%}\n\n{{ variant.weight | weight_with_unit: variant.weight_unit }}",
+      "name": "Override the default unit",
+      "data": {
+        "product": {
+          "variants": [
+            {
+              "weight": 200,
+              "weight_unit": "g"
+            },
+            {
+              "weight": 200,
+              "weight_unit": "g"
+            },
+            {
+              "weight": 400,
+              "weight_unit": "g"
+            },
+            {
+              "weight": 200,
+              "weight_unit": "g"
+            }
+          ]
+        }
+      },
+      "output": "200 g"
+    }
+  ]
+}

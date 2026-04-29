@@ -1,0 +1,39 @@
+{
+  "kind": "filter",
+  "name": "slice",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/slice",
+  "renderedExamples": [
+    {
+      "code": "{{ collection.title | slice: 0 }}\n{{ collection.title | slice: 0, 5 }}\n\n{{ collection.all_tags | slice: 1, 2 | join: ', ' }}",
+      "data": {
+        "collection": {
+          "all_tags": [
+            "Burning",
+            "dried",
+            "extra-potent",
+            "extracts",
+            "fresh",
+            "healing",
+            "ingredients",
+            "music",
+            "plant",
+            "Salty",
+            "supplies"
+          ],
+          "title": "Products"
+        }
+      },
+      "output": "P\nProdu\n\ndried, extra-potent"
+    },
+    {
+      "code": "{{ collection.title | slice: -3, 3 }}",
+      "name": "Negative index",
+      "data": {
+        "collection": {
+          "title": "Products"
+        }
+      },
+      "output": "cts"
+    }
+  ]
+}

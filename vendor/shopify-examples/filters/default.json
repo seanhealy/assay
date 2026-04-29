@@ -1,0 +1,22 @@
+{
+  "kind": "filter",
+  "name": "default",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/default",
+  "renderedExamples": [
+    {
+      "code": "{{ product.selected_variant.url | default: product.url }}",
+      "data": {
+        "product": {
+          "selected_variant": null,
+          "url": "/products/health-potion"
+        }
+      },
+      "output": "/products/health-potion"
+    },
+    {
+      "code": "{%- assign display_price = false -%}\n\n{{ display_price | default: true, allow_false: true }}",
+      "name": "allow_false",
+      "output": "false"
+    }
+  ]
+}

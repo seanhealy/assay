@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "url_for_vendor",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/url_for_vendor",
+  "renderedExamples": [
+    {
+      "code": "{{ \"Polina's Potent Potions\" | url_for_vendor }}",
+      "output": "/collections/vendors?q=Polina%27s%20Potent%20Potions"
+    }
+  ]
+}

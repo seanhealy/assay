@@ -1,0 +1,16 @@
+{
+  "kind": "tag",
+  "name": "cycle",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/cycle",
+  "renderedExamples": [
+    {
+      "code": "{% for i in (1..4) -%}\n  {% cycle 'one', 'two', 'three' %}\n{%- endfor %}",
+      "output": "one\ntwo\nthree\none"
+    },
+    {
+      "code": "<!-- Iteration 1 -->\n{% for i in (1..4) -%}\n  {% cycle 'one', 'two', 'three' %}\n{%- endfor %}\n\n<!-- Iteration 2 -->\n{% for i in (1..4) -%}\n  {% cycle 'one', 'two', 'three' %}\n{%- endfor %}\n\n<!-- Iteration 3 -->\n{% for i in (1..4) -%}\n  {% cycle 'group_1': 'one', 'two', 'three' %}\n{%- endfor %}\n\n<!-- Iteration 4 -->\n{% for i in (1..4) -%}\n  {% cycle 'group_2': 'one', 'two', 'three' %}\n{%- endfor %}",
+      "name": "Create unique cycle groups",
+      "output": "<!-- Iteration 1 -->\none\ntwo\nthree\none\n\n\n<!-- Iteration 2 -->\ntwo\nthree\none\ntwo\n\n\n<!-- Iteration 3 -->\none\ntwo\nthree\none\n\n\n<!-- Iteration 4 -->\none\ntwo\nthree\none"
+    }
+  ]
+}

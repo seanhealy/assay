@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "font_modify",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/font_modify",
+  "renderedExamples": [
+    {
+      "code": "{%- assign bold_font = settings.type_body_font | font_modify: 'weight', 'bold' -%}\n\nh2 {\n  font-weight: {{ bold_font.weight }};\n}",
+      "data": {
+        "settings": {
+          "type_body_font": {}
+        }
+      },
+      "output": "h2 {\n  font-weight: 700;\n}"
+    },
+    {
+      "code": "{%- assign bold_font = settings.type_body_font | font_modify: 'weight', 'bold' -%}\n{%- assign italic_font = settings.type_body_font | font_modify: 'style', 'italic' -%}\n{%- assign heavy_font = settings.type_body_font | font_modify: 'weight', '900' | default: bold_font -%}\n{%- assign oblique_font = settings.type_body_font | font_modify: 'style', 'oblique' | default: italic_font -%}\n\nh2 {\n  font-style: {{ heavy_font.weight }};\n}\n\n.italic {\n  {% if oblique_font -%}\n    font-style: {{ oblique_font.style }};\n  {%- else -%}\n    font-style: {{ italic_font.style }};\n  {%- endif %}\n}",
+      "name": "Non-existent font variants",
+      "data": {
+        "settings": {
+          "type_body_font": {}
+        }
+      },
+      "output": "h2 {\n  font-style: 700;\n}\n\n.italic {\n  font-style: ;\n}"
+    }
+  ]
+}

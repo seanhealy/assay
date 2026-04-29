@@ -1,0 +1,78 @@
+{
+  "kind": "filter",
+  "name": "default_pagination",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/default_pagination",
+  "renderedExamples": [
+    {
+      "code": "{% paginate collection.products by 2 %}\n  {% for product in collection.products %}\n    {{- product.title }}\n  {% endfor %}\n\n  {{- paginate | default_pagination -}}\n{% endpaginate %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Glacier ice"
+            }
+          ],
+          "products_count": 4
+        }
+      },
+      "output": "Draught of Immortality\n  \nGlacier ice\n  \n<span class=\"page current\">1</span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">2</a></span> <span class=\"next\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">Next &raquo;</a></span>"
+    },
+    {
+      "code": "{% paginate collection.products by 2 %}\n  {% for product in collection.products %}\n    {{- product.title }}\n  {% endfor %}\n\n  {{- paginate | default_pagination: previous: 'Previous' -}}\n{% endpaginate %}",
+      "name": "previous",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Glacier ice"
+            }
+          ],
+          "products_count": 4
+        }
+      },
+      "output": "Draught of Immortality\n  \nGlacier ice\n  \n<span class=\"page current\">1</span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">2</a></span> <span class=\"next\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">Next &raquo;</a></span>"
+    },
+    {
+      "code": "{% paginate collection.products by 2 %}\n  {% for product in collection.products %}\n    {{- product.title }}\n  {% endfor %}\n\n  {{- paginate | default_pagination: next: 'Next' -}}\n{% endpaginate %}",
+      "name": "next",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Glacier ice"
+            }
+          ],
+          "products_count": 4
+        }
+      },
+      "output": "Draught of Immortality\n  \nGlacier ice\n  \n<span class=\"page current\">1</span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">2</a></span> <span class=\"next\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">Next</a></span>"
+    },
+    {
+      "code": "{% paginate collection.products by 2 %}\n  {% for product in collection.products %}\n    {{- product.title }}\n  {% endfor %}\n\n  <div id=\"pagination\">\n    {{- paginate | default_pagination: anchor: 'pagination' -}}\n  </div>\n{% endpaginate %}",
+      "name": "anchor",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Glacier ice"
+            }
+          ],
+          "products_count": 4
+        }
+      },
+      "output": "Draught of Immortality\n  \nGlacier ice\n  \n\n  <div id=\"pagination\"><span class=\"page current\">1</span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=2#pagination\" title=\"\">2</a></span> <span class=\"next\"><a href=\"/services/liquid_rendering/resource?page=2#pagination\" title=\"\">Next &raquo;</a></span></div>"
+    }
+  ]
+}

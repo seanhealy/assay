@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "modulo",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/modulo",
+  "renderedExamples": [
+    {
+      "code": "{{ 12 | modulo: 5 }}",
+      "output": "2"
+    }
+  ]
+}

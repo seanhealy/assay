@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "truncatewords",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/truncatewords",
+  "renderedExamples": [
+    {
+      "code": "{{ article.content | strip_html | truncatewords: 15 }}",
+      "data": {
+        "article": {
+          "content": "<p>We've all had this problem before: we peek into the potions vault to determine which potions we are running low on, and the invisibility potion bottle looks completely empty.</p>\n<p>...</p>\n<p> </p>"
+        }
+      },
+      "output": "We've all had this problem before: we peek into the potions vault to determine which..."
+    },
+    {
+      "code": "{{ article.content | strip_html | truncatewords: 15, '--' }}\n\n{{ article.content | strip_html | truncatewords: 15, '' }}",
+      "name": "Specify a custom ellipsis",
+      "data": {
+        "article": {
+          "content": "<p>We've all had this problem before: we peek into the potions vault to determine which potions we are running low on, and the invisibility potion bottle looks completely empty.</p>\n<p>...</p>\n<p> </p>"
+        }
+      },
+      "output": "We've all had this problem before: we peek into the potions vault to determine which--\n\nWe've all had this problem before: we peek into the potions vault to determine which"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "filter",
+  "name": "time_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/time_tag",
+  "renderedExamples": [
+    {
+      "code": "{{ article.created_at | time_tag: '%B %d, %Y' }}",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "<time datetime=\"2022-04-14T20:56:02Z\">April 14, 2022</time>"
+    },
+    {
+      "code": "{{ article.created_at | time_tag: format: 'abbreviated_date' }}",
+      "name": "format",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "<time datetime=\"2022-04-14T20:56:02Z\">Apr 14, 2022</time>"
+    },
+    {
+      "code": "{{ article.created_at | time_tag: '%B %d, %Y', datetime: '%Y-%m-%d' }}",
+      "name": "datetime",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "<time datetime=\"2022-04-14\">April 14, 2022</time>"
+    },
+    {
+      "code": "{{ article.created_at | time_tag: format: 'month_day_year' }}",
+      "name": "Setting format options in locale files",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "<time datetime=\"2022-04-14T20:56:02Z\">April 14, 2022</time>"
+    }
+  ]
+}

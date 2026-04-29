@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "url_for_type",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/url_for_type",
+  "renderedExamples": [
+    {
+      "code": "{{ 'health' | url_for_type }}",
+      "output": "/collections/types?q=health"
+    }
+  ]
+}

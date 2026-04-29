@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "payment_button",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/payment_button",
+  "renderedExamples": [
+    {
+      "code": "{% form 'product', product %}\n  {{ form | payment_button }}\n{% endform %}",
+      "data": {
+        "product": {
+          "id": 6786188247105
+        }
+      },
+      "output": "<form method=\"post\" action=\"/cart/add\" id=\"product_form_6786188247105\" accept-charset=\"UTF-8\" class=\"shopify-product-form\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"form_type\" value=\"product\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <div data-shopify=\"payment-button\" class=\"shopify-payment-button\"> <shopify-accelerated-checkout recommended=\"null\" fallback=\"{&quot;supports_subs&quot;:true,&quot;supports_def_opts&quot;:true,&quot;name&quot;:&quot;buy_it_now&quot;,&quot;wallet_params&quot;:{}}\" access-token=\"7be588c245f69602e5db198d53fcfde5\" buyer-country=\"CA\" buyer-locale=\"en\" buyer-currency=\"CAD\" variant-params=\"[{&quot;id&quot;:39897499729985,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499762753,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499795521,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499828289,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499861057,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499893825,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499926593,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499959361,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499992129,&quot;requiresShipping&quot;:true}]\" shop-id=\"56174706753\" enabled-flags=\"[&quot;5865c7bd&quot;,&quot;ce346acf&quot;]\" > <div class=\"shopify-payment-button__button\" role=\"button\" disabled aria-hidden=\"true\" style=\"background-color: transparent; border: none\"> <div class=\"shopify-payment-button__skeleton\">&nbsp;</div> </div> </shopify-accelerated-checkout> <small id=\"shopify-buyer-consent\" class=\"hidden\" aria-hidden=\"true\" data-consent-type=\"subscription\"> This item is a deferred, subscription, or recurring purchase. By continuing, I agree to the <span id=\"shopify-subscription-policy-button\">cancellation policy</span> and authorize you to charge my payment method at the prices, frequency and dates listed on this page until my order is fulfilled or I cancel, if permitted. </small> </div>\n<input type=\"hidden\" name=\"product-id\" value=\"6786188247105\" /></form>"
+    }
+  ]
+}

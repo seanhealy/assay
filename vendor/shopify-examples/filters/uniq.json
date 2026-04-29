@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "uniq",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/uniq",
+  "renderedExamples": [
+    {
+      "code": "{% assign potion_array = 'invisibility, health, love, health, invisibility' | split: ', ' %}\n\n{{ potion_array | uniq | join: ', ' }}",
+      "output": "invisibility, health, love"
+    }
+  ]
+}

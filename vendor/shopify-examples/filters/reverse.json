@@ -1,0 +1,39 @@
+{
+  "kind": "filter",
+  "name": "reverse",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/reverse",
+  "renderedExamples": [
+    {
+      "code": "Original order:\n{{ collection.products | map: 'title' | join: ', ' }}\n\nReverse order:\n{{ collection.products | reverse | map: 'title' | join: ', ' }}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Glacier ice"
+            },
+            {
+              "title": "Health potion"
+            },
+            {
+              "title": "Invisibility potion"
+            }
+          ]
+        }
+      },
+      "output": "Original order:\nDraught of Immortality, Glacier ice, Health potion, Invisibility potion\n\nReverse order:\nInvisibility potion, Health potion, Glacier ice, Draught of Immortality"
+    },
+    {
+      "code": "{{ collection.title | split: '' | reverse | join: '' }}",
+      "name": "Reversing strings",
+      "data": {
+        "collection": {
+          "title": "Sale potions"
+        }
+      },
+      "output": "snoitop elaS"
+    }
+  ]
+}

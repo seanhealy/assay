@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_to_hex",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_to_hex",
+  "renderedExamples": [
+    {
+      "code": "{{ 'rgb(234, 90, 185)' | color_to_hex }}",
+      "output": "#ea5ab9"
+    }
+  ]
+}

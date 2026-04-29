@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "article_img_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/article_img_url",
+  "renderedExamples": [
+    {
+      "code": "{{ article.image | article_img_url }}",
+      "data": {
+        "article": {
+          "image": "articles/beakers-for-science-with-water.jpg"
+        }
+      },
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/articles/beakers-for-science-with-water_small.jpg?v=1654385193"
+    },
+    {
+      "code": "{{ article.image | article_img_url: 'large' }}",
+      "name": "size",
+      "data": {
+        "article": {
+          "image": "articles/beakers-for-science-with-water.jpg"
+        }
+      },
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/articles/beakers-for-science-with-water_large.jpg?v=1654385193"
+    }
+  ]
+}

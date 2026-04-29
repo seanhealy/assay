@@ -1,0 +1,87 @@
+{
+  "kind": "filter",
+  "name": "metafield_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/metafield_tag",
+  "renderedExamples": [
+    {
+      "code": "<!-- boolean -->\n{{ product.metafields.information.seasonal | metafield_tag }}\n\n<!-- collection_reference -->\n{{ product.metafields.information.related_collection | metafield_tag }}\n\n<!-- color -->\n{{ product.metafields.details.potion_color | metafield_tag }}\n\n<!-- date -->\n{{ product.metafields.information.expiry | metafield_tag }}\n\n<!-- date_time -->\n{{ product.metafields.information.brew_date | metafield_tag }}\n\n<!-- json -->\n{{ product.metafields.information.burn_temperature | metafield_tag }}\n\n<!-- money -->\n{{ product.metafields.details.price_per_ml | metafield_tag }}\n\n<!-- multi_line_text_field -->\n{{ product.metafields.information.shipping | metafield_tag }}\n\n<!-- number_decimal -->\n{{ product.metafields.information.salinity | metafield_tag }}\n\n<!-- number_integer -->\n{{ product.metafields.information.doses_per_day | metafield_tag }}\n\n<!-- page_reference -->\n{{ product.metafields.information.dosage | metafield_tag }}\n\n<!-- product_reference -->\n{{ product.metafields.information.related_product | metafield_tag }}\n\n<!-- rating -->\n{{ product.metafields.details.rating | metafield_tag }}\n\n<!-- single_line_text_field -->\n{{ product.metafields.information.directions | metafield_tag }}\n\n<!-- url -->\n{{ product.metafields.information.health | metafield_tag }}\n\n<!-- variant_reference -->\n{{ product.metafields.information.best_seller | metafield_tag }}\n\n<!-- rich_text_field -->\n{{ product.metafields.information.rich_description | metafield_tag }}",
+      "name": "Basic types",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<!-- boolean -->\n<span class=\"metafield-boolean\">false</span>\n\n<!-- collection_reference -->\n<a href=\"/collections/sale-potions\" class=\"metafield-collection_reference\">Sale potions</a>\n\n<!-- color -->\n<span class=\"metafield-color\">#ff0000</span>\n\n<!-- date -->\n<time datetime=\"2040-01-01\" class=\"metafield-date\">January 1, 2040</time>\n\n<!-- date_time -->\n<time datetime=\"2022-06-22T13:00:00Z\" class=\"metafield-date_time\">Jun 22, 2022, 1:00 pm</time>\n\n<!-- json -->\n<script type=\"application/json\" class=\"metafield-json\">{\"temperature\":\"700\",\"unit\":\"degrees\",\"scale\":\"Fahrenheit\"}</script>\n\n<!-- money -->\n<span class=\"metafield-money\">$0.10 CAD</span>\n\n<!-- multi_line_text_field -->\n<span class=\"metafield-multi_line_text_field\">All health potions are made to order, so it might take up to 2 weeks before your order can be shipped.<br />\n<br />\nThanks for your patience!</span>\n\n<!-- number_decimal -->\n<span class=\"metafield-number_decimal\">8.4</span>\n\n<!-- number_integer -->\n<span class=\"metafield-number_integer\">3</span>\n\n<!-- page_reference -->\n<a href=\"/pages/potion-dosages\" class=\"metafield-page_reference\">Potion dosages</a>\n\n<!-- product_reference -->\n<a href=\"/products/dried-chamomile\" class=\"metafield-product_reference\">Dried chamomile</a>\n\n<!-- rating -->\n<span class=\"metafield-rating\">4.5</span>\n\n<!-- single_line_text_field -->\n<span class=\"metafield-single_line_text_field\">Take with a meal.</span>\n\n<!-- url -->\n<a href=\"https://www.canada.ca/en/health-canada/services/food-nutrition/legislation-guidelines/acts-regulations/canada-food-drugs.html\" class=\"metafield-url\">www.canada.ca/en/health-canada/services/food-nutrition/legislation-guidelines/acts-regulations/canada-food-drugs.html</a>\n\n<!-- variant_reference -->\n<a href=\"/products/health-potion?variant=39897499762753\" class=\"metafield-variant_reference\">S / Medium</a>\n\n<!-- rich_text_field -->\n<div class=\"metafield-rich_text_field\"><h3>Are you low on health? Well we&#39;ve got the potion just for you!</h3><p>Just need a top up? Almost dead? In between? No need to worry because we have a range of sizes and strengths!</p></div>"
+    },
+    {
+      "code": "{{ product.metafields.details.scale_width | metafield_tag }}",
+      "name": "dimension",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<span class=\"metafield-dimension\"><span class=\"metafield-dimension_value\">3 </span><span class=\"metafield-dimension_unit\">cm</span></span>"
+    },
+    {
+      "code": "<!-- Image -->\n{{ product.metafields.information.promo_image | metafield_tag }}\n\n<!-- Video -->\n{{ product.metafields.information.promo_video | metafield_tag }}\n\n<!-- Other -->\n{{ product.metafields.information.disclaimers | metafield_tag }}",
+      "name": "file_reference",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<!-- Image -->\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/potions-header.png?v=1650325393\" loading=\"lazy\" class=\"metafield-file_reference\">\n\n<!-- Video -->\n<video playsinline=\"playsinline\" preload=\"metadata\" poster=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/preview_images/4733c31cd9d744f6994f61458fda85e6.thumbnail.0000000_small.jpg?v=1655257099\"><source src=\"//polinas-potent-potions.myshopify.com/cdn/shop/videos/c/vp/4733c31cd9d744f6994f61458fda85e6/4733c31cd9d744f6994f61458fda85e6.HD-1080p-7.2Mbps.mp4?v=0\" type=\"video/mp4\"><img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/preview_images/4733c31cd9d744f6994f61458fda85e6.thumbnail.0000000_small.jpg?v=1655257099\"></video>\n\n<!-- Other -->\n<a href=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/disclaimer.pdf?v=9043651738044769859\" class=\"metafield-file_reference\"><img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/preview_images/document-7f23220eb4be7eeaa6e225738b97d943f22e74367cd2d7544fc3b37fb36acd71.png?v=1653087800\" loading=\"lazy\"></a>"
+    },
+    {
+      "code": "<!-- <ul> element -->\n{{ product.metafields.information.ingredients | metafield_tag: field: 'name' }}\n\n<!-- <ol> element -->\n{{ product.metafields.information.ingredients | metafield_tag: field: 'name', list_format: 'ordered' }}",
+      "name": "list.metaobject_reference",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<!-- <ul> element -->\n<ul class=\"metafield-single_line_text_field-array\"><li class=\"metafield-single_line_text_field\">Spinach</li><li class=\"metafield-single_line_text_field\">Kale</li><li class=\"metafield-single_line_text_field\">Mushrooms</li></ul>\n\n<!-- <ol> element -->\n<ol class=\"metafield-single_line_text_field-array\"><li class=\"metafield-single_line_text_field\">Spinach</li><li class=\"metafield-single_line_text_field\">Kale</li><li class=\"metafield-single_line_text_field\">Mushrooms</li></ol>"
+    },
+    {
+      "code": "<!-- <ul> element -->\n{{ product.metafields.information.pickup_locations | metafield_tag }}\n\n<!-- <ol> element -->\n{{ product.metafields.information.pickup_locations | metafield_tag: list_format: 'ordered' }}",
+      "name": "list.single_line_text_field",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<!-- <ul> element -->\n<ul class=\"metafield-single_line_text_field-array\"><li class=\"metafield-single_line_text_field\">Ottawa</li><li class=\"metafield-single_line_text_field\">Toronto</li><li class=\"metafield-single_line_text_field\">Montreal</li><li class=\"metafield-single_line_text_field\">Vancouver</li></ul>\n\n<!-- <ol> element -->\n<ol class=\"metafield-single_line_text_field-array\"><li class=\"metafield-single_line_text_field\">Ottawa</li><li class=\"metafield-single_line_text_field\">Toronto</li><li class=\"metafield-single_line_text_field\">Montreal</li><li class=\"metafield-single_line_text_field\">Vancouver</li></ol>"
+    },
+    {
+      "code": "{{ product.metafields.information.primary_ingredient | metafield_tag: field: 'name' }}",
+      "name": "metaobject_reference",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<span class=\"metafield-single_line_text_field\">Spinach</span>"
+    },
+    {
+      "code": "{{ product.metafields.details.milk_container_volume | metafield_tag }}",
+      "name": "volume",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<span class=\"metafield-volume\"><span class=\"metafield-volume_value\">500 </span><span class=\"metafield-volume_unit\">mL</span></span>"
+    },
+    {
+      "code": "{{ product.metafields.details.chamomile_base_weight | metafield_tag }}",
+      "name": "weight",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<span class=\"metafield-weight\"><span class=\"metafield-weight_value\">50 </span><span class=\"metafield-weight_unit\">g</span></span>"
+    }
+  ]
+}

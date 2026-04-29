@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "remove_first",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/remove_first",
+  "renderedExamples": [
+    {
+      "code": "{{ \"I hate it when I accidentally spill my duplication potion accidentally!\" | remove_first: ' accidentally' }}",
+      "output": "I hate it when I spill my duplication potion accidentally!"
+    }
+  ]
+}

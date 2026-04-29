@@ -1,0 +1,44 @@
+{
+  "kind": "filter",
+  "name": "external_video_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/external_video_tag",
+  "renderedExamples": [
+    {
+      "code": "{% for media in product.media %}\n  {% if media.media_type == 'external_video' %}\n    {% if media.host == 'youtube' %}\n      {{ media | external_video_url: color: 'white' | external_video_tag }}\n    {% elsif media.host == 'vimeo' %}\n      {{ media | external_video_url: loop: '1', muted: '1' | external_video_tag }}\n    {% endif %}\n  {% endif %}\n{% endfor %}",
+      "data": {
+        "product": {
+          "media": [
+            {
+              "host": "youtube",
+              "media_type": "external_video"
+            },
+            {
+              "host": null,
+              "media_type": "video"
+            }
+          ]
+        }
+      },
+      "output": "<iframe frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"allowfullscreen\" src=\"https://www.youtube.com/embed/vj01PAffOac?color=white&amp;controls=1&amp;enablejsapi=1&amp;modestbranding=1&amp;origin=https%3A%2F%2Fpolinas-potent-potions.myshopify.com&amp;playsinline=1&amp;rel=0\" title=\"Potion beats\"></iframe>"
+    },
+    {
+      "code": "{% for media in product.media %}\n  {% if media.media_type == 'external_video' %}\n    {% if media.host == 'youtube' %}\n      {{ media | external_video_url: color: 'white' | external_video_tag: class:'youtube-video' }}\n    {% endif %}\n  {% endif %}\n{% endfor %}",
+      "name": "HTML attributes",
+      "data": {
+        "product": {
+          "media": [
+            {
+              "host": "youtube",
+              "media_type": "external_video"
+            },
+            {
+              "host": null,
+              "media_type": "video"
+            }
+          ]
+        }
+      },
+      "output": "<iframe frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"allowfullscreen\" class=\"youtube-video\" src=\"https://www.youtube.com/embed/vj01PAffOac?color=white&amp;controls=1&amp;enablejsapi=1&amp;modestbranding=1&amp;origin=https%3A%2F%2Fpolinas-potent-potions.myshopify.com&amp;playsinline=1&amp;rel=0\" title=\"Potion beats\"></iframe>"
+    }
+  ]
+}

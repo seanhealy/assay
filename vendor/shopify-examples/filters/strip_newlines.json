@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "strip_newlines",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/strip_newlines",
+  "renderedExamples": [
+    {
+      "code": "<!-- With newlines -->\n{{ product.description }}\n\n<!-- Newlines stripped -->\n{{ product.description | strip_newlines }}",
+      "data": {
+        "product": {
+          "description": "<h3>Are you low on health? Well we've got the potion just for you!</h3>\n<p>Just need a top up? Almost dead? In between? No need to worry because we have a range of sizes and strengths!</p>"
+        }
+      },
+      "output": "<!-- With newlines -->\n<h3>Are you low on health? Well we've got the potion just for you!</h3>\n<p>Just need a top up? Almost dead? In between? No need to worry because we have a range of sizes and strengths!</p>\n\n<!-- Newlines stripped -->\n<h3>Are you low on health? Well we've got the potion just for you!</h3><p>Just need a top up? Almost dead? In between? No need to worry because we have a range of sizes and strengths!</p>"
+    }
+  ]
+}

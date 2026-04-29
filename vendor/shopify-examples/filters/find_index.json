@@ -1,0 +1,142 @@
+{
+  "kind": "filter",
+  "name": "find_index",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/find_index",
+  "renderedExamples": [
+    {
+      "code": "{% assign index = collection.products | find_index: 'vendor', \"Polina's Potent Potions\" %}\n\n{{ index }}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "0"
+    },
+    {
+      "code": "{% assign index = collection.products | find_index: 'vendor', \"Polina's Potions\" %}\n\n{{ index | default: \"No index found\" }}",
+      "name": "Returns `nil` when no items match the specified property value.",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "No index found"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "abs",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/abs",
+  "renderedExamples": [
+    {
+      "code": "{{ -3 | abs }}",
+      "output": "3"
+    }
+  ]
+}

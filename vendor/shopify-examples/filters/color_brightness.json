@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_brightness",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_brightness",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_brightness }}",
+      "output": "143.89"
+    }
+  ]
+}

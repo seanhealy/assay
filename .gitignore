@@ -3,6 +3,8 @@ dist/
 src/cli/shopify-names.ts
 src/shims/filters/index.ts
 src/shims/tags/index.ts
+vendor/shopify-examples/*/*.md
+vendor/shopify-examples/objects/
 __screenshots__/
 .vitest-attachments/
 

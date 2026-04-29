@@ -1,0 +1,142 @@
+{
+  "kind": "filter",
+  "name": "has",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/has",
+  "renderedExamples": [
+    {
+      "code": "{% assign has_potent_potions = collection.products | has: 'vendor', \"Polina's Potent Potions\" %}\n\n{{ has_potent_potions }}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "true"
+    },
+    {
+      "code": "{% assign has_potent_potions = collection.products | has: 'vendor', \"Polina's Potions\" %}\n\n{{ has_potent_potions }}",
+      "name": "Returns `false` when no items match the specified property value.",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "false"
+    }
+  ]
+}

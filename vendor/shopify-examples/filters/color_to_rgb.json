@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_to_rgb",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_to_rgb",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_to_rgb }}",
+      "output": "rgb(234, 90, 185)"
+    }
+  ]
+}

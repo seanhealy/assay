@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_extract",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_extract",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_extract: 'red' }}",
+      "output": "234"
+    }
+  ]
+}

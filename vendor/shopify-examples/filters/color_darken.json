@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_darken",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_darken",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_darken: 30 }}",
+      "output": "#98136b"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "kind": "filter",
+  "name": "highlight",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/highlight",
+  "renderedExamples": [
+    {
+      "code": "{% for item in search.results %}\n  {% if item.object_type == 'product' %}\n    {{ item.description | highlight: search.terms }}\n  {% else %}\n    {{ item.content | highlight: search.terms }}\n  {% endif %}\n{% endfor %}",
+      "data": {
+        "search": {
+          "results": [
+            {
+              "description": "",
+              "object_type": "product"
+            },
+            {
+              "description": "",
+              "object_type": "product"
+            },
+            {
+              "description": "",
+              "object_type": "product"
+            },
+            {
+              "description": "",
+              "object_type": "product"
+            },
+            {
+              "description": "This is a love potion.",
+              "object_type": "product"
+            },
+            {
+              "description": "",
+              "object_type": "product"
+            }
+          ],
+          "terms": "love"
+        }
+      },
+      "output": "This is a <strong class=\"highlight\">love</strong> potion."
+    }
+  ]
+}

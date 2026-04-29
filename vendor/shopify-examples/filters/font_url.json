@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "font_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/font_url",
+  "renderedExamples": [
+    {
+      "code": "{{ settings.type_header_font | font_url }}",
+      "data": {
+        "settings": {
+          "type_header_font": {}
+        }
+      },
+      "output": "//polinas-potent-potions.myshopify.com/cdn/fonts/assistant/assistant_n4.9120912a469cad1cc292572851508ca49d12e768.woff2"
+    },
+    {
+      "code": "{{ settings.type_header_font | font_url: 'woff' }}",
+      "name": "woff format",
+      "data": {
+        "settings": {
+          "type_header_font": {}
+        }
+      },
+      "output": "//polinas-potent-potions.myshopify.com/cdn/fonts/assistant/assistant_n4.6e9875ce64e0fefcd3f4446b7ec9036b3ddd2985.woff"
+    }
+  ]
+}

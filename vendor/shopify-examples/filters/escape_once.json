@@ -1,0 +1,10 @@
+{
+  "kind": "filter",
+  "name": "escape_once",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/escape_once",
+  "renderedExamples": [
+    {
+      "code": "# applying the escape filter to already escaped text escapes characters in HTML entities:\n\n{{ \"&lt;p&gt;Text to be escaped.&lt;/p&gt;\" | escape }}\n\n# applying the escape_once filter to already escaped text skips characters in HTML entities:\n\n{{ \"&lt;p&gt;Text to be escaped.&lt;/p&gt;\" | escape_once }}\n\n# use escape_once to escape strings where a combination of HTML entities and non-escaped characters might be present:\n\n{{ \"&lt;p&gt;Text to be escaped.&lt;/p&gt; & some additional text\" | escape_once }}"
+    }
+  ]
+}

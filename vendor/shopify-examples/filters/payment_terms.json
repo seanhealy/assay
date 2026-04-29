@@ -1,0 +1,13 @@
+{
+  "kind": "filter",
+  "name": "payment_terms",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/payment_terms",
+  "renderedExamples": [
+    {
+      "code": "{% form 'product', product %}\n  {{ form | payment_terms }}\n{% endform %}"
+    },
+    {
+      "code": "{% form 'cart', cart %}\n  {{ form | payment_terms }}\n{% endform %}"
+    }
+  ]
+}

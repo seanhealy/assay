@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "times",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/times",
+  "renderedExamples": [
+    {
+      "code": "{{ 2 | times: 2 }}",
+      "output": "4"
+    }
+  ]
+}

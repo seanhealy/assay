@@ -1,0 +1,11 @@
+{
+  "kind": "tag",
+  "name": "layout",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/layout",
+  "renderedExamples": [
+    {
+      "code": "{% layout 'full-width' %}\n{% layout none %}",
+      "name": "name"
+    }
+  ]
+}

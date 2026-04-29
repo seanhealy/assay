@@ -1,0 +1,22 @@
+{
+  "kind": "filter",
+  "name": "link_to_remove_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/link_to_remove_tag",
+  "renderedExamples": [
+    {
+      "code": "{% for tag in collection.all_tags %}\n  {%- if current_tags contains tag -%}\n    {{ tag | link_to_remove_tag: tag }}\n  {%- else -%}\n    {{ tag | link_to_add_tag: tag }}\n  {%- endif -%}\n{% endfor %}",
+      "data": {
+        "collection": {
+          "all_tags": [
+            "extra-potent",
+            "fresh",
+            "healing",
+            "ingredients"
+          ]
+        },
+        "template": "collection"
+      },
+      "output": "<a href=\"/services/liquid_rendering/extra-potent\" title=\"Narrow selection to products matching tag extra-potent\">extra-potent</a>\n\n<a href=\"/services/liquid_rendering/fresh\" title=\"Narrow selection to products matching tag fresh\">fresh</a>\n\n<a href=\"/services/liquid_rendering/healing\" title=\"Narrow selection to products matching tag healing\">healing</a>\n\n<a href=\"/services/liquid_rendering/ingredients\" title=\"Narrow selection to products matching tag ingredients\">ingredients</a>"
+    }
+  ]
+}

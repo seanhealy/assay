@@ -1,0 +1,115 @@
+{
+  "kind": "filter",
+  "name": "sort",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/sort",
+  "renderedExamples": [
+    {
+      "code": "{% assign tags = collection.all_tags | sort %}\n\n{% for tag in tags -%}\n  {{ tag }}\n{%- endfor %}",
+      "data": {
+        "collection": {
+          "all_tags": [
+            "Burning",
+            "dried",
+            "extra-potent",
+            "extracts",
+            "fresh",
+            "healing",
+            "ingredients",
+            "music",
+            "plant",
+            "Salty",
+            "supplies"
+          ]
+        }
+      },
+      "output": "Burning\nSalty\ndried\nextra-potent\nextracts\nfresh\nhealing\ningredients\nmusic\nplant\nsupplies"
+    },
+    {
+      "code": "{% assign products = collection.products | sort: 'price' %}\n\n{% for product in products -%}\n  {{ product.title }}\n{%- endfor %}",
+      "name": "Sort by an array item property",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "price": "10.00",
+              "title": "Blue Mountain Flower"
+            },
+            {
+              "price": "0.00",
+              "title": "Charcoal"
+            },
+            {
+              "price": "56.00",
+              "title": "Crocodile tears"
+            },
+            {
+              "price": "0.00",
+              "title": "Dandelion milk"
+            },
+            {
+              "price": "1000000.00",
+              "title": "Draught of Immortality"
+            },
+            {
+              "price": "8.98",
+              "title": "Dried chamomile"
+            },
+            {
+              "price": "0.00",
+              "title": "Forest mushroom"
+            },
+            {
+              "price": "10.00",
+              "title": "Gift Card"
+            },
+            {
+              "price": "0.00",
+              "title": "Glacier ice"
+            },
+            {
+              "price": "0.00",
+              "title": "Ground mandrake root"
+            },
+            {
+              "price": "10.00",
+              "title": "Health potion"
+            },
+            {
+              "price": "250.00",
+              "title": "Invisibility potion"
+            },
+            {
+              "price": "0.00",
+              "title": "Komodo dragon scale"
+            },
+            {
+              "price": "0.00",
+              "title": "Love Potion"
+            },
+            {
+              "price": "10.00",
+              "title": "Mana potion"
+            },
+            {
+              "price": "0.00",
+              "title": "Potion beats"
+            },
+            {
+              "price": "0.00",
+              "title": "Potion bottle"
+            },
+            {
+              "price": "400.00",
+              "title": "Viper venom"
+            },
+            {
+              "price": "24.99",
+              "title": "Whole bloodroot"
+            }
+          ]
+        }
+      },
+      "output": "Charcoal\nDandelion milk\nForest mushroom\nGlacier ice\nGround mandrake root\nKomodo dragon scale\nLove Potion\nPotion beats\nPotion bottle\nDried chamomile\nBlue Mountain Flower\nGift Card\nHealth potion\nMana potion\nWhole bloodroot\nCrocodile tears\nInvisibility potion\nViper venom\nDraught of Immortality"
+    }
+  ]
+}

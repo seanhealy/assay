@@ -1,0 +1,23 @@
+{
+  "kind": "filter",
+  "name": "payment_type_img_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/payment_type_img_url",
+  "renderedExamples": [
+    {
+      "code": "{% for type in shop.enabled_payment_types %}\n<img src=\"{{ type | payment_type_img_url }}\" width=\"50\" height=\"50\" />\n{% endfor %}",
+      "data": {
+        "shop": {
+          "enabled_payment_types": [
+            "visa",
+            "master",
+            "american_express",
+            "paypal",
+            "diners_club",
+            "discover"
+          ]
+        }
+      },
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shopifycloud/storefront/assets/payment_icons/visa-65d650f7.svg\" width=\"50\" height=\"50\" />\n\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shopifycloud/storefront/assets/payment_icons/master-54b5a7ce.svg\" width=\"50\" height=\"50\" />\n\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shopifycloud/storefront/assets/payment_icons/american_express-1efdc6a3.svg\" width=\"50\" height=\"50\" />\n\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shopifycloud/storefront/assets/payment_icons/paypal-a7c68b85.svg\" width=\"50\" height=\"50\" />\n\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shopifycloud/storefront/assets/payment_icons/diners_club-678e3046.svg\" width=\"50\" height=\"50\" />\n\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shopifycloud/storefront/assets/payment_icons/discover-59880595.svg\" width=\"50\" height=\"50\" />"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_contrast",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_contrast",
+  "renderedExamples": [
+    {
+      "code": "{{ '#E800B0' | color_contrast: '#D9D8FF' }}",
+      "output": "3.0"
+    }
+  ]
+}

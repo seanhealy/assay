@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "upcase",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/upcase",
+  "renderedExamples": [
+    {
+      "code": "{{ product.title | upcase }}",
+      "data": {
+        "product": {
+          "title": "Health potion"
+        }
+      },
+      "output": "HEALTH POTION"
+    }
+  ]
+}

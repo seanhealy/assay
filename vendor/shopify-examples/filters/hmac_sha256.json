@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "hmac_sha256",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/hmac_sha256",
+  "renderedExamples": [
+    {
+      "code": "{%- assign secret_potion = 'Polyjuice' | hmac_sha256: 'Polina' -%}\n\nMy secret potion: {{ secret_potion }}",
+      "output": "My secret potion: 8e0d5d65cff1242a4af66c8f4a32854fd5fb80edcc8aabe9b302b29c7c71dc20"
+    }
+  ]
+}

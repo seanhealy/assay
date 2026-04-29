@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "link_to_type",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/link_to_type",
+  "renderedExamples": [
+    {
+      "code": "{{ 'Health' | link_to_type }}",
+      "output": "<a href=\"/collections/types?q=Health\" title=\"Health\">Health</a>"
+    },
+    {
+      "code": "{{ 'Health' | link_to_type: class: 'link-class' }}",
+      "name": "HTML attributes",
+      "output": "<a class=\"link-class\" href=\"/collections/types?q=Health\" title=\"Health\">Health</a>"
+    }
+  ]
+}

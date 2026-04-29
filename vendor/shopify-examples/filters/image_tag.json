@@ -1,0 +1,51 @@
+{
+  "kind": "filter",
+  "name": "image_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/image_tag",
+  "renderedExamples": [
+    {
+      "code": "{{ product | image_url: width: 200 | image_tag }}",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200 200w\" width=\"200\" height=\"133\">"
+    },
+    {
+      "code": "{{ images['potions-header.png'] | image_url: width: 300 | image_tag }}",
+      "name": "`image_tag` and focal points",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/potions-header.png?v=1650325393&amp;width=300\" alt=\"\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/potions-header.png?v=1650325393&amp;width=300 300w\" width=\"300\" height=\"173\" style=\"object-position:1.9231% 9.7917%;\">"
+    },
+    {
+      "code": "<!-- With a width -->\n{{ product | image_url: width: 400 | image_tag: width: 300 }}\n\n<!-- With the width set to nil -->\n{{ product | image_url: width: 400 | image_tag: width: nil }}",
+      "name": "width",
+      "output": "<!-- With a width -->\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=400\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=300 300w, //polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=352 352w\" width=\"300\">\n\n<!-- With the width set to nil -->\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=400\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=352 352w\">"
+    },
+    {
+      "code": "<!-- With a height -->\n{{ product | image_url: width: 400 | image_tag: height: 300 }}\n\n<!-- With the height set to nil -->\n{{ product | image_url: width: 400 | image_tag: height: nil }}",
+      "name": "height",
+      "output": "<!-- With a height -->\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=400\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=352 352w\" height=\"300\">\n\n<!-- With the height set to nil -->\n<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=400\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=352 352w\">"
+    },
+    {
+      "code": "{{ product | image_url: width: 200 | image_tag: sizes: '(min-width:1600px) 960px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)' }}",
+      "name": "sizes",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200 200w\" width=\"200\" height=\"133\" sizes=\"(min-width:1600px) 960px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)\">"
+    },
+    {
+      "code": "{{ product | image_url: width: 600 | image_tag: widths: '200, 300, 400' }}",
+      "name": "widths",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=600\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200 200w, //polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=300 300w, //polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=400 400w\" width=\"600\" height=\"400\">"
+    },
+    {
+      "code": "{{ product | image_url: width: 200 | image_tag: srcset: nil }}",
+      "name": "srcset",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200\" alt=\"Health potion\" width=\"200\" height=\"133\">"
+    },
+    {
+      "code": "{{ product | image_url: width: 200 | image_tag: alt: \"My image's alt text\" }}",
+      "name": "alt",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200\" alt=\"My image&#39;s alt text\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200 200w\" width=\"200\" height=\"133\">"
+    },
+    {
+      "code": "{{ product | image_url: width: 200 | image_tag: class: 'custom-class', loading: 'lazy' }}",
+      "name": "HTML attributes",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200\" alt=\"Health potion\" srcset=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new.jpg?v=1683744744&amp;width=200 200w\" width=\"200\" height=\"133\" loading=\"lazy\" class=\"custom-class\">"
+    }
+  ]
+}

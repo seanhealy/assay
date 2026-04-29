@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "at_most",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/at_most",
+  "renderedExamples": [
+    {
+      "code": "{{ 6 | at_most: 5 }}\n{{ 4 | at_most: 5 }}",
+      "output": "5\n4"
+    }
+  ]
+}

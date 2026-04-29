@@ -1,0 +1,26 @@
+{
+  "kind": "tag",
+  "name": "case",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/case",
+  "renderedExamples": [
+    {
+      "code": "{% case product.type %}\n  {% when 'Health' %}\n    This is a health potion.\n  {% when 'Love' %}\n    This is a love potion.\n  {% else %}\n    This is a potion.\n{% endcase %}",
+      "data": {
+        "product": {
+          "type": null
+        }
+      },
+      "output": "This is a health potion."
+    },
+    {
+      "code": "{% case product.type %}\n  {% when 'Love' or 'Luck' %}\n    This is a love or luck potion.\n  {% when 'Strength','Health' %}\n    This is a strength or health potion.\n  {% else %}\n    This is a potion.\n{% endcase %}",
+      "name": "Multiple values",
+      "data": {
+        "product": {
+          "type": null
+        }
+      },
+      "output": "This is a strength or health potion."
+    }
+  ]
+}

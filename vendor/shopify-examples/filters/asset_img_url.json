@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "asset_img_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/asset_img_url",
+  "renderedExamples": [
+    {
+      "code": "{{ 'red-and-black-bramble-berries.jpg' | asset_img_url }}",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/t/4/assets/red-and-black-bramble-berries_small.jpg?v=337"
+    },
+    {
+      "code": "{{ 'red-and-black-bramble-berries.jpg' | asset_img_url: 'large' }}",
+      "name": "size",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/t/4/assets/red-and-black-bramble-berries_large.jpg?v=337"
+    }
+  ]
+}

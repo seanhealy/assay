@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "file_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/file_url",
+  "renderedExamples": [
+    {
+      "code": "{{ 'disclaimer.pdf' | file_url }}",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/disclaimer.pdf?v=9043651738044769859"
+    }
+  ]
+}

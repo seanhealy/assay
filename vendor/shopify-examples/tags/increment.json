@@ -1,0 +1,11 @@
+{
+  "kind": "tag",
+  "name": "increment",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/increment",
+  "renderedExamples": [
+    {
+      "code": "{% increment variable %}\n{% increment variable %}\n{% increment variable %}",
+      "output": "0\n1\n2"
+    }
+  ]
+}

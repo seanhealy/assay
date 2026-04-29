@@ -1,0 +1,78 @@
+{
+  "kind": "tag",
+  "name": "paginate",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/paginate",
+  "renderedExamples": [
+    {
+      "code": "{% paginate collection.products by 5 %}\n  {% for product in collection.products -%}\n    {{ product.title }}\n  {%- endfor %}\n\n  {{- paginate | default_pagination }}\n{% endpaginate %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Blue Mountain Flower"
+            },
+            {
+              "title": "Charcoal"
+            },
+            {
+              "title": "Crocodile tears"
+            },
+            {
+              "title": "Dandelion milk"
+            },
+            {
+              "title": "Draught of Immortality"
+            }
+          ],
+          "products_count": 19
+        }
+      },
+      "output": "Blue Mountain Flower\nCharcoal\nCrocodile tears\nDandelion milk\nDraught of Immortality\n\n<span class=\"page current\">1</span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">2</a></span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=3\" title=\"\">3</a></span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=4\" title=\"\">4</a></span> <span class=\"next\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">Next &raquo;</a></span>"
+    },
+    {
+      "code": "{% paginate collection.products by 4 %}\n  {% for product in collection.products limit: 4 -%}\n    {{ product.title }}\n  {%- endfor %}\n{% endpaginate -%}\n\n<!-- Less performant method -->\n{% for product in collection.products limit: 4 -%}\n  {{ product.title }}\n{%- endfor -%}",
+      "name": "Limit data fetching",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Blue Mountain Flower"
+            },
+            {
+              "title": "Charcoal"
+            },
+            {
+              "title": "Crocodile tears"
+            },
+            {
+              "title": "Dandelion milk"
+            }
+          ],
+          "products_count": 19
+        }
+      },
+      "output": "Blue Mountain Flower\nCharcoal\nCrocodile tears\nDandelion milk\n\n<!-- Less performant method -->\nBlue Mountain Flower\nCharcoal\nCrocodile tears\nDandelion milk"
+    },
+    {
+      "code": "{% paginate collection.products by 3, window_size: 1 %}\n  {% for product in collection.products -%}\n    {{ product.title }}\n  {%- endfor %}\n\n  {{- paginate | default_pagination }}\n{% endpaginate %}",
+      "name": "window_size",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Blue Mountain Flower"
+            },
+            {
+              "title": "Charcoal"
+            },
+            {
+              "title": "Crocodile tears"
+            }
+          ],
+          "products_count": 19
+        }
+      },
+      "output": "Blue Mountain Flower\nCharcoal\nCrocodile tears\n\n<span class=\"page current\">1</span> <span class=\"deco\">&hellip;</span> <span class=\"page\"><a href=\"/services/liquid_rendering/resource?page=7\" title=\"\">7</a></span> <span class=\"next\"><a href=\"/services/liquid_rendering/resource?page=2\" title=\"\">Next &raquo;</a></span>"
+    }
+  ]
+}

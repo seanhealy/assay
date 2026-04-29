@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "capitalize",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/capitalize",
+  "renderedExamples": [
+    {
+      "code": "{{ 'this sentence should start with a capitalized word.' | capitalize }}",
+      "output": "This sentence should start with a capitalized word."
+    }
+  ]
+}

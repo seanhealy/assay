@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "customer_register_link",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/customer_register_link",
+  "renderedExamples": [
+    {
+      "code": "{{ 'Create an account' | customer_register_link }}",
+      "output": "<a href=\"/account/register\" id=\"customer_register_link\">Create an account</a>"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "replace_first",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/replace_first",
+  "renderedExamples": [
+    {
+      "code": "{{ product.handle | replace_first: '-', ' ' }}",
+      "data": {
+        "product": {
+          "handle": "komodo-dragon-scale"
+        }
+      },
+      "output": "komodo dragon-scale"
+    }
+  ]
+}

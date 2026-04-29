@@ -1,0 +1,29 @@
+{
+  "kind": "filter",
+  "name": "map",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/map",
+  "renderedExamples": [
+    {
+      "code": "{%- assign product_titles = collection.products | map: 'title' -%}\n\n{{ product_titles | join: ', ' }}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Glacier ice"
+            },
+            {
+              "title": "Health potion"
+            },
+            {
+              "title": "Invisibility potion"
+            }
+          ]
+        }
+      },
+      "output": "Draught of Immortality, Glacier ice, Health potion, Invisibility potion"
+    }
+  ]
+}

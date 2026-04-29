@@ -1,0 +1,17 @@
+{
+  "kind": "tag",
+  "name": "echo",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/echo",
+  "renderedExamples": [
+    {
+      "code": "{% echo product.title %}\n\n{% liquid\n  echo product.price | money\n%}",
+      "data": {
+        "product": {
+          "price": "10.00",
+          "title": "Health potion"
+        }
+      },
+      "output": "Health potion\n\n$10.00"
+    }
+  ]
+}

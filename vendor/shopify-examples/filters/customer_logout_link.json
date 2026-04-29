@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "customer_logout_link",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/customer_logout_link",
+  "renderedExamples": [
+    {
+      "code": "{{ 'Log out' | customer_logout_link }}",
+      "output": "<a href=\"/account/logout\" id=\"customer_logout_link\">Log out</a>"
+    }
+  ]
+}

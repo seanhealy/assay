@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_saturate",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_saturate",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_saturate: 30 }}",
+      "output": "#ff45c0"
+    }
+  ]
+}

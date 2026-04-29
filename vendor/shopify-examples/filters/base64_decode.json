@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "base64_decode",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/base64_decode",
+  "renderedExamples": [
+    {
+      "code": "{{ 'b25lIHR3byB0aHJlZQ==' | base64_decode }}",
+      "output": "one two three"
+    }
+  ]
+}

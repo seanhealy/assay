@@ -1,0 +1,11 @@
+{
+  "kind": "tag",
+  "name": "decrement",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/decrement",
+  "renderedExamples": [
+    {
+      "code": "{% decrement variable %}\n{% decrement variable %}\n{% decrement variable %}",
+      "output": "-1\n-2\n-3"
+    }
+  ]
+}

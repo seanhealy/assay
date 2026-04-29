@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "url_escape",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/url_escape",
+  "renderedExamples": [
+    {
+      "code": "{{ '<p>Health & Love potions</p>' | url_escape }}",
+      "output": "%3Cp%3EHealth%20&%20Love%20potions%3C/p%3E"
+    }
+  ]
+}

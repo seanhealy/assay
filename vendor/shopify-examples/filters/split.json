@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "split",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/split",
+  "renderedExamples": [
+    {
+      "code": "{%- assign title_words = product.handle | split: '-' -%}\n\n{% for word in title_words -%}\n  {{ word }}\n{%- endfor %}",
+      "data": {
+        "product": {
+          "handle": "health-potion"
+        }
+      },
+      "output": "health\npotion"
+    }
+  ]
+}

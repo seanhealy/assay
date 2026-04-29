@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_difference",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_difference",
+  "renderedExamples": [
+    {
+      "code": "{{ '#720955' | color_difference: '#FFF3F9' }}",
+      "output": "539"
+    }
+  ]
+}

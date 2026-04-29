@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "brightness_difference",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/brightness_difference",
+  "renderedExamples": [
+    {
+      "code": "{{ '#E800B0' | brightness_difference: '#FECEE9' }}",
+      "output": "134"
+    }
+  ]
+}

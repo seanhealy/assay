@@ -46,6 +46,8 @@
 		"test": "vitest run && npm test --prefix example",
 		"docs:update": "git submodule update --remote vendor/theme-liquid-docs",
 		"docs:audit": "tsx scripts/audit-shopify-compat.ts && prettier --write docs/filters.md docs/tags.md",
+		"docs:lookup": "tsx scripts/lookup-shopify-docs.ts",
+		"docs:fetchExample": "tsx scripts/fetch-shopify-examples.ts",
 		"prepublishOnly": "npm run build"
 	},
 	"volta": {
@@ -57,6 +59,7 @@
 		"vitest": ">=4.0.0"
 	},
 	"dependencies": {
+		"es-toolkit": "^1.46.0",
 		"liquidjs": "^10.25.2"
 	},
 	"devDependencies": {

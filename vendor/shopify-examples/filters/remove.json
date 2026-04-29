@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "remove",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/remove",
+  "renderedExamples": [
+    {
+      "code": "{{ \"I can't do it!\" | remove: \"'t\" }}",
+      "output": "I can do it!"
+    }
+  ]
+}

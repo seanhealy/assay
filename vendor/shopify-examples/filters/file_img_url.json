@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "file_img_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/file_img_url",
+  "renderedExamples": [
+    {
+      "code": "{{ 'potions-header.png' | file_img_url }}",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/potions-header_small.png?v=4246568442683817558"
+    },
+    {
+      "code": "{{ 'potions-header.png' | file_img_url: 'large' }}",
+      "name": "The size parameter",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/potions-header_large.png?v=4246568442683817558"
+    }
+  ]
+}

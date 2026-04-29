@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_to_oklch",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_to_oklch",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_to_oklch }}",
+      "output": "oklch(68% 0.2 343 / 1.0)"
+    }
+  ]
+}

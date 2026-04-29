@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "link_to",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/link_to",
+  "renderedExamples": [
+    {
+      "code": "{{ 'Shopify' | link_to: 'https://www.shopify.com' }}",
+      "output": "<a href=\"https://www.shopify.com\" title=\"\" rel=\"nofollow\">Shopify</a>"
+    },
+    {
+      "code": "{{ 'Shopify' | link_to: 'https://www.shopify.com', class: 'link-class' }}",
+      "name": "HTML attributes",
+      "output": "<a class=\"link-class\" href=\"https://www.shopify.com\" rel=\"nofollow\">Shopify</a>"
+    }
+  ]
+}

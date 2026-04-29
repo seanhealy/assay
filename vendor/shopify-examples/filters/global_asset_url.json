@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "global_asset_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/global_asset_url",
+  "renderedExamples": [
+    {
+      "code": "{{ 'lightbox.js' | global_asset_url | script_tag }}\n\n{{ 'lightbox.css' | global_asset_url | stylesheet_tag }}",
+      "output": "<script src=\"//polinas-potent-potions.myshopify.com/cdn/s/global/lightbox.js\" type=\"text/javascript\"></script>\n\n<link href=\"//polinas-potent-potions.myshopify.com/cdn/s/global/lightbox.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />"
+    }
+  ]
+}

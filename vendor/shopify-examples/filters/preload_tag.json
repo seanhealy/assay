@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "preload_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/preload_tag",
+  "renderedExamples": [
+    {
+      "code": "{{ 'cart.js' | asset_url | preload_tag: as: 'script' }}",
+      "output": "<link href=\"//polinas-potent-potions.myshopify.com/cdn/shop/t/4/assets/cart.js?v=83971781268232213281663872410\" as=\"script\" rel=\"preload\">"
+    },
+    {
+      "code": "{{ 'cart.js' | asset_url | preload_tag: as: 'script', type: 'text/javascript' }}",
+      "name": "HTML attributes",
+      "output": "<link href=\"//polinas-potent-potions.myshopify.com/cdn/shop/t/4/assets/cart.js?v=83971781268232213281663872410\" as=\"script\" type=\"text/javascript\" rel=\"preload\">"
+    }
+  ]
+}

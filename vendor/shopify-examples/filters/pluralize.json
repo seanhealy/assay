@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "pluralize",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/pluralize",
+  "renderedExamples": [
+    {
+      "code": "Cart item count: {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}",
+      "data": {
+        "cart": {
+          "item_count": 2
+        }
+      },
+      "output": "Cart item count: 2 items"
+    }
+  ]
+}

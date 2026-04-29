@@ -1,0 +1,30 @@
+{
+  "kind": "filter",
+  "name": "sum",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/sum",
+  "renderedExamples": [
+    {
+      "code": "{% assign fibonacci = '0, 1, 1, 2, 3, 5' | split: ', ' %}\n\n{{ fibonacci | sum }}",
+      "output": "12"
+    },
+    {
+      "code": "Total quantity of all items in cart:\n{{ cart.items | sum: 'quantity' }}\n\nSubtotal price for all items in cart:\n{{ cart.items | sum: 'final_line_price' | money }}",
+      "name": "Sum object property values",
+      "data": {
+        "cart": {
+          "items": [
+            {
+              "final_line_price": "22.49",
+              "quantity": 1
+            },
+            {
+              "final_line_price": "400.00",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "output": "Total quantity of all items in cart:\n2\n\nSubtotal price for all items in cart:\n$422.49"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "sort_by",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/sort_by",
+  "renderedExamples": [
+    {
+      "code": "{{ collection.url | sort_by: 'best-selling' }}",
+      "data": {
+        "collection": {
+          "url": "/collections/sale-potions"
+        }
+      },
+      "output": "/collections/sale-potions?sort_by=best-selling"
+    }
+  ]
+}

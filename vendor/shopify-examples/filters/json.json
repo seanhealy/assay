@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "json",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/json",
+  "renderedExamples": [
+    {
+      "code": "{{ product | json }}",
+      "output": "{\"id\":6792602320961,\"title\":\"Crocodile tears\",\"handle\":\"crocodile-tears\",\"description\":\"\",\"published_at\":\"2022-04-22T11:55:58-04:00\",\"created_at\":\"2022-04-22T11:55:56-04:00\",\"vendor\":\"Polina's Potent Potions\",\"type\":\"\",\"tags\":[\"Salty\"],\"price\":5600,\"price_min\":5600,\"price_max\":5600,\"available\":false,\"price_varies\":false,\"compare_at_price\":null,\"compare_at_price_min\":0,\"compare_at_price_max\":0,\"compare_at_price_varies\":false,\"variants\":[{\"id\":39888242344001,\"title\":\"Default Title\",\"option1\":\"Default Title\",\"option2\":null,\"option3\":null,\"sku\":\"\",\"requires_shipping\":true,\"taxable\":true,\"featured_image\":null,\"available\":false,\"name\":\"Crocodile tears\",\"public_title\":null,\"options\":[\"Default Title\"],\"price\":5600,\"weight\":0,\"compare_at_price\":null,\"inventory_management\":\"shopify\",\"barcode\":\"\",\"requires_selling_plan\":false,\"selling_plan_allocations\":[],\"quantity_rule\":{\"min\":1,\"max\":null,\"increment\":1}}],\"images\":[\"\\/\\/polinas-potent-potions.myshopify.com\\/cdn\\/shop\\/products\\/amber-beard-oil-bottle.jpg?v=1650642958\"],\"featured_image\":\"\\/\\/polinas-potent-potions.myshopify.com\\/cdn\\/shop\\/products\\/amber-beard-oil-bottle.jpg?v=1650642958\",\"options\":[\"Title\"],\"media\":[{\"alt\":null,\"id\":21772501975105,\"position\":1,\"preview_image\":{\"aspect_ratio\":1.5,\"height\":2974,\"width\":4460,\"src\":\"\\/\\/polinas-potent-potions.myshopify.com\\/cdn\\/shop\\/products\\/amber-beard-oil-bottle.jpg?v=1650642958\"},\"aspect_ratio\":1.5,\"height\":2974,\"media_type\":\"image\",\"src\":\"\\/\\/polinas-potent-potions.myshopify.com\\/cdn\\/shop\\/products\\/amber-beard-oil-bottle.jpg?v=1650642958\",\"width\":4460}],\"requires_selling_plan\":false,\"selling_plan_groups\":[],\"content\":\"\"}"
+    }
+  ]
+}

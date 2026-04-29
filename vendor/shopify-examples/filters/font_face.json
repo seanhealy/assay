@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "font_face",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/font_face",
+  "renderedExamples": [
+    {
+      "code": "{{ settings.type_header_font | font_face }}",
+      "data": {
+        "settings": {
+          "type_header_font": {}
+        }
+      },
+      "output": "@font-face {\n  font-family: Assistant;\n  font-weight: 400;\n  font-style: normal;\n  src: url(\"//polinas-potent-potions.myshopify.com/cdn/fonts/assistant/assistant_n4.9120912a469cad1cc292572851508ca49d12e768.woff2\") format(\"woff2\"),\n       url(\"//polinas-potent-potions.myshopify.com/cdn/fonts/assistant/assistant_n4.6e9875ce64e0fefcd3f4446b7ec9036b3ddd2985.woff\") format(\"woff\");\n}"
+    },
+    {
+      "code": "{{ settings.type_header_font | font_face: font_display: 'swap' }}",
+      "name": "font_display",
+      "data": {
+        "settings": {
+          "type_header_font": {}
+        }
+      },
+      "output": "@font-face {\n  font-family: Assistant;\n  font-weight: 400;\n  font-style: normal;\n  font-display: swap;\n  src: url(\"//polinas-potent-potions.myshopify.com/cdn/fonts/assistant/assistant_n4.9120912a469cad1cc292572851508ca49d12e768.woff2\") format(\"woff2\"),\n       url(\"//polinas-potent-potions.myshopify.com/cdn/fonts/assistant/assistant_n4.6e9875ce64e0fefcd3f4446b7ec9036b3ddd2985.woff\") format(\"woff\");\n}"
+    }
+  ]
+}

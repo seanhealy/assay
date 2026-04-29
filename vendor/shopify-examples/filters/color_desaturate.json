@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_desaturate",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_desaturate",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_desaturate: 30 }}",
+      "output": "#ce76b0"
+    }
+  ]
+}

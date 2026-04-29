@@ -1,0 +1,37 @@
+{
+  "kind": "filter",
+  "name": "concat",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/concat",
+  "renderedExamples": [
+    {
+      "code": "{%- assign types_and_vendors = collection.all_types | concat: collection.all_vendors -%}\n\nTypes and vendors:\n\n{% for item in types_and_vendors -%}\n  {%- if item != blank -%}\n    - {{ item }}\n  {%- endif -%}\n{%- endfor %}",
+      "data": {
+        "collection": {
+          "all_types": [
+            "",
+            "Animals & Pet Supplies",
+            "Baking Flavors & Extracts",
+            "Container",
+            "Cooking & Baking Ingredients",
+            "Dried Flowers",
+            "Fruits & Vegetables",
+            "Gift Cards",
+            "Health",
+            "Health & Beauty",
+            "Invisibility",
+            "Love",
+            "Music & Sound Recordings",
+            "Seasonings & Spices",
+            "Water"
+          ],
+          "all_vendors": [
+            "Clover's Apothecary",
+            "Polina's Potent Potions",
+            "Ted's Apothecary Supply"
+          ]
+        }
+      },
+      "output": "Types and vendors:\n\n- Animals & Pet Supplies\n- Baking Flavors & Extracts\n- Container\n- Cooking & Baking Ingredients\n- Dried Flowers\n- Fruits & Vegetables\n- Gift Cards\n- Health\n- Health & Beauty\n- Invisibility\n- Love\n- Music & Sound Recordings\n- Seasonings & Spices\n- Water\n- Clover's Apothecary\n- Polina's Potent Potions\n- Ted's Apothecary Supply"
+    }
+  ]
+}

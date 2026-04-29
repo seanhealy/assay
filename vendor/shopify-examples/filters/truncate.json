@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "truncate",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/truncate",
+  "renderedExamples": [
+    {
+      "code": "{{ article.title | truncate: 15 }}",
+      "data": {
+        "article": {
+          "title": "How to tell if you're out of invisibility potion"
+        }
+      },
+      "output": "How to tell ..."
+    },
+    {
+      "code": "{{ article.title | truncate: 15, '--' }}\n{{ article.title | truncate: 15, '' }}",
+      "name": "Specify a custom ellipsis",
+      "data": {
+        "article": {
+          "title": "How to tell if you're out of invisibility potion"
+        }
+      },
+      "output": "How to tell i--\nHow to tell if"
+    }
+  ]
+}

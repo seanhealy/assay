@@ -1,0 +1,40 @@
+{
+  "kind": "filter",
+  "name": "date",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/date",
+  "renderedExamples": [
+    {
+      "code": "{{ article.created_at | date: '%B %d, %Y' }}",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "April 14, 2022"
+    },
+    {
+      "code": "{{ 'now' | date: '%B %d, %Y' }}",
+      "name": "The current date"
+    },
+    {
+      "code": "{{ article.created_at | date: format: 'abbreviated_date' }}",
+      "name": "format",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "Apr 14, 2022"
+    },
+    {
+      "code": "{{ article.created_at | date: format: 'month_day_year' }}",
+      "name": "Setting format options in locale files",
+      "data": {
+        "article": {
+          "created_at": "2022-04-14 16:56:02 -0400"
+        }
+      },
+      "output": "April 14, 2022"
+    }
+  ]
+}

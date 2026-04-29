@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "script_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/script_tag",
+  "renderedExamples": [
+    {
+      "code": "{{ 'cart.js' | asset_url | script_tag }}",
+      "output": "<script src=\"//polinas-potent-potions.myshopify.com/cdn/shop/t/4/assets/cart.js?v=83971781268232213281663872410\" type=\"text/javascript\"></script>"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "kind": "tag",
+  "name": "unless",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/unless",
+  "renderedExamples": [
+    {
+      "code": "{% unless product.has_only_default_variant %}\n  // Variant selection functionality\n{% endunless %}",
+      "data": {
+        "product": {
+          "has_only_default_variant": false
+        }
+      },
+      "output": "// Variant selection functionality"
+    }
+  ]
+}

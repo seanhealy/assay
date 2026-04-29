@@ -1,0 +1,96 @@
+{
+  "kind": "filter",
+  "name": "sort_natural",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/sort_natural",
+  "renderedExamples": [
+    {
+      "code": "{% assign tags = collection.all_tags | sort_natural %}\n\n{% for tag in tags -%}\n  {{ tag }}\n{%- endfor %}",
+      "data": {
+        "collection": {
+          "all_tags": [
+            "Burning",
+            "dried",
+            "extra-potent",
+            "extracts",
+            "fresh",
+            "healing",
+            "ingredients",
+            "music",
+            "plant",
+            "Salty",
+            "supplies"
+          ]
+        }
+      },
+      "output": "Burning\ndried\nextra-potent\nextracts\nfresh\nhealing\ningredients\nmusic\nplant\nSalty\nsupplies"
+    },
+    {
+      "code": "{% assign products = collection.products | sort_natural: 'title' %}\n\n{% for product in products -%}\n  {{ product.title }}\n{%- endfor %}",
+      "name": "Sort by an array item property",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Blue Mountain Flower"
+            },
+            {
+              "title": "Charcoal"
+            },
+            {
+              "title": "Crocodile tears"
+            },
+            {
+              "title": "Dandelion milk"
+            },
+            {
+              "title": "Draught of Immortality"
+            },
+            {
+              "title": "Dried chamomile"
+            },
+            {
+              "title": "Forest mushroom"
+            },
+            {
+              "title": "Gift Card"
+            },
+            {
+              "title": "Glacier ice"
+            },
+            {
+              "title": "Ground mandrake root"
+            },
+            {
+              "title": "Health potion"
+            },
+            {
+              "title": "Invisibility potion"
+            },
+            {
+              "title": "Komodo dragon scale"
+            },
+            {
+              "title": "Love Potion"
+            },
+            {
+              "title": "Mana potion"
+            },
+            {
+              "title": "Potion beats"
+            },
+            {
+              "title": "Potion bottle"
+            },
+            {
+              "title": "Viper venom"
+            },
+            {
+              "title": "Whole bloodroot"
+            }
+          ]
+        }
+      },
+      "output": "Blue Mountain Flower\nCharcoal\nCrocodile tears\nDandelion milk\nDraught of Immortality\nDried chamomile\nForest mushroom\nGift Card\nGlacier ice\nGround mandrake root\nHealth potion\nInvisibility potion\nKomodo dragon scale\nLove Potion\nMana potion\nPotion beats\nPotion bottle\nViper venom\nWhole bloodroot"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "login_button",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/login_button",
+  "renderedExamples": [
+    {
+      "code": "{{ shop | login_button: action: 'follow' }}",
+      "name": "action"
+    }
+  ]
+}

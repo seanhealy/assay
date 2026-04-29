@@ -1,0 +1,11 @@
+{
+  "kind": "tag",
+  "name": "raw",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/raw",
+  "renderedExamples": [
+    {
+      "code": "{% raw %}\n{{ 2 | plus: 2 }} equals 4.\n{% endraw %}",
+      "output": "{{ 2 | plus: 2 }} equals 4."
+    }
+  ]
+}

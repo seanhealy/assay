@@ -1,0 +1,112 @@
+{
+  "kind": "tag",
+  "name": "form",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/form",
+  "renderedExamples": [
+    {
+      "code": "{% form 'activate_customer_password' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "activate_customer_password",
+      "output": "<form method=\"post\" action=\"/account/activate\" accept-charset=\"UTF-8\"><input type=\"hidden\" name=\"form_type\" value=\"activate_customer_password\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'cart', cart %}\n  <!-- form content -->\n{% endform %}",
+      "name": "cart",
+      "output": "<form method=\"post\" action=\"/cart\" id=\"cart_form\" accept-charset=\"UTF-8\" class=\"shopify-cart-form\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"form_type\" value=\"cart\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'contact' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "contact",
+      "output": "<form method=\"post\" action=\"/contact#contact_form\" id=\"contact_form\" accept-charset=\"UTF-8\" class=\"contact-form\"><input type=\"hidden\" name=\"form_type\" value=\"contact\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'create_customer' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "create_customer",
+      "output": "<form method=\"post\" action=\"/account\" id=\"create_customer\" accept-charset=\"UTF-8\" data-login-with-shop-sign-up=\"true\"><input type=\"hidden\" name=\"form_type\" value=\"create_customer\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'currency' %}\n  {{ form | currency_selector }}\n{% endform %}",
+      "name": "currency",
+      "output": "<form method=\"post\" action=\"/cart/update\" id=\"currency_form\" accept-charset=\"UTF-8\" class=\"shopify-currency-form\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"form_type\" value=\"currency\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" /><input type=\"hidden\" name=\"return_to\" value=\"/services/liquid_rendering/resource\" />\n  <select name=\"currency\"><option value=\"AED\">AED د.إ</option><option value=\"AFN\">AFN ؋</option><option value=\"AUD\">AUD $</option><option value=\"CAD\" selected=\"selected\">CAD $</option><option value=\"CHF\">CHF CHF</option><option value=\"CZK\">CZK Kč</option><option value=\"DKK\">DKK kr.</option><option value=\"EUR\">EUR €</option><option value=\"GBP\">GBP £</option><option value=\"HKD\">HKD $</option><option value=\"ILS\">ILS ₪</option><option value=\"JPY\">JPY ¥</option><option value=\"KRW\">KRW ₩</option><option value=\"MYR\">MYR RM</option><option value=\"NZD\">NZD $</option><option value=\"PLN\">PLN zł</option><option value=\"SEK\">SEK kr</option><option value=\"SGD\">SGD $</option><option value=\"USD\">USD $</option></select>\n</form>"
+    },
+    {
+      "code": "{% form 'customer' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "customer",
+      "output": "<form method=\"post\" action=\"/contact#contact_form\" id=\"contact_form\" accept-charset=\"UTF-8\" class=\"contact-form\"><input type=\"hidden\" name=\"form_type\" value=\"customer\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'customer_address', customer.new_address %}\n  <!-- form content -->\n{% endform %}",
+      "name": "customer_address",
+      "data": {
+        "customer": {
+          "new_address": {}
+        }
+      },
+      "output": "<form method=\"post\" action=\"/account/addresses\" id=\"address_form_new\" accept-charset=\"UTF-8\"><input type=\"hidden\" name=\"form_type\" value=\"customer_address\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'customer_login' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "customer_login",
+      "output": "<form method=\"post\" action=\"/account/login\" id=\"customer_login\" accept-charset=\"UTF-8\" data-login-with-shop-sign-in=\"true\"><input type=\"hidden\" name=\"form_type\" value=\"customer_login\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'guest_login' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "guest_login",
+      "output": "<form method=\"post\" action=\"/account/login\" id=\"customer_login_guest\" accept-charset=\"UTF-8\"><input type=\"hidden\" name=\"form_type\" value=\"guest_login\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n<input type=\"hidden\" name=\"guest\" value=\"true\" /></form>"
+    },
+    {
+      "code": "{% form 'localization' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "localization",
+      "output": "<form method=\"post\" action=\"/localization\" id=\"localization_form\" accept-charset=\"UTF-8\" class=\"shopify-localization-form\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"form_type\" value=\"localization\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" /><input type=\"hidden\" name=\"_method\" value=\"put\" /><input type=\"hidden\" name=\"return_to\" value=\"/services/liquid_rendering/resource\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'new_comment', article %}\n  <!-- form content -->\n{% endform %}",
+      "name": "new_comment",
+      "output": "<form method=\"post\" action=\"/blogs/potion-notions/how-to-tell-if-you-have-run-out-of-invisibility-potion/comments#comment_form\" id=\"comment_form\" accept-charset=\"UTF-8\" class=\"comment-form\"><input type=\"hidden\" name=\"form_type\" value=\"new_comment\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'product', product %}\n  <!-- form content -->\n{% endform %}",
+      "name": "product",
+      "data": {
+        "product": {
+          "id": 6786188247105
+        }
+      },
+      "output": "<form method=\"post\" action=\"/cart/add\" id=\"product_form_6786188247105\" accept-charset=\"UTF-8\" class=\"shopify-product-form\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"form_type\" value=\"product\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n<input type=\"hidden\" name=\"product-id\" value=\"6786188247105\" /></form>"
+    },
+    {
+      "code": "{% form 'recover_customer_password' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "recover_customer_password",
+      "output": "<form method=\"post\" action=\"/account/recover\" accept-charset=\"UTF-8\"><input type=\"hidden\" name=\"form_type\" value=\"recover_customer_password\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'reset_customer_password' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "reset_customer_password",
+      "output": "<form method=\"post\" action=\"/account/reset\" accept-charset=\"UTF-8\"><input type=\"hidden\" name=\"form_type\" value=\"reset_customer_password\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'storefront_password' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "storefront_password",
+      "output": "<form method=\"post\" action=\"/password\" id=\"login_form\" accept-charset=\"UTF-8\" class=\"storefront-password-form\"><input type=\"hidden\" name=\"form_type\" value=\"storefront_password\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form 'customer_login', return_to: routes.root_url %}\n  <!-- form content -->\n{% endform %}",
+      "name": "return_to",
+      "data": {
+        "routes": {
+          "root_url": "/"
+        }
+      },
+      "output": "<form method=\"post\" action=\"/account/login\" id=\"customer_login\" accept-charset=\"UTF-8\" data-login-with-shop-sign-in=\"true\"><input type=\"hidden\" name=\"form_type\" value=\"customer_login\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" /><input type=\"hidden\" name=\"return_to\" value=\"/\" />\n  <!-- form content -->\n</form>"
+    },
+    {
+      "code": "{% form \"product\", product, id: 'custom-id', class: 'custom-class', data-example: '100' %}\n  <!-- form content -->\n{% endform %}",
+      "name": "HTML attributes",
+      "data": {
+        "product": {
+          "id": 6786188247105
+        }
+      },
+      "output": "<form method=\"post\" action=\"/cart/add\" id=\"custom-id\" accept-charset=\"UTF-8\" class=\"custom-class\" enctype=\"multipart/form-data\" data-example=\"100\"><input type=\"hidden\" name=\"form_type\" value=\"product\" /><input type=\"hidden\" name=\"utf8\" value=\"✓\" />\n  <!-- form content -->\n<input type=\"hidden\" name=\"product-id\" value=\"6786188247105\" /></form>"
+    }
+  ]
+}

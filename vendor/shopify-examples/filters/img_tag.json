@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "img_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/img_tag",
+  "renderedExamples": [
+    {
+      "code": "{{ product | img_tag }}",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_small.jpg?v=1683744744\" alt=\"\" />"
+    },
+    {
+      "code": "{{ product | img_tag: 'image alt text', '', '450x450' }}",
+      "name": "Optional parameters",
+      "output": "<img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_450x450.jpg?v=1683744744\" alt=\"image alt text\" class=\"\" />"
+    }
+  ]
+}

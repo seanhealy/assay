@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "handleize",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/handleize",
+  "renderedExamples": [
+    {
+      "code": "{{ product.title | handleize }}\n{{ product.title | handle }}",
+      "data": {
+        "product": {
+          "title": "Health potion"
+        }
+      },
+      "output": "health-potion\nhealth-potion"
+    }
+  ]
+}

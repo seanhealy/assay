@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "item_count_for_variant",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/item_count_for_variant",
+  "renderedExamples": [
+    {
+      "code": "{{ cart | item_count_for_variant: 39888235757633 }}",
+      "output": "1"
+    }
+  ]
+}

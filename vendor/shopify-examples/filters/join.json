@@ -1,0 +1,36 @@
+{
+  "kind": "filter",
+  "name": "join",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/join",
+  "renderedExamples": [
+    {
+      "code": "{{ collection.all_tags | join }}",
+      "data": {
+        "collection": {
+          "all_tags": [
+            "extra-potent",
+            "fresh",
+            "healing",
+            "ingredients"
+          ]
+        }
+      },
+      "output": "extra-potent fresh healing ingredients"
+    },
+    {
+      "code": "{{ collection.all_tags | join: ', ' }}",
+      "name": "Custom separator",
+      "data": {
+        "collection": {
+          "all_tags": [
+            "extra-potent",
+            "fresh",
+            "healing",
+            "ingredients"
+          ]
+        }
+      },
+      "output": "extra-potent, fresh, healing, ingredients"
+    }
+  ]
+}

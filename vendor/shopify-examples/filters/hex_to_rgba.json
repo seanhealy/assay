@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "hex_to_rgba",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/hex_to_rgba",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | hex_to_rgba }}",
+      "output": "rgba(234,90,185,1)"
+    },
+    {
+      "code": "{{ '#EA5AB9' | hex_to_rgba: 0.5 }}",
+      "name": "alpha",
+      "output": "rgba(234,90,185,0.5)"
+    }
+  ]
+}

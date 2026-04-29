@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "customer_login_link",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/customer_login_link",
+  "renderedExamples": [
+    {
+      "code": "{{ 'Log in' | customer_login_link }}",
+      "output": "<a href=\"/account/login\" id=\"customer_login_link\">Log in</a>"
+    }
+  ]
+}

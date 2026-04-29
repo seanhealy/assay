@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "color_to_hsl",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_to_hsl",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_to_hsl }}",
+      "output": "hsl(320, 77%, 64%)"
+    }
+  ]
+}

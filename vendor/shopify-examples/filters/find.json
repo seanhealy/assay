@@ -1,0 +1,161 @@
+{
+  "kind": "filter",
+  "name": "find",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/find",
+  "renderedExamples": [
+    {
+      "code": "{% assign product = collection.products | find: 'vendor', \"Polina's Potent Potions\" %}\n\n{{ product.title }}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Blue Mountain Flower",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Charcoal",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Crocodile tears",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Dandelion milk",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Draught of Immortality",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Dried chamomile",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Forest mushroom",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Gift Card",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Glacier ice",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Ground mandrake root",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Health potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Invisibility potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Komodo dragon scale",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Love Potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Mana potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Potion beats",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Potion bottle",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Viper venom",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Whole bloodroot",
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "Blue Mountain Flower"
+    },
+    {
+      "code": "{% assign product = collection.products | find: 'vendor', \"Polina's Potions\" %}\n\n{{ product.title | default: \"No product found\" }}",
+      "name": "Returns `nil` when no items match the specified property value.",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "No product found"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "structured_data",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/structured_data",
+  "renderedExamples": [
+    {
+      "code": "<script type=\"application/ld+json\">\n  {{ product | structured_data }}\n</script>",
+      "output": "<script type=\"application/ld+json\">\n  {\"@context\":\"http:\\/\\/schema.org\\/\",\"@id\":\"\\/products\\/crocodile-tears#product\",\"@type\":\"Product\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Polina's Potent Potions\"},\"category\":\"\",\"description\":\"\",\"image\":\"https:\\/\\/polinas-potent-potions.myshopify.com\\/cdn\\/shop\\/products\\/amber-beard-oil-bottle.jpg?v=1650642958\\u0026width=1920\",\"name\":\"Crocodile tears\",\"offers\":{\"@id\":\"\\/products\\/crocodile-tears?variant=39888242344001#offer\",\"@type\":\"Offer\",\"availability\":\"http:\\/\\/schema.org\\/OutOfStock\",\"price\":\"56.00\",\"priceCurrency\":\"CAD\",\"url\":\"https:\\/\\/polinas-potent-potions.myshopify.com\\/products\\/crocodile-tears?variant=39888242344001\"},\"url\":\"https:\\/\\/polinas-potent-potions.myshopify.com\\/products\\/crocodile-tears\"}\n</script>"
+    }
+  ]
+}

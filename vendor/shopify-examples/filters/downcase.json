@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "downcase",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/downcase",
+  "renderedExamples": [
+    {
+      "code": "{{ product.title | downcase }}",
+      "data": {
+        "product": {
+          "title": "Health potion"
+        }
+      },
+      "output": "health potion"
+    }
+  ]
+}

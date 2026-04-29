@@ -1,0 +1,31 @@
+{
+  "kind": "filter",
+  "name": "img_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/img_url",
+  "renderedExamples": [
+    {
+      "code": "{{ product | img_url }}",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_small.jpg?v=1683744744"
+    },
+    {
+      "code": "{{ product | img_url: '480x' }}\n\n{{ product | img_url: 'x480' }}\n\n{{ product | img_url: '480x480' }}\n\n{{ product | img_url: 'large' }}",
+      "name": "size",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_480x.jpg?v=1683744744\n\n//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_x480.jpg?v=1683744744\n\n//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_480x480.jpg?v=1683744744\n\n//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_large.jpg?v=1683744744"
+    },
+    {
+      "code": "{{ product | img_url: crop: 'bottom' }}",
+      "name": "crop",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_small.jpg?v=1683744744"
+    },
+    {
+      "code": "{{ product | img_url: format: 'pjpg' }}",
+      "name": "format",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_small.jpg?v=1683744744"
+    },
+    {
+      "code": "{{ product | img_url: scale: 2 }}",
+      "name": "scale",
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/files/science-beakers-blue-light-new_small.jpg?v=1683744744"
+    }
+  ]
+}

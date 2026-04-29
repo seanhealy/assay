@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "stylesheet_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/stylesheet_tag",
+  "renderedExamples": [
+    {
+      "code": "{{ 'base.css' | asset_url | stylesheet_tag }}",
+      "output": "<link href=\"//polinas-potent-potions.myshopify.com/cdn/shop/t/4/assets/base.css?v=88290808517547527771663872409\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />"
+    }
+  ]
+}

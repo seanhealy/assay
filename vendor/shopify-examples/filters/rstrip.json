@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "rstrip",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/rstrip",
+  "renderedExamples": [
+    {
+      "code": "{%- assign text = '  Some potions create whitespace.      ' -%}\n\n\"{{ text }}\"\n\"{{ text | rstrip }}\"",
+      "output": "\"  Some potions create whitespace.      \"\n\"  Some potions create whitespace.\""
+    }
+  ]
+}

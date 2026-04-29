@@ -1,0 +1,16 @@
+{
+  "kind": "tag",
+  "name": "assign",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/assign",
+  "renderedExamples": [
+    {
+      "code": "{%- assign product_title = product.title | upcase -%}\n\n{{ product_title }}",
+      "data": {
+        "product": {
+          "title": "Health potion"
+        }
+      },
+      "output": "HEALTH POTION"
+    }
+  ]
+}

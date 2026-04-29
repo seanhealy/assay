@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "media_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/media_tag",
+  "renderedExamples": [
+    {
+      "code": "{% for media in product.media %}\n  {{- media | media_tag }}\n{% endfor %}",
+      "data": {
+        "product": {
+          "media": []
+        }
+      },
+      "output": "<iframe frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"allowfullscreen\" src=\"https://www.youtube.com/embed/vj01PAffOac?controls=1&amp;enablejsapi=1&amp;modestbranding=1&amp;origin=https%3A%2F%2Fpolinas-potent-potions.myshopify.com&amp;playsinline=1&amp;rel=0\" title=\"Potion beats\"></iframe>\n\n<video playsinline=\"playsinline\" controls=\"controls\" preload=\"metadata\" aria-label=\"Potion beats\" poster=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/4edc28a708b7405093a927cebe794f1a.thumbnail.0000000_small.jpg?v=1655255324\"><source src=\"//polinas-potent-potions.myshopify.com/cdn/shop/videos/c/vp/4edc28a708b7405093a927cebe794f1a/4edc28a708b7405093a927cebe794f1a.HD-1080p-7.2Mbps.mp4?v=0\" type=\"video/mp4\"><img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/4edc28a708b7405093a927cebe794f1a.thumbnail.0000000_small.jpg?v=1655255324\"></video>"
+    },
+    {
+      "code": "{% for media in product.media %}\n  {{- media | media_tag: image_size: '400x' }}\n{% endfor %}",
+      "name": "image_size",
+      "data": {
+        "product": {
+          "media": []
+        }
+      },
+      "output": "<iframe frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"allowfullscreen\" image_size=\"400x\" src=\"https://www.youtube.com/embed/vj01PAffOac?controls=1&amp;enablejsapi=1&amp;modestbranding=1&amp;origin=https%3A%2F%2Fpolinas-potent-potions.myshopify.com&amp;playsinline=1&amp;rel=0\" title=\"Potion beats\"></iframe>\n\n<video playsinline=\"playsinline\" controls=\"controls\" preload=\"metadata\" aria-label=\"Potion beats\" poster=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/4edc28a708b7405093a927cebe794f1a.thumbnail.0000000_400x.jpg?v=1655255324\"><source src=\"//polinas-potent-potions.myshopify.com/cdn/shop/videos/c/vp/4edc28a708b7405093a927cebe794f1a/4edc28a708b7405093a927cebe794f1a.HD-1080p-7.2Mbps.mp4?v=0\" type=\"video/mp4\"><img src=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/4edc28a708b7405093a927cebe794f1a.thumbnail.0000000_400x.jpg?v=1655255324\"></video>"
+    }
+  ]
+}

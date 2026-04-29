@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "lstrip",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/lstrip",
+  "renderedExamples": [
+    {
+      "code": "{%- assign text = '  Some potions create whitespace.      ' -%}\n\n\"{{ text }}\"\n\"{{ text | lstrip }}\"",
+      "output": "\"  Some potions create whitespace.      \"\n\"Some potions create whitespace.      \""
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "filter",
+  "name": "collection_img_url",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/collection_img_url",
+  "renderedExamples": [
+    {
+      "code": "{{ collection.image | collection_img_url }}",
+      "data": {
+        "collection": {
+          "image": "collections/sale-written-in-lights.jpg"
+        }
+      },
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/collections/sale-written-in-lights.jpg?v=1657654130"
+    },
+    {
+      "code": "{{ collection.image | collection_img_url: 'large' }}",
+      "name": "The size parameter",
+      "data": {
+        "collection": {
+          "image": "collections/sale-written-in-lights.jpg"
+        }
+      },
+      "output": "//polinas-potent-potions.myshopify.com/cdn/shop/collections/sale-written-in-lights_large.jpg?v=1657654130"
+    }
+  ]
+}

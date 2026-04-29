@@ -1,0 +1,27 @@
+{
+  "kind": "filter",
+  "name": "size",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/size",
+  "renderedExamples": [
+    {
+      "code": "{{ collection.title | size }}\n{{ collection.products | size }}",
+      "data": {
+        "collection": {
+          "products": [],
+          "title": "Sale potions"
+        }
+      },
+      "output": "12\n4"
+    },
+    {
+      "code": "{% if collection.products.size >= 10 %}\n  There are 10 or more products in this collection.\n{% else %}\n  There are less than 10 products in this collection.\n{% endif %}",
+      "name": "Dot notation",
+      "data": {
+        "collection": {
+          "products": []
+        }
+      },
+      "output": "There are less than 10 products in this collection."
+    }
+  ]
+}

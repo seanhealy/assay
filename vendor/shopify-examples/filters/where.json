@@ -1,0 +1,180 @@
+{
+  "kind": "filter",
+  "name": "where",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/where",
+  "renderedExamples": [
+    {
+      "code": "{% assign polina_products = collection.products | where: 'vendor', \"Polina's Potent Potions\" %}\n\nProducts from Polina's Potent Potions:\n\n{% for product in polina_products -%}\n  - {{ product.title }}\n{%- endfor %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "Blue Mountain Flower",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Charcoal",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Crocodile tears",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Dandelion milk",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Draught of Immortality",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Dried chamomile",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Forest mushroom",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Gift Card",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Glacier ice",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Ground mandrake root",
+              "vendor": "Clover's Apothecary"
+            },
+            {
+              "title": "Health potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Invisibility potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Komodo dragon scale",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Love Potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Mana potion",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Potion beats",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Potion bottle",
+              "vendor": "Polina's Potent Potions"
+            },
+            {
+              "title": "Viper venom",
+              "vendor": "Ted's Apothecary Supply"
+            },
+            {
+              "title": "Whole bloodroot",
+              "vendor": "Clover's Apothecary"
+            }
+          ]
+        }
+      },
+      "output": "Products from Polina's Potent Potions:\n\n- Blue Mountain Flower\n- Crocodile tears\n- Draught of Immortality\n- Gift Card\n- Health potion\n- Invisibility potion\n- Love Potion\n- Mana potion\n- Potion beats\n- Potion bottle"
+    },
+    {
+      "code": "{% assign available_products = collection.products | where: 'available' %}\n\nAvailable products:\n\n{% for product in available_products -%}\n  - {{ product.title }}\n{%- endfor %}",
+      "name": "Filter for boolean properties with a `true` value",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "available": false,
+              "title": "Blue Mountain Flower"
+            },
+            {
+              "available": true,
+              "title": "Charcoal"
+            },
+            {
+              "available": false,
+              "title": "Crocodile tears"
+            },
+            {
+              "available": false,
+              "title": "Dandelion milk"
+            },
+            {
+              "available": true,
+              "title": "Draught of Immortality"
+            },
+            {
+              "available": true,
+              "title": "Dried chamomile"
+            },
+            {
+              "available": false,
+              "title": "Forest mushroom"
+            },
+            {
+              "available": true,
+              "title": "Gift Card"
+            },
+            {
+              "available": false,
+              "title": "Glacier ice"
+            },
+            {
+              "available": true,
+              "title": "Ground mandrake root"
+            },
+            {
+              "available": true,
+              "title": "Health potion"
+            },
+            {
+              "available": true,
+              "title": "Invisibility potion"
+            },
+            {
+              "available": false,
+              "title": "Komodo dragon scale"
+            },
+            {
+              "available": false,
+              "title": "Love Potion"
+            },
+            {
+              "available": true,
+              "title": "Mana potion"
+            },
+            {
+              "available": true,
+              "title": "Potion beats"
+            },
+            {
+              "available": false,
+              "title": "Potion bottle"
+            },
+            {
+              "available": true,
+              "title": "Viper venom"
+            },
+            {
+              "available": true,
+              "title": "Whole bloodroot"
+            }
+          ]
+        }
+      },
+      "output": "Available products:\n\n- Charcoal\n- Draught of Immortality\n- Dried chamomile\n- Gift Card\n- Ground mandrake root\n- Health potion\n- Invisibility potion\n- Mana potion\n- Potion beats\n- Viper venom\n- Whole bloodroot"
+    }
+  ]
+}

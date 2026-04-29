@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "url_encode",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/url_encode",
+  "renderedExamples": [
+    {
+      "code": "{{ 'test@test.com' | url_encode }}",
+      "output": "test%40test.com"
+    }
+  ]
+}

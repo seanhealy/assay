@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "money_with_currency",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/money_with_currency",
+  "renderedExamples": [
+    {
+      "code": "{{ product.price | money_with_currency }}",
+      "data": {
+        "product": {
+          "price": "10.00"
+        }
+      },
+      "output": "$10.00 CAD"
+    }
+  ]
+}

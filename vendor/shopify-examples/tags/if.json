@@ -1,0 +1,27 @@
+{
+  "kind": "tag",
+  "name": "if",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/if",
+  "renderedExamples": [
+    {
+      "code": "{% if product.compare_at_price > product.price %}\n  This product is on sale!\n{% endif %}",
+      "data": {
+        "product": {
+          "compare_at_price": "10.00",
+          "price": "0.00"
+        }
+      },
+      "output": "This product is on sale!"
+    },
+    {
+      "code": "{% if product.type == 'Love' %}\n  This is a love potion!\n{% elsif product.type == 'Health' %}\n  This is a health potion!\n{% endif %}",
+      "name": "elsif",
+      "data": {
+        "product": {
+          "type": null
+        }
+      },
+      "output": "This is a health potion!"
+    }
+  ]
+}

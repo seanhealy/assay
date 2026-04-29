@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "camelize",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/camelize",
+  "renderedExamples": [
+    {
+      "code": "{{ 'variable-name' | camelize }}",
+      "output": "VariableName"
+    }
+  ]
+}

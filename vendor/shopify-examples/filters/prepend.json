@@ -1,0 +1,19 @@
+{
+  "kind": "filter",
+  "name": "prepend",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/prepend",
+  "renderedExamples": [
+    {
+      "code": "{%- assign origin = request.origin -%}\n\n{{ product.url | prepend: origin }}",
+      "data": {
+        "product": {
+          "url": "/products/health-potion"
+        },
+        "request": {
+          "origin": "https://polinas-potent-potions.myshopify.com"
+        }
+      },
+      "output": "https://polinas-potent-potions.myshopify.com/products/health-potion"
+    }
+  ]
+}

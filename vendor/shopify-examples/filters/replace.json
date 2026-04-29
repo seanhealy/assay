@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "replace",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/replace",
+  "renderedExamples": [
+    {
+      "code": "{{ product.handle | replace: '-', ' ' }}",
+      "data": {
+        "product": {
+          "handle": "komodo-dragon-scale"
+        }
+      },
+      "output": "komodo dragon scale"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "filter",
+  "name": "within",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/within",
+  "renderedExamples": [
+    {
+      "code": "{%- assign collection_product = collection.products.first -%}\n\n{{ collection_product.url | within: collection }}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "url": "/products/draught-of-immortality"
+            },
+            {
+              "url": "/products/glacier-ice"
+            },
+            {
+              "url": "/products/health-potion"
+            },
+            {
+              "url": "/products/invisibility-potion"
+            }
+          ]
+        }
+      },
+      "output": "/collections/sale-potions/products/draught-of-immortality"
+    }
+  ]
+}

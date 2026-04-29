@@ -1,0 +1,16 @@
+{
+  "kind": "filter",
+  "name": "link_to_vendor",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/link_to_vendor",
+  "renderedExamples": [
+    {
+      "code": "{{ \"Polina's Potent Potions\" | link_to_vendor }}",
+      "output": "<a href=\"/collections/vendors?q=Polina%27s%20Potent%20Potions\" title=\"Polina&#39;s Potent Potions\">Polina's Potent Potions</a>"
+    },
+    {
+      "code": "{{ \"Polina's Potent Potions\" | link_to_vendor: class: 'link-class' }}",
+      "name": "HTML attributes",
+      "output": "<a class=\"link-class\" href=\"/collections/vendors?q=Polina%27s%20Potent%20Potions\" title=\"Polina&#39;s Potent Potions\">Polina's Potent Potions</a>"
+    }
+  ]
+}

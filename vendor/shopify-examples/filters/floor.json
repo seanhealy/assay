@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "floor",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/floor",
+  "renderedExamples": [
+    {
+      "code": "{{ 1.2 | floor }}",
+      "output": "1"
+    }
+  ]
+}

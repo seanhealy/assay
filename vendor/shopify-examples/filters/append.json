@@ -1,0 +1,19 @@
+{
+  "kind": "filter",
+  "name": "append",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/append",
+  "renderedExamples": [
+    {
+      "code": "{%-  assign path = product.url -%}\n\n{{ request.origin | append: path }}",
+      "data": {
+        "product": {
+          "url": "/products/health-potion"
+        },
+        "request": {
+          "origin": "https://polinas-potent-potions.myshopify.com"
+        }
+      },
+      "output": "https://polinas-potent-potions.myshopify.com/products/health-potion"
+    }
+  ]
+}

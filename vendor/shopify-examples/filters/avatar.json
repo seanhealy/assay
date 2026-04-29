@@ -1,0 +1,10 @@
+{
+  "kind": "filter",
+  "name": "avatar",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/avatar",
+  "renderedExamples": [
+    {
+      "code": "{{ customer | avatar }}"
+    }
+  ]
+}

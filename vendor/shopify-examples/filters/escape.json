@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "escape",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/escape",
+  "renderedExamples": [
+    {
+      "code": "{{ '<p>Text to be escaped.</p>' | escape }}",
+      "output": "&lt;p&gt;Text to be escaped.&lt;/p&gt;"
+    }
+  ]
+}

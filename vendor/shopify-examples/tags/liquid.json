@@ -1,0 +1,16 @@
+{
+  "kind": "tag",
+  "name": "liquid",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/liquid",
+  "renderedExamples": [
+    {
+      "code": "{% liquid\n  # Show a message that's customized to the product type\n\n  assign product_type = product.type | downcase\n  assign message = ''\n\n  case product_type\n    when 'health'\n      assign message = 'This is a health potion!'\n    when 'love'\n      assign message = 'This is a love potion!'\n    else\n      assign message = 'This is a potion!'\n  endcase\n\n  echo message\n%}",
+      "data": {
+        "product": {
+          "type": null
+        }
+      },
+      "output": "This is a health potion!"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "inline_asset_content",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/inline_asset_content",
+  "renderedExamples": [
+    {
+      "code": "{{ 'icon.svg' | inline_asset_content }}",
+      "output": "'<svg xmlns=\"http://www.w3.org/2000/svg\"/>'"
+    }
+  ]
+}

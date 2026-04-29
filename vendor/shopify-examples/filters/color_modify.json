@@ -1,0 +1,15 @@
+{
+  "kind": "filter",
+  "name": "color_modify",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_modify",
+  "renderedExamples": [
+    {
+      "code": "{{ '#EA5AB9' | color_modify: 'red', 255 }}",
+      "output": "#ff5ab9"
+    },
+    {
+      "code": "{{ '#EA5AB9' | color_modify: 'alpha', 0.85 }}",
+      "output": "rgba(234, 90, 185, 0.85)"
+    }
+  ]
+}

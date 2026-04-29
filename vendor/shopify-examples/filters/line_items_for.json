@@ -1,0 +1,30 @@
+{
+  "kind": "filter",
+  "name": "line_items_for",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/line_items_for",
+  "renderedExamples": [
+    {
+      "code": "{% assign product = all_products['bloodroot-whole'] %}\n{% assign line_items = cart | line_items_for: product %}\n\nTotal cart quantity for product: {{ line_items | sum: 'quantity' }}",
+      "data": {
+        "all_products": {
+          "bloodroot-whole": {}
+        }
+      },
+      "output": "Total cart quantity for product: 1"
+    },
+    {
+      "code": "{% assign product = all_products['bloodroot-whole'] %}\n{% assign variant = product.variants.first %}\n{% assign line_items = cart | line_items_for: variant %}\n\nTotal cart quantity for variant: {{ line_items | sum: 'quantity' }}",
+      "data": {
+        "all_products": {
+          "bloodroot-whole": {
+            "variants": []
+          }
+        },
+        "product": {
+          "variants": []
+        }
+      },
+      "output": "Total cart quantity for variant: 1"
+    }
+  ]
+}

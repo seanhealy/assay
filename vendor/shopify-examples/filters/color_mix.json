@@ -1,0 +1,15 @@
+{
+  "kind": "filter",
+  "name": "color_mix",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/color_mix",
+  "renderedExamples": [
+    {
+      "code": "{{ '#E800B0' | color_mix: '#00936F', 50 }}",
+      "output": "#744a90"
+    },
+    {
+      "code": "{{ 'rgba(232, 0, 176, 0.75)' | color_mix: '#00936F', 50 }}",
+      "output": "rgba(116, 74, 144, 0.88)"
+    }
+  ]
+}

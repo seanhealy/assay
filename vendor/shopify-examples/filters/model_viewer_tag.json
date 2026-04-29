@@ -1,0 +1,48 @@
+{
+  "kind": "filter",
+  "name": "model_viewer_tag",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/model_viewer_tag",
+  "renderedExamples": [
+    {
+      "code": "{% for media in product.media %}\n  {% if media.media_type == 'model' %}\n    {{ media | model_viewer_tag }}\n  {% endif %}\n{% endfor %}",
+      "data": {
+        "product": {
+          "media": [
+            {
+              "media_type": "model"
+            }
+          ]
+        }
+      },
+      "output": "<model-viewer src=\"//polinas-potent-potions.myshopify.com/cdn/shop/3d/models/o/eb9388299ce0557c/WaterBottle.glb?v=0\" camera-controls=\"true\" style=\"--poster-color: transparent;\" data-shopify-feature=\"1.12\" alt=\"Potion bottle\" poster=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057\"></model-viewer>"
+    },
+    {
+      "code": "{% for media in product.media %}\n  {% if media.media_type == 'model' %}\n    {{ media | model_viewer_tag: interaction-policy: 'allow-when-focused' }}\n  {% endif %}\n{% endfor %}",
+      "name": "Model viewer attributes",
+      "data": {
+        "product": {
+          "media": [
+            {
+              "media_type": "model"
+            }
+          ]
+        }
+      },
+      "output": "<model-viewer interaction-policy=\"allow-when-focused\" src=\"//polinas-potent-potions.myshopify.com/cdn/shop/3d/models/o/eb9388299ce0557c/WaterBottle.glb?v=0\" camera-controls=\"true\" style=\"--poster-color: transparent;\" data-shopify-feature=\"1.12\" alt=\"Potion bottle\" poster=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057\"></model-viewer>"
+    },
+    {
+      "code": "{% for media in product.media %}\n  {% if media.media_type == 'model' %}\n    {{ media | model_viewer_tag: image_size: '400x' }}\n  {% endif %}\n{% endfor %}",
+      "name": "image_size",
+      "data": {
+        "product": {
+          "media": [
+            {
+              "media_type": "model"
+            }
+          ]
+        }
+      },
+      "output": "<model-viewer src=\"//polinas-potent-potions.myshopify.com/cdn/shop/3d/models/o/eb9388299ce0557c/WaterBottle.glb?v=0\" camera-controls=\"true\" style=\"--poster-color: transparent;\" data-shopify-feature=\"1.12\" alt=\"Potion bottle\" poster=\"//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_400x.jpg?v=1655189057\"></model-viewer>"
+    }
+  ]
+}

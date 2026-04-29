@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "ceil",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/ceil",
+  "renderedExamples": [
+    {
+      "code": "{{ 1.2 | ceil }}",
+      "output": "2"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "filter",
+  "name": "format_address",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/format_address",
+  "renderedExamples": [
+    {
+      "code": "{{ shop.address | format_address }}",
+      "data": {
+        "shop": {
+          "address": {}
+        }
+      },
+      "output": "<p>Polina&#39;s Potions, LLC<br>150 Elgin Street<br>8th floor<br>Ottawa ON K2P 1L4<br>Canada</p>"
+    },
+    {
+      "code": "{{ customer.default_address | format_address }}",
+      "data": {
+        "customer": {
+          "default_address": {}
+        }
+      },
+      "output": "<p>Cornelius Potionmaker<br>12 Phoenix Feather Alley<br>1<br>Calgary AB T1X 0L4<br>Canada</p>"
+    }
+  ]
+}

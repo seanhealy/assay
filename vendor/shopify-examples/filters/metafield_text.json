@@ -1,0 +1,37 @@
+{
+  "kind": "filter",
+  "name": "metafield_text",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/metafield_text",
+  "renderedExamples": [
+    {
+      "code": "{{ product.metafields.information.dosage | metafield_text }}",
+      "name": "Basic types",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "Potion dosages"
+    },
+    {
+      "code": "{{ product.metafields.information.ingredients | metafield_text: field: 'name' }}",
+      "name": "list.metaobject_reference",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "Spinach, Kale, and Mushrooms"
+    },
+    {
+      "code": "{{ product.metafields.information.primary_ingredient | metafield_tag: field: 'name' }}",
+      "name": "metaobject_reference",
+      "data": {
+        "product": {
+          "metafields": {}
+        }
+      },
+      "output": "<span class=\"metafield-single_line_text_field\">Spinach</span>"
+    }
+  ]
+}

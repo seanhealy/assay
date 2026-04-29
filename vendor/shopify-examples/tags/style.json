@@ -1,0 +1,16 @@
+{
+  "kind": "tag",
+  "name": "style",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/style",
+  "renderedExamples": [
+    {
+      "code": "{% style %}\n  .h1 {\n    color: {{ settings.colors_accent_1 }};\n  }\n{% endstyle %}",
+      "data": {
+        "settings": {
+          "colors_accent_1": "#121212"
+        }
+      },
+      "output": "<style data-shopify>\n  .h1 {\n    color: #121212;\n  }\n</style>"
+    }
+  ]
+}

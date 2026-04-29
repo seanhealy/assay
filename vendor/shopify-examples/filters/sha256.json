@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "sha256",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/sha256",
+  "renderedExamples": [
+    {
+      "code": "{%- assign secret_potion = 'Polyjuice' | sha256 -%}\n\nMy secret potion: {{ secret_potion }}",
+      "output": "My secret potion: 44ac1d7a2936e30a5de07082fd65d6fe9b1fb658a1a98bfe65bc5959beac5dd0"
+    }
+  ]
+}

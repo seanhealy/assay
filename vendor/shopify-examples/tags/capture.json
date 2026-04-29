@@ -1,0 +1,16 @@
+{
+  "kind": "tag",
+  "name": "capture",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/tags/capture",
+  "renderedExamples": [
+    {
+      "code": "{%- assign up_title = product.title | upcase -%}\n{%- assign down_title = product.title | downcase -%}\n{%- assign show_up_title = true -%}\n\n{%- capture title -%}\n  {% if show_up_title -%}\n    Upcase title: {{ up_title }}\n  {%- else -%}\n    Downcase title: {{ down_title }}\n  {%- endif %}\n{%- endcapture %}\n\n{{ title }}",
+      "data": {
+        "product": {
+          "title": "Health potion"
+        }
+      },
+      "output": "Upcase title: HEALTH POTION"
+    }
+  ]
+}

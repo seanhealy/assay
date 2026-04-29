@@ -1,0 +1,11 @@
+{
+  "kind": "filter",
+  "name": "minus",
+  "docsUrl": "https://shopify.dev/docs/api/liquid/filters/minus",
+  "renderedExamples": [
+    {
+      "code": "{{ 4 | minus: 2 }}",
+      "output": "2"
+    }
+  ]
+}
