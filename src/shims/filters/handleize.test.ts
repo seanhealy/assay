@@ -39,6 +39,32 @@ describe("handleize()", () => {
 		});
 	});
 
+	describe("with a camelCase string", () => {
+		beforeEach(() =>
+			render(
+				liquid`<div data-testid="camel">{{ "HelloWorld" | handleize }}</div>`,
+			),
+		);
+
+		it("lowercases without splitting on case boundaries", async () => {
+			await expect
+				.element(page.getByTestId("camel"))
+				.toHaveTextContent("helloworld");
+		});
+	});
+
+	describe("with diacritics", () => {
+		beforeEach(() =>
+			render(liquid`<div data-testid="accent">{{ "Café" | handleize }}</div>`),
+		);
+
+		it("strips diacritics from letters", async () => {
+			await expect
+				.element(page.getByTestId("accent"))
+				.toHaveTextContent("cafe");
+		});
+	});
+
 	describe("with nil input", () => {
 		beforeEach(() =>
 			render(

@@ -1,13 +1,9 @@
-// Shopify reference: https://shopify.dev/docs/api/liquid/tags/form
-// `{% form 'form_type', ... %}` wraps the body in a `<form>` element with
-// the action URL, id/class defaults, and hidden inputs that Shopify
-// generates for the given form type. The Assay shim implements the wiring
-// per form type (action, default id/class/enctype, `form_type` and `utf8`
-// hidden inputs) and forwards keyword arguments as HTML attributes. The
-// optional second positional argument (the form's parameter object — used
-// in real Shopify to fill `product-id` and `address_form_<id>`) is
-// intentionally ignored: the shim is partial by design, focused on
-// producing valid form HTML for tests.
+// `form` is a mock — Shopify generates form_type-specific actions, hidden
+// inputs, and id/class defaults that we approximate. Critical pieces a
+// theme will rely on: `return_to` is rendered as a hidden input (not a
+// form attribute, so it's actually carried on submit), and `product` /
+// `customer_address` forms derive their `id` and `product-id` hidden
+// input from the parameter object.
 
 import { beforeEach, describe, expect, it } from "vitest";
 import { liquid, render } from "@";
@@ -73,7 +69,7 @@ describe("form tag", () => {
 		});
 	});
 
-	describe("with keyword arguments", () => {
+	describe("with `return_to`", () => {
 		beforeEach(async () => {
 			container = await render(liquid`
 {% form 'customer_login', return_to: '/account' %}
@@ -82,8 +78,12 @@ describe("form tag", () => {
 			`);
 		});
 
-		it("forwards arbitrary keywords as HTML attributes", () => {
-			expect(getForm(container)?.getAttribute("return_to")).toBe("/account");
+		it("emits return_to as a hidden input, not a form attribute", () => {
+			const form = getForm(container);
+			expect(
+				form?.querySelector('input[name="return_to"]')?.getAttribute("value"),
+			).toBe("/account");
+			expect(form?.hasAttribute("return_to")).toBe(false);
 		});
 	});
 
@@ -116,6 +116,86 @@ describe("form tag", () => {
 
 		it("forwards data-* keys as HTML attributes", () => {
 			expect(getForm(container)?.getAttribute("data-example")).toBe("100");
+		});
+	});
+
+	describe("when the form_type is 'product' with a parameter", () => {
+		beforeEach(async () => {
+			container = await render(
+				liquid`
+{% form 'product', product %}
+	<button data-testid="add">Add to cart</button>
+{% endform %}
+			`,
+				{ product: { id: 6786188247105 } },
+			);
+		});
+
+		it("derives the form id from the product id", () => {
+			expect(getForm(container)?.getAttribute("id")).toBe(
+				"product_form_6786188247105",
+			);
+		});
+
+		it("emits a `product-id` hidden input with the product id", () => {
+			expect(
+				getForm(container)
+					?.querySelector('input[name="product-id"]')
+					?.getAttribute("value"),
+			).toBe("6786188247105");
+		});
+	});
+
+	describe("when the form_type is 'customer_address' with an existing address", () => {
+		beforeEach(async () => {
+			container = await render(
+				liquid`
+{% form 'customer_address', address %}
+	<input data-testid="street" name="address1">
+{% endform %}
+			`,
+				{ address: { id: 4242 } },
+			);
+		});
+
+		it("derives the form id from the address id", () => {
+			expect(getForm(container)?.getAttribute("id")).toBe("address_form_4242");
+		});
+	});
+
+	describe("when the form_type is 'guest_login'", () => {
+		beforeEach(async () => {
+			container = await render(liquid`
+{% form 'guest_login' %}
+	<input data-testid="email" name="email">
+{% endform %}
+			`);
+		});
+
+		it("emits a `guest=true` hidden input", () => {
+			expect(
+				getForm(container)
+					?.querySelector('input[name="guest"]')
+					?.getAttribute("value"),
+			).toBe("true");
+		});
+	});
+
+	describe("when the form_type is 'localization'", () => {
+		beforeEach(async () => {
+			container = await render(liquid`
+{% form 'localization' %}
+	<select data-testid="locale" name="locale_code"><option>en</option></select>
+{% endform %}
+			`);
+		});
+
+		it("emits a `_method=put` hidden input", () => {
+			expect(
+				getForm(container)
+					?.querySelector('input[name="_method"]')
+					?.getAttribute("value"),
+			).toBe("put");
 		});
 	});
 });
