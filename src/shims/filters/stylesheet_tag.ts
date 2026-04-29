@@ -6,15 +6,15 @@ export default {
 	name: "stylesheet_tag",
 	status: "parity",
 	implementation: (value, ...args) => {
-		const positional = args.find((arg) => !Array.isArray(arg));
-		const keywords = keywordArgs(args);
-		const media = (positional as string | undefined) ?? "all";
+		// Spec: positional `media` (string), keyword `preload` (boolean).
+		const positional = args.find((arg) => typeof arg === "string");
+		const { preload } = keywordArgs(args);
 		return `<link${attributes({
 			href: String(value ?? ""),
 			rel: "stylesheet",
 			type: "text/css",
-			media,
-			...keywords,
+			media: positional ?? "all",
+			preload,
 		})}>`;
 	},
 } satisfies ShimFilter;

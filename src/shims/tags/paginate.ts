@@ -8,7 +8,7 @@ export default {
 	name: "paginate",
 	status: "mock",
 	description:
-		"Renders the body and exposes a `paginate` drop with `current_page`, `pages`, `items`, `parts`, `previous`, and `next`. Always renders page 1 — the shim doesn't read query parameters or slice the collection. The `window_size` option is parsed for compatibility but doesn't affect the rendered `parts` array.",
+		"Renders the body and exposes a `paginate` drop with `current_page`, `current_offset`, `page_size`, `items`, `pages`, `parts`, `previous`, and `next`. Always renders page 1 — the shim doesn't read query parameters or slice the collection. Accepts the `window_size` keyword for spec compatibility but doesn't apply it to the rendered `parts` array.",
 	implementation: {
 		parse(token, remainingTokens) {
 			const tokenizer = token.tokenizer as Tokenizer;
@@ -22,7 +22,7 @@ export default {
 			this.pageSizeToken = tokenizer.readValue();
 			tokenizer.skipBlank();
 			if (tokenizer.peek() === ",") tokenizer.advance();
-			this.optionTokens = readOptions(tokenizer);
+			this.windowSizeToken = readWindowSize(tokenizer);
 			this.templates = parseBlockBody(
 				"paginate",
 				this.liquid.parser,
@@ -37,12 +37,12 @@ export default {
 			const pageSize = Number(
 				yield evalToken(this.pageSizeToken as ValueToken, ctx),
 			);
-			// Drain `window_size` and any other options so undefined values
-			// don't crash the engine, then discard the result.
-			for (const [, valueToken] of this.optionTokens as Array<
-				[string, ValueToken]
-			>) {
-				yield evalToken(valueToken, ctx);
+			// Evaluate `window_size` even though it doesn't change the output
+			// — keeps any in-arg variable references from being silently
+			// undefined and surfaces type errors at the same point Shopify
+			// would.
+			if (this.windowSizeToken) {
+				yield evalToken(this.windowSizeToken as ValueToken, ctx);
 			}
 			const items = Array.isArray(collection) ? collection.length : 0;
 			const pages = Math.max(1, Math.ceil(items / Math.max(1, pageSize)));
@@ -50,6 +50,7 @@ export default {
 			ctx.push({
 				paginate: {
 					current_page: 1,
+					current_offset: 0,
 					page_size: pageSize,
 					items,
 					pages,
@@ -87,23 +88,25 @@ function buildParts(pages: number): Array<{
 	return parts;
 }
 
-function readOptions(tokenizer: Tokenizer): Array<[string, ValueToken]> {
-	const result: Array<[string, ValueToken]> = [];
-	while (!tokenizer.end()) {
-		tokenizer.skipBlank();
-		if (tokenizer.peek() === ",") {
-			tokenizer.advance();
-			tokenizer.skipBlank();
-		}
-		if (tokenizer.end()) break;
-		const name = tokenizer.readIdentifier().content;
-		tokenizer.skipBlank();
-		if (!name || tokenizer.peek() !== ":") break;
-		tokenizer.advance();
-		tokenizer.skipBlank();
-		const value = tokenizer.readValue();
-		if (!value) break;
-		result.push([name, value]);
+/**
+ * Reads the optional `window_size: N` keyword. Spec defines no other
+ * keyword arguments for `paginate`, so anything else throws.
+ */
+function readWindowSize(tokenizer: Tokenizer): ValueToken | undefined {
+	tokenizer.skipBlank();
+	if (tokenizer.end()) return undefined;
+	const name = tokenizer.readIdentifier().content;
+	if (!name) return undefined;
+	if (name !== "window_size") {
+		throw new Error(
+			`unknown {% paginate %} keyword '${name}' — expected 'window_size'`,
+		);
 	}
-	return result;
+	tokenizer.skipBlank();
+	if (tokenizer.peek() !== ":") {
+		throw new Error("expected ':' after 'window_size'");
+	}
+	tokenizer.advance();
+	tokenizer.skipBlank();
+	return tokenizer.readValue();
 }
