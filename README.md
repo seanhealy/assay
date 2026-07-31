@@ -2,19 +2,22 @@
 
 [![Tests](https://github.com/seanhealy/assay/actions/workflows/test.yml/badge.svg)](https://github.com/seanhealy/assay/actions/workflows/test.yml)
 
-Test Shopify Liquid templates with Vitest. Render snippets, sections, and
-blocks, then query and interact with familiar Testing Library patterns.
+Automaticly test Shopify Liquid templates with
+[Vitest](https://vitest.dev/guide/): render snippets, sections, and blocks.
+Query and interact with familiar Testing Library patterns.
 
 ## Why
 
-- **Shopify-ready.** Filters like `| money` and `| asset_url` work out of the
-  box. `{% schema %}` tags are handled. More filters shipping regularly.
-- **Simple API.** `render("button", { text: "Click me" })` — one function,
+- **Shopify-ready.** Filters like `|money` and `|asset_url` work out of the box.
+  `{%schema%}` tags are handled. Actively maintained with new filters and tags
+  being added regularly.
+- **Simple API.** `render("button", { text: "Click me" })` in one function,
   template name, data. Everything else is handled for you.
-- **Web components.** `<script>` tags execute, custom elements upgrade. Test
-  interactive components the same way they work in production.
-- **Cross-browser.** Tests run in real Chromium, Firefox, or WebKit via Vitest
-  Browser Mode — catch browser-specific issues before your users do.
+- **Web components.** `<script>` tags execute and custom elements upgrade.
+  Allowing you to test interactive components exactly as your users will see
+  them.
+- **Cross-browser.** Run tests in real Chromium, Firefox, or WebKit (Safari).
+  Catch browser-specific issues before users do.
 
 ---
 
